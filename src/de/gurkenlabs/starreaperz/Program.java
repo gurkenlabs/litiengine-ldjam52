@@ -4,7 +4,7 @@ import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.environment.CreatureMapObjectLoader;
 import de.gurkenlabs.litiengine.resources.Resources;
 import de.gurkenlabs.starreaperz.entities.Spaceship;
-import de.gurkenlabs.starreaperz.screens.IngameScreen;
+import de.gurkenlabs.starreaperz.ui.screens.IngameScreen;
 
 public class Program {
 

@@ -1,4 +1,4 @@
-package de.gurkenlabs.starreaperz.screens;
+package de.gurkenlabs.starreaperz.ui.screens;
 
 import de.gurkenlabs.litiengine.gui.screens.GameScreen;
 
