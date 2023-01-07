@@ -1508,13 +1508,17 @@
 </data>
  </layer>
  <objectgroup id="0" name="default" visible="1">
-  <object id="1" name="spaceship" type="CREATURE" x="304" y="23917" width="64" height="64">
+  <object id="1" name="spaceship" type="CREATURE" x="304" y="23909" width="64" height="64">
    <properties>
     <property name="addShadow" type="bool" value="true"/>
     <property name="collision" type="bool" value="true"/>
-    <property name="collisionboxHeight" type="float" value="25.6"/>
-    <property name="collisionboxWidth" type="float" value="25.6"/>
+    <property name="collisionAlign" value="CENTER"/>
+    <property name="collisionType" value="DYNAMIC"/>
+    <property name="collisionValign" value="MIDDLE_DOWN"/>
+    <property name="collisionboxHeight" value="43.0"/>
+    <property name="collisionboxWidth" value="56.0"/>
     <property name="indestructible" type="bool" value="false"/>
+    <property name="spawnDirection" value="UNDEFINED"/>
     <property name="spritesheetName" value="spaceship"/>
    </properties>
   </object>
