@@ -1,7 +1,10 @@
 package de.gurkenlabs.starreaperz;
 
 import de.gurkenlabs.litiengine.Game;
+import de.gurkenlabs.litiengine.environment.CreatureMapObjectLoader;
 import de.gurkenlabs.litiengine.resources.Resources;
+import de.gurkenlabs.starreaperz.entities.Spaceship;
+import de.gurkenlabs.starreaperz.screens.IngameScreen;
 
 public class Program {
 
@@ -23,9 +26,13 @@ public class Program {
 
     // load data from the utiLITI game file
     Resources.load("game.litidata");
+
+    CreatureMapObjectLoader.registerCustomCreatureType(Spaceship.class);
     //        Game.screens().add(new MenuScreen());
-    //        Game.screens().add(new IngameScreen());
+    Game.screens().add(new IngameScreen());
 
     Game.start();
+
+    Game.world().loadEnvironment("level1");
   }
 }
