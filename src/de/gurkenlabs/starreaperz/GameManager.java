@@ -8,6 +8,8 @@ import de.gurkenlabs.starreaperz.graphics.VerticalRailCamera;
 public class GameManager {
   private static GameManager INSTANCE;
 
+  private GameState state;
+
   public static GameManager instance() {
     if (INSTANCE == null) {
       INSTANCE = new GameManager();
@@ -29,6 +31,15 @@ public class GameManager {
   public void startGame() {
     Game.screens().display("INGAME");
     Game.world().loadEnvironment("level1");
+    setState(GameState.INGAME);
+  }
+
+  public GameState getState() {
+    return state;
+  }
+
+  public void setState(GameState state) {
+    this.state = state;
   }
 
 }

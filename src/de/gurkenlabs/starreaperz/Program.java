@@ -3,6 +3,7 @@ package de.gurkenlabs.starreaperz;
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.environment.CreatureMapObjectLoader;
 import de.gurkenlabs.litiengine.resources.Resources;
+import de.gurkenlabs.starreaperz.constants.ReaperImageZ;
 import de.gurkenlabs.starreaperz.entities.Spaceship;
 import de.gurkenlabs.starreaperz.ui.screens.IngameScreen;
 import de.gurkenlabs.starreaperz.ui.screens.MenuScreen;
@@ -22,7 +23,7 @@ public class Program {
 
     // set the icon for the game (this has to be done after initialization
     // because the ScreenManager will not be present otherwise)
-    //    Game.window().setIcon(Resources.images().get("icon.png"));
+    Game.window().setIcon(ReaperImageZ.ICON);
     Game.graphics().setBaseRenderScale(3f);
 
     // load data from the utiLITI game file

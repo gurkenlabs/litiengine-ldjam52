@@ -1,5 +1,5 @@
 package de.gurkenlabs.starreaperz;
 
 public enum GameState {
-  PAUSE, INGAME, WON, LOST, SCORE_OVERVIEW, MENU
+  PAUSE, INGAME, LEVEL_OVERVIEW, WON, LOST, SCORE_OVERVIEW, MENU, INSTRUCTIONS
 }
