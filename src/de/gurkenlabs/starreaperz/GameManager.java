@@ -8,9 +8,12 @@ import de.gurkenlabs.starreaperz.entities.Spaceship;
 import de.gurkenlabs.starreaperz.graphics.VerticalRailCamera;
 
 import java.awt.event.KeyEvent;
+import java.util.Hashtable;
 
 public class GameManager {
   private static GameManager INSTANCE;
+
+  private final Hashtable<String, Integer> score = new Hashtable<>();
 
   private GameState state;
 
@@ -21,6 +24,17 @@ public class GameManager {
       INSTANCE = new GameManager();
     }
     return INSTANCE;
+  }
+
+  public void score(int points) {
+    var level = Game.world().environment().getMap().getName();
+    var currentScore = this.score.get(level) != null ? this.score.get(level) : 0;
+    var newScore = currentScore + points;
+    this.score.put(level, newScore);
+  }
+
+  public int getOverallScore() {
+    return this.score.values().stream().reduce(0, Integer::sum);
   }
 
   public void init() {

@@ -1,21 +1,23 @@
 package de.gurkenlabs.starreaperz.entities;
 
 import de.gurkenlabs.litiengine.Game;
+import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.litiengine.entities.AnimationInfo;
 import de.gurkenlabs.litiengine.entities.Creature;
 import de.gurkenlabs.litiengine.environment.Environment;
+import de.gurkenlabs.litiengine.graphics.RenderType;
 import de.gurkenlabs.litiengine.physics.StickyForce;
+import de.gurkenlabs.litiengine.tweening.TweenType;
 import de.gurkenlabs.starreaperz.GameManager;
 
 import java.awt.geom.Point2D;
 
-@AnimationInfo(spritePrefix = {"energy-red", "energy-blue", "energy-green", "energy-yellow"})
-public class Energy extends Creature implements SpaceshipListener {
+@AnimationInfo(spritePrefix = {"energy-blue", "energy-green", "energy-yellow"})
+public class Energy extends Creature implements SpaceshipListener, IUpdateable {
 
   private static final float VELOCITY_DIFF_PERCENT = 0.1f;
 
   public enum EnergyColor {
-    RED,
     BLUE,
     GREEN,
     YELLOW
@@ -33,13 +35,31 @@ public class Energy extends Creature implements SpaceshipListener {
     var size = Game.random().nextInt(16, 48);
     this.setSize(size, size);
     this.animations().setAutoScaling(true);
+    Game.tweens().begin(this, TweenType.ANGLE, 10000);
+    this.setRenderType(RenderType.OVERLAY);
     this.movementForce = new StickyForce(this, getEnergyVelocity(SpaceshipController.VERTICAL_VELOCITY), 10);
     this.movement().apply(this.movementForce);
   }
 
-  private float getEnergyVelocity(float spaceshipVelocity){
+  private float getEnergyVelocity(float spaceshipVelocity) {
     return spaceshipVelocity - (spaceshipVelocity * this.velocityDiff);
   }
+
+
+  @Override
+  public void update() {
+    // if we hit the spaceship
+    if(Game.world().environment().findCombatEntities(this.getHitBox(), e -> e.equals(GameManager.instance().getSpaceship())).size() >0){
+      GameManager.instance().score((int)this.getWidth());
+      // TODO: SOUND AND POOOOOF
+      Game.world().environment().remove(this);
+    }
+
+    if (!Game.world().camera().getViewport().intersects(this.getBoundingBox())) {
+      Game.world().environment().remove(this);
+    }
+  }
+
   @Override
   public void loaded(Environment environment) {
     super.loaded(environment);
