@@ -1,5 +1,10 @@
 package de.gurkenlabs.starreaperz;
 
+import de.gurkenlabs.litiengine.Game;
+import de.gurkenlabs.litiengine.environment.Environment;
+import de.gurkenlabs.starreaperz.entities.Spaceship;
+import de.gurkenlabs.starreaperz.graphics.VerticalRailCamera;
+
 public class GameManager {
   private static GameManager INSTANCE;
 
@@ -9,4 +14,16 @@ public class GameManager {
     }
     return INSTANCE;
   }
+
+  public void init(){
+    Game.world().onLoaded(this::environmentLoaded);
+  }
+
+  private void environmentLoaded(Environment env) {
+    var spaceship = env.get(Spaceship.class, "spaceship");
+    var verticalRailCamers = new VerticalRailCamera(spaceship);
+    verticalRailCamers.setClampToMap(true);
+    Game.world().setCamera(verticalRailCamers);
+  }
+
 }

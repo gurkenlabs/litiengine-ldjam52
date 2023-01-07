@@ -21,7 +21,7 @@ public class Program {
 
     // set the icon for the game (this has to be done after initialization
     // because the ScreenManager will not be present otherwise)
-    Game.window().setIcon(Resources.images().get("icon.png"));
+    //Game.window().setIcon(Resources.images().get("icon.png"));
     Game.graphics().setBaseRenderScale(3f);
 
     // load data from the utiLITI game file
@@ -32,6 +32,7 @@ public class Program {
     Game.screens().add(new IngameScreen());
 
     Game.start();
+    GameManager.instance().init();
 
     Game.world().loadEnvironment("level1");
   }
