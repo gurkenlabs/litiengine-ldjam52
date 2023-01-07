@@ -1,18 +1,21 @@
 package de.gurkenlabs.starreaperz.entities;
 
+import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.input.KeyboardEntityController;
 import de.gurkenlabs.litiengine.physics.StickyForce;
 
 import java.awt.event.KeyEvent;
 
 public class SpaceshipController extends KeyboardEntityController<Spaceship> {
-  private static final int VERTICAL_VELOCITY = 200;
+  public static final int VERTICAL_VELOCITY = 200;
 
   private final StickyForce movementForce;
 
-  private boolean breaking;
-  private boolean boosting;
+  private long breaking;
+  private long boosting;
   private boolean keyPressed;
+  private boolean keyLeftDown;
+  private boolean keyRightDown;
 
   public SpaceshipController(Spaceship entity) {
     super(entity);
@@ -24,28 +27,56 @@ public class SpaceshipController extends KeyboardEntityController<Spaceship> {
   public void update() {
     super.update();
 
-    if(!keyPressed || (!this.breaking && !this.boosting)){
+    if((!this.isBreaking() && !this.isBoosting())){
+      Game.world().camera().setZoom(1.0f, 100);
+    }
+
+    if (!keyPressed || (!this.isBreaking() && !this.isBoosting())) {
       this.movementForce.setStrength(VERTICAL_VELOCITY);
+
     }
 
     this.keyPressed = false;
-    this.breaking = false;
-    this.boosting = false;
+    this.keyLeftDown = false;
+    this.keyRightDown = false;
+  }
+
+  public boolean isKeyLeftDown(){
+    return keyLeftDown;
+  }
+
+  public boolean isKeyRightDown(){
+    return keyRightDown;
+  }
+
+  public boolean isBoosting() {
+    return boosting == Game.time().now();
+  }
+
+  public boolean isBreaking() {
+    return breaking == Game.time().now();
   }
 
   @Override
   public void handlePressedKey(KeyEvent keyCode) {
+    keyPressed = true;
     if (this.getUpKeys().contains(keyCode.getKeyCode())) {
       this.movementForce.setStrength(VERTICAL_VELOCITY * 1.75f);
-      this.boosting = true;
+      this.boosting = Game.time().now();
+      Game.world().camera().setZoom(0.95f, 100);
+      return;
     } else if (this.getDownKeys().contains(keyCode.getKeyCode())) {
       this.movementForce.setStrength(VERTICAL_VELOCITY * 0.25f);
-      this.breaking = true;
-    } else {
-      super.handlePressedKey(keyCode);
+      this.breaking = Game.time().now();
+      Game.world().camera().setZoom(1.1f, 100);
+      return;
+    } else if (this.getLeftKeys().contains(keyCode.getKeyCode())) {
+      this.keyLeftDown = true;
+    } else if (this.getRightKeys().contains(keyCode.getKeyCode())) {
+      this.keyRightDown = true;
     }
 
-    keyPressed = true;
+    super.handlePressedKey(keyCode);
   }
 }
 
