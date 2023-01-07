@@ -32,8 +32,8 @@ public class SpaceshipController extends KeyboardEntityController<Spaceship> {
     }
 
     if (!keyPressed || (!this.isBreaking() && !this.isBoosting())) {
+      this.changeVelocity(VERTICAL_VELOCITY);
       this.movementForce.setStrength(VERTICAL_VELOCITY);
-
     }
 
     this.keyPressed = false;
@@ -61,12 +61,12 @@ public class SpaceshipController extends KeyboardEntityController<Spaceship> {
   public void handlePressedKey(KeyEvent keyCode) {
     keyPressed = true;
     if (this.getUpKeys().contains(keyCode.getKeyCode())) {
-      this.movementForce.setStrength(VERTICAL_VELOCITY * 1.75f);
+      this.changeVelocity(VERTICAL_VELOCITY * 1.75f);
       this.boosting = Game.time().now();
       Game.world().camera().setZoom(0.95f, 100);
       return;
     } else if (this.getDownKeys().contains(keyCode.getKeyCode())) {
-      this.movementForce.setStrength(VERTICAL_VELOCITY * 0.25f);
+      this.changeVelocity(VERTICAL_VELOCITY * 0.25f);
       this.breaking = Game.time().now();
       Game.world().camera().setZoom(1.1f, 100);
       return;
@@ -77,6 +77,11 @@ public class SpaceshipController extends KeyboardEntityController<Spaceship> {
     }
 
     super.handlePressedKey(keyCode);
+  }
+
+  private void changeVelocity(float velocity){
+    this.movementForce.setStrength(velocity);
+    this.getEntity().notifyVelocityChanged(velocity);
   }
 }
 
