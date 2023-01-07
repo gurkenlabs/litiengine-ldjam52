@@ -1,0 +1,22 @@
+plugins {
+    // Apply the application plugin to add support for building a CLI application in Java.
+    id 'application'
+    id 'java'
+}
+
+repositories {
+    // Use Maven Central for resolving dependencies.
+    mavenCentral()
+}
+
+sourceSets {
+    main.java.srcDir 'src'
+    main.resources.srcDirs = ['audio', 'images', 'localization', 'misc']
+}
+
+dependencies {
+    implementation "de.gurkenlabs:litiengine"
+}
+
+version 'v0.0.1'
+mainClassName = 'de.gurkenlabs.starreaperz.Program'
