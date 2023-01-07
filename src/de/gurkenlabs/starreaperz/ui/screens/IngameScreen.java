@@ -9,7 +9,8 @@ import java.awt.*;
 
 public class IngameScreen extends GameScreen {
 
-  public IngameScreen(){
+  public IngameScreen() {
+    super("INGAME");
     Game.world().addListener(new EnvironmentListener() {
       @Override
       public void loaded(Environment environment) {
@@ -17,6 +18,7 @@ public class IngameScreen extends GameScreen {
       }
     });
   }
+
   @Override
   public void render(Graphics2D g) {
     super.render(g);

@@ -15,7 +15,7 @@ public class GameManager {
     return INSTANCE;
   }
 
-  public void init(){
+  public void init() {
     Game.world().onLoaded(this::environmentLoaded);
   }
 
@@ -24,6 +24,11 @@ public class GameManager {
     var verticalRailCamers = new VerticalRailCamera(spaceship);
     verticalRailCamers.setClampToMap(true);
     Game.world().setCamera(verticalRailCamers);
+  }
+
+  public void startGame() {
+    Game.screens().display("INGAME");
+    Game.world().loadEnvironment("level1");
   }
 
 }
