@@ -3,7 +3,7 @@
  <tileset firstgid="1" name="tileset" tilewidth="16" tileheight="16" tilecount="64" columns="8">
   <image source="tileset.png" width="128" height="128"/>
  </tileset>
- <imagelayer id="9" name="yellow_galaxy">
+ <imagelayer id="9" name="blue_galaxy">
   <image source="blue_pixeled.png" width="672" height="24000"/>
  </imagelayer>
  <layer id="1" name="Kachelebene 1" width="42" height="1500">
