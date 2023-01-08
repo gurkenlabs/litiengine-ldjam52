@@ -4,10 +4,10 @@ import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.input.KeyboardEntityController;
 import de.gurkenlabs.litiengine.physics.StickyForce;
 
+import de.gurkenlabs.starreaperz.constants.ReaperConstantZ;
 import java.awt.event.KeyEvent;
 
 public class SpaceshipController extends KeyboardEntityController<Spaceship> {
-  public static final int VERTICAL_VELOCITY = 70;
 
   private final StickyForce movementForce;
 
@@ -19,7 +19,7 @@ public class SpaceshipController extends KeyboardEntityController<Spaceship> {
 
   public SpaceshipController(Spaceship entity) {
     super(entity);
-    this.movementForce = new StickyForce(this.getEntity(), VERTICAL_VELOCITY, 10);
+    this.movementForce = new StickyForce(this.getEntity(), ReaperConstantZ.REAPER_VERTICAL_VELOCITY, 10);
     this.movementForce.setCancelOnCollision(false);
     this.apply(this.movementForce);
   }
@@ -28,13 +28,13 @@ public class SpaceshipController extends KeyboardEntityController<Spaceship> {
   public void update() {
     super.update();
 
-    if((!this.isBreaking() && !this.isBoosting())){
-      Game.world().camera().setZoom(1.0f, 300);
+    if ((!this.isBreaking() && !this.isBoosting())) {
+      Game.world().camera().setZoom(ReaperConstantZ.CAMERA_STANDARD_ZOOM_FACTOR, ReaperConstantZ.CAMERA_ZOOM_DELAY);
     }
 
     if (!keyPressed || (!this.isBreaking() && !this.isBoosting())) {
-      this.changeVelocity(VERTICAL_VELOCITY);
-      this.movementForce.setStrength(VERTICAL_VELOCITY);
+      this.changeVelocity(ReaperConstantZ.REAPER_VERTICAL_VELOCITY);
+      this.movementForce.setStrength(ReaperConstantZ.REAPER_VERTICAL_VELOCITY);
     }
 
     this.keyPressed = false;
@@ -42,11 +42,11 @@ public class SpaceshipController extends KeyboardEntityController<Spaceship> {
     this.keyRightDown = false;
   }
 
-  public boolean isKeyLeftDown(){
+  public boolean isKeyLeftDown() {
     return keyLeftDown;
   }
 
-  public boolean isKeyRightDown(){
+  public boolean isKeyRightDown() {
     return keyRightDown;
   }
 
@@ -62,14 +62,14 @@ public class SpaceshipController extends KeyboardEntityController<Spaceship> {
   public void handlePressedKey(KeyEvent keyCode) {
     keyPressed = true;
     if (this.getUpKeys().contains(keyCode.getKeyCode())) {
-      this.changeVelocity(VERTICAL_VELOCITY * 1.75f);
+      this.changeVelocity(ReaperConstantZ.REAPER_VERTICAL_VELOCITY * ReaperConstantZ.REAPER_VELOCITY_BOOST_FACTOR);
       this.boosting = Game.time().now();
-      Game.world().camera().setZoom(0.95f, 300);
+      Game.world().camera().setZoom(ReaperConstantZ.CAMERA_BOOST_ZOOM_FACTOR, ReaperConstantZ.CAMERA_ZOOM_DELAY);
       return;
     } else if (this.getDownKeys().contains(keyCode.getKeyCode())) {
-      this.changeVelocity(VERTICAL_VELOCITY * 0.25f);
+      this.changeVelocity(ReaperConstantZ.REAPER_VERTICAL_VELOCITY * ReaperConstantZ.REAPER_VELOCITY_BRAKE_FACTOR);
       this.breaking = Game.time().now();
-      Game.world().camera().setZoom(1.1f, 300);
+      Game.world().camera().setZoom(ReaperConstantZ.CAMERA_BRAKE_ZOOM_FACTOR, ReaperConstantZ.CAMERA_ZOOM_DELAY);
       return;
     } else if (this.getLeftKeys().contains(keyCode.getKeyCode())) {
       this.keyLeftDown = true;
@@ -85,7 +85,7 @@ public class SpaceshipController extends KeyboardEntityController<Spaceship> {
     }
   }
 
-  private void changeVelocity(float velocity){
+  private void changeVelocity(float velocity) {
     this.movementForce.setStrength(velocity);
     this.getEntity().notifyVelocityChanged(velocity);
   }

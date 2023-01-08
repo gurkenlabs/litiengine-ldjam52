@@ -5,7 +5,7 @@ import de.gurkenlabs.litiengine.entities.Creature;
 import de.gurkenlabs.litiengine.entities.MovementInfo;
 import de.gurkenlabs.litiengine.graphics.animation.IEntityAnimationController;
 import de.gurkenlabs.litiengine.physics.IMovementController;
-import de.gurkenlabs.starreaperz.entities.abilities.ShootLaserAbility;
+import de.gurkenlabs.starreaperz.abilities.ShootLaserAbility;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;

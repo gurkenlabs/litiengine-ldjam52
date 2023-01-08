@@ -1,4 +1,4 @@
-package de.gurkenlabs.starreaperz.entities.abilities;
+package de.gurkenlabs.starreaperz.abilities;
 
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.abilities.Ability;
