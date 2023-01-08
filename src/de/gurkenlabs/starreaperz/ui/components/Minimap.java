@@ -2,13 +2,17 @@ package de.gurkenlabs.starreaperz.ui.components;
 
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.entities.IEntity;
+import de.gurkenlabs.litiengine.environment.tilemap.MapUtilities;
 import de.gurkenlabs.litiengine.graphics.ImageRenderer;
 import de.gurkenlabs.litiengine.graphics.ShapeRenderer;
 import de.gurkenlabs.litiengine.gui.ImageComponent;
 import de.gurkenlabs.litiengine.util.Imaging;
+import de.gurkenlabs.litiengine.util.geom.GeometricUtilities;
 import de.gurkenlabs.starreaperz.constants.ReaperColorZ;
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Shape;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.AffineTransformOp;
@@ -23,7 +27,9 @@ public class Minimap extends ImageComponent {
 
   @Override public void render(Graphics2D g) {
     super.render(g);
-    ImageRenderer.render(g, computeMinimapImage(), 0, 0);
+    ImageRenderer.render(g, computeMinimapImage(), getX(), getY());
+    g.setColor(ReaperColorZ.ENERGY_RED);
+    ShapeRenderer.renderOutline(g, getBoundingBox());
   }
 
   private BufferedImage computeMinimapImage() {
@@ -37,11 +43,14 @@ public class Minimap extends ImageComponent {
       return null;
     }
     enemies.forEach(e -> {
+      if (!Game.world().camera().getViewport().contains(e.getCenter())) {
+        return;
+      }
       double xScaleFactor = getWidth() / Game.world().camera().getViewport().getWidth();
       double yScaleFactor = getHeight() / Game.world().camera().getViewport().getHeight();
 
-      double miniX = e.getX() * xScaleFactor;
-      double miniY = e.getY() * yScaleFactor;
+      double miniX = Game.world().camera().getViewportLocation(e).getX() * xScaleFactor;
+      double miniY = Game.world().camera().getViewportLocation(e).getY() * yScaleFactor;
       double miniWidth = e.getWidth() * xScaleFactor;
       double miniHeight = e.getHeight() * yScaleFactor;
       g.setColor(ReaperColorZ.ENERGY_BLUE);

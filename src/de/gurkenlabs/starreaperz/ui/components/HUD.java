@@ -26,7 +26,7 @@ public class HUD extends GuiComponent {
 
   @Override protected void initializeComponents() {
     super.initializeComponents();
-    this.minimap = new Minimap(200, 200, 400, 200);
+    this.minimap = new Minimap(600, 200, Game.window().getResolution().getWidth() * 1 / 10d, Game.window().getResolution().getHeight() * 1 / 10d);
     getComponents().add(minimap);
   }
 }
