@@ -11,6 +11,8 @@ import de.gurkenlabs.litiengine.physics.IMovementController;
 import de.gurkenlabs.litiengine.physics.MovementController;
 import de.gurkenlabs.litiengine.physics.StickyForce;
 import de.gurkenlabs.litiengine.tweening.TweenType;
+import de.gurkenlabs.litiengine.util.MathUtilities;
+import de.gurkenlabs.litiengine.util.geom.GeometricUtilities;
 import de.gurkenlabs.starreaperz.GameManager;
 import de.gurkenlabs.starreaperz.constants.ReaperConstantZ;
 
@@ -18,15 +20,17 @@ import java.awt.geom.Point2D;
 
 @AnimationInfo(spritePrefix = {"energy-blue", "energy-green", "energy-yellow"})
 public class Energy extends Creature implements SpaceshipListener, IUpdateable {
-  private static final String[] collectSounds = new String[]{
-          "zoom.wav",
-          "zoom2.wav",
+  private static final String[] collectSounds = new String[] {
+      "zoom.wav",
+      "zoom2.wav",
   };
   private static final float VELOCITY_DIFF_PERCENT = 0.1f;
 
   private final StickyForce movementForce;
 
   private final float velocityDiff;
+  private final int originalSize;
+  private final double originalDistance;
 
   private final EnergyColor color;
   private boolean harvested;
@@ -37,9 +41,10 @@ public class Energy extends Creature implements SpaceshipListener, IUpdateable {
     this.velocityDiff = Game.random().nextFloat(VELOCITY_DIFF_PERCENT, VELOCITY_DIFF_PERCENT * 3f);
     this.setLocation(origin);
 
-    var size = Game.random().nextInt(16, 48);
-    this.setSize(size, size);
-    this.animations().setAutoScaling(true);
+    this.originalSize = Game.random().nextInt(16, 48);
+    this.originalDistance = GeometricUtilities.distance(getCenter(), GameManager.instance().getSpaceship().getCenter());
+    setSize(originalSize, originalSize);
+    animations().setAutoScaling(true);
     Game.tweens().begin(this, TweenType.ANGLE, 10000);
     this.setRenderType(RenderType.OVERLAY);
     this.movementForce = new StickyForce(this, getEnergyVelocity(ReaperConstantZ.REAPER_VERTICAL_VELOCITY), 10);
@@ -110,8 +115,12 @@ public class Energy extends Creature implements SpaceshipListener, IUpdateable {
     @Override
     public void update() {
       super.update();
-      if (this.getEntity().isHarvested()) {
-        Game.physics().move(this.getEntity(), GameManager.instance().getSpaceship().getCenter(), this.getEntity().getTickVelocity());
+      if (getEntity().isHarvested()) {
+        Game.physics().move(getEntity(), GameManager.instance().getSpaceship().getCenter(), getEntity().getTickVelocity());
+        double newSize = MathUtilities.clamp(
+            (getEntity().originalSize / getEntity().originalDistance) * GeometricUtilities.distance(getEntity().getCenter(),
+                GameManager.instance().getSpaceship().getCenter()), 4, getEntity().originalSize);
+        getEntity().setSize(newSize, newSize);
       }
     }
   }
