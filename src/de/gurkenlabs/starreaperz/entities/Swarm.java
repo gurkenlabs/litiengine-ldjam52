@@ -13,7 +13,7 @@ public class Swarm {
   public Swarm() {
   }
 
-  public void add(Agent agent){
+  public void add(Agent agent) {
     this.agents.add(agent);
   }
 
@@ -30,6 +30,23 @@ public class Swarm {
   }
 
   public Agent getLeader() {
-    return this.agents.get(0);
+    return this.agents.stream().filter(x -> !x.isDead()).findFirst().orElse(null);
+  }
+
+  public Agent getPredecessor(Agent agent) {
+    if (agent.isLeader()) {
+      return null;
+    }
+
+    Agent predecessor = null;
+    for (var a : this.agents) {
+      if (a.equals(agent)) {
+        return predecessor;
+      }
+
+      predecessor = a;
+    }
+
+    return predecessor;
   }
 }

@@ -10,6 +10,8 @@ public class ReaperConstantZ {
   public static final float REAPER_VELOCITY_BRAKE_FACTOR = 0.25f;
   public static final int ENEMY_SWARM_ENERGY_AMOUNT = 2;
 
+  public static final int ENEMY_DEFENDER_ENERGY_AMOUNT = 5;
+
   public static final double ENEMY_AGENT_WAVESTRENGTH = 0.25;
 
   public static final double ENEMY_DEFENDER_WAVESTRENGTH = 0.5;

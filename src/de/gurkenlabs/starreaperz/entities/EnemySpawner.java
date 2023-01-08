@@ -86,6 +86,10 @@ public class EnemySpawner implements IUpdateable {
       }
 
       System.out.println("-- Spawning a defender");
+
+      var defender = Defender.create(this.energyColor);
+      defender.setLocation(determineSpawnPoint());
+      Game.world().environment().add(defender);
       return ReaperConstantZ.ENEMY_DEFENDER_WAVESTRENGTH;
     }
 
@@ -105,15 +109,14 @@ public class EnemySpawner implements IUpdateable {
         agents[i] = Agent.create(this.energyColor, swarm);
       }
 
-
       swarm.spawn(determineSpawnPoint());
       return size * ReaperConstantZ.ENEMY_AGENT_WAVESTRENGTH;
     }
 
     public Point2D determineSpawnPoint() {
       var viewport = Game.world().camera().getViewport();
-
-      var spawnArea = new Rectangle2D.Double(viewport.getX(), viewport.getY() - viewport.getHeight() / 4, viewport.getWidth(), viewport.getHeight() / 2);
+      final int offsetX = 100;
+      var spawnArea = new Rectangle2D.Double(viewport.getX() + offsetX, viewport.getY() - viewport.getHeight() / 4, viewport.getWidth() - 2 * offsetX, viewport.getHeight() / 2);
       return Game.random().getLocation(spawnArea);
     }
 
