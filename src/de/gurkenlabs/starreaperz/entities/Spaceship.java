@@ -1,12 +1,19 @@
 package de.gurkenlabs.starreaperz.entities;
 
+import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.entities.CombatInfo;
 import de.gurkenlabs.litiengine.entities.Creature;
 import de.gurkenlabs.litiengine.entities.MovementInfo;
+import de.gurkenlabs.litiengine.graphics.RenderType;
 import de.gurkenlabs.litiengine.graphics.animation.IEntityAnimationController;
+import de.gurkenlabs.litiengine.graphics.emitters.EntityEmitter;
+import de.gurkenlabs.litiengine.graphics.emitters.xml.EmitterLoader;
+import de.gurkenlabs.litiengine.input.Input;
 import de.gurkenlabs.litiengine.physics.IMovementController;
+import de.gurkenlabs.starreaperz.GameManager;
 import de.gurkenlabs.starreaperz.abilities.ShootLaserAbility;
 
+import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -15,12 +22,24 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class Spaceship extends Creature {
 
   private final List<SpaceshipListener> listeners = new CopyOnWriteArrayList<>();
+  private boolean harvesting;
+  private EntityEmitter harvestingEmitter;
 
   private final ShootLaserAbility shootLaserAbility;
 
   public Spaceship() {
     super("spaceship");
     this.shootLaserAbility = new ShootLaserAbility(this);
+    //    Input.keyboard().onKeyPressed(l -> {
+    //      if (l.getKeyCode() == KeyEvent.VK_SHIFT && !isHarvesting()) {
+    //        startHarvesting();
+    //      }
+    //    });
+    Input.keyboard().onKeyReleased(l -> {
+      if (l.getKeyCode() == KeyEvent.VK_SHIFT && isHarvesting()) {
+        stopHarvesting();
+      }
+    });
   }
 
   @Override
@@ -51,7 +70,21 @@ public class Spaceship extends Creature {
     return shootLaserAbility;
   }
 
-  public boolean isHavesting() {
-    return ((SpaceshipController)this.movement()).isHarvesting();
+  public boolean isHarvesting() {
+    return harvesting;
+  }
+
+  protected void startHarvesting() {
+    this.harvesting = true;
+    if (harvestingEmitter == null) {
+      this.harvestingEmitter = new EntityEmitter(this, EmitterLoader.get("harvest"), true);
+      harvestingEmitter.setRenderType(RenderType.GROUND);
+    }
+    Game.world().environment().add(harvestingEmitter);
+  }
+
+  protected void stopHarvesting() {
+    this.harvesting = false;
+    Game.world().environment().remove(harvestingEmitter);
   }
 }

@@ -58,10 +58,6 @@ public class SpaceshipController extends KeyboardEntityController<Spaceship> {
     return breaking == Game.time().now();
   }
 
-  public boolean isHarvesting() {
-    return harvestingDown == Game.time().now();
-  }
-
   @Override
   public void handlePressedKey(KeyEvent keyCode) {
     keyPressed = true;
@@ -88,8 +84,8 @@ public class SpaceshipController extends KeyboardEntityController<Spaceship> {
       this.getEntity().getShootLaserAbility().cast();
     }
 
-    if (keyCode.getKeyCode() == KeyEvent.VK_SHIFT) {
-      this.harvestingDown = Game.time().now();
+    if (keyCode.getKeyCode() == KeyEvent.VK_SHIFT && !getEntity().isHarvesting()) {
+      getEntity().startHarvesting();
     }
   }
 

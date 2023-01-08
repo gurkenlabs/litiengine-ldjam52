@@ -1,7 +1,6 @@
 package de.gurkenlabs.starreaperz.entities;
 
 import de.gurkenlabs.litiengine.Game;
-import de.gurkenlabs.litiengine.GameMetrics;
 import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.litiengine.entities.AnimationInfo;
 import de.gurkenlabs.litiengine.entities.Creature;
@@ -107,7 +106,7 @@ public class Energy extends Creature implements SpaceshipListener, IUpdateable {
     @Override
     public void update() {
       super.update();
-      if (GameManager.instance().getSpaceship().isHavesting()) {
+      if (GameManager.instance().getSpaceship().isHarvesting()) {
         Game.physics().move(getEntity(), GameManager.instance().getSpaceship().getCenter(), getEntity().getTickVelocity());
         double newSize = MathUtilities.clamp(
             (getEntity().originalSize / getEntity().originalDistance) * GeometricUtilities.distance(getEntity().getCenter(),

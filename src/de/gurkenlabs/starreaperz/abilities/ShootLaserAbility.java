@@ -38,7 +38,7 @@ public class ShootLaserAbility extends Ability {
 
   @Override
   public boolean canCast() {
-    return !GameManager.instance().getSpaceship().isHavesting() && super.canCast();
+    return !GameManager.instance().getSpaceship().isHarvesting() && super.canCast();
   }
 
   private static class ShootLaserProjectileEffect extends Effect {
