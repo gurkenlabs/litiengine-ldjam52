@@ -12,12 +12,20 @@ import de.gurkenlabs.starreaperz.entities.LaserProjectile;
 
 import java.awt.geom.Point2D;
 
+// TODO: Fast shooting upgrade (reduce cooldown to <=100)
 @AbilityInfo(cooldown = 250)
 public class ShootLaserAbility extends Ability {
+  private static final String[] shootSounds = new String[]{
+          "laserShoot.wav",
+          "laserShoot_2.wav",
+          "laserShoot_6.wav",
+          "laserShoot_7.wav",
+          "laserShoot_8.wav"
+  };
+
   public ShootLaserAbility(Creature executor) {
     super(executor);
     this.addEffect(new ShootLaserProjectileEffect(this));
-    // TODO: SOUNDS
   }
 
   @Override
@@ -40,6 +48,7 @@ public class ShootLaserAbility extends Ability {
       var rightProjectile = new LaserProjectile(rightProjectileOrigin, true);
       Game.world().environment().add(leftProjectile);
       Game.world().environment().add(rightProjectile);
+      Game.audio().playSound(Game.random().choose(shootSounds));
       super.apply(entity);
     }
   }

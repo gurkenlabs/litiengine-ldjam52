@@ -14,7 +14,7 @@ import java.awt.geom.Point2D;
 
 
 @AnimationInfo(spritePrefix = {"laser_1", "laser_1-right"})
-@MovementInfo(velocity = 320, turnOnMove = false)
+@MovementInfo(velocity = 350, turnOnMove = false)
 @EntityInfo(width = 5, height = 10)
 public class LaserProjectile extends Creature implements IUpdateable {
 

@@ -14,7 +14,10 @@ import java.awt.geom.Point2D;
 
 @AnimationInfo(spritePrefix = {"energy-blue", "energy-green", "energy-yellow"})
 public class Energy extends Creature implements SpaceshipListener, IUpdateable {
-
+  private static final String[] collectSounds = new String[]{
+          "zoom.wav",
+          "zoom2.wav",
+  };
   private static final float VELOCITY_DIFF_PERCENT = 0.1f;
 
   public enum EnergyColor {
@@ -51,7 +54,8 @@ public class Energy extends Creature implements SpaceshipListener, IUpdateable {
     // if we hit the spaceship
     if(Game.world().environment().findCombatEntities(this.getHitBox(), e -> e.equals(GameManager.instance().getSpaceship())).size() >0){
       GameManager.instance().score((int)this.getWidth());
-      // TODO: SOUND AND POOOOOF
+      // TODO: ADD POOOOOF EMITTER
+      Game.audio().playSound(Game.random().choose(collectSounds));
       Game.world().environment().remove(this);
     }
 
