@@ -1542,6 +1542,61 @@
      </properties>
     </object>
    </objectgroup>
+   <objectgroup id="0" name="emitters" visible="1">
+    <object id="2" type="EMITTER" x="138" y="11580" width="64" height="64">
+     <properties>
+      <property name="collisionAlign" value="CENTER"/>
+      <property name="collisionType" value="NONE"/>
+      <property name="collisionValign" value="DOWN"/>
+      <property name="emitterAlphaVariance" type="float" value="0.0"/>
+      <property name="emitterColorVariance" type="float" value="0.0"/>
+      <property name="emitterColors" value="#cc00a5bc"/>
+      <property name="emitterDuration" type="int" value="0"/>
+      <property name="emitterMaxParticles" type="int" value="400"/>
+      <property name="emitterOriginAlign" value="CENTER"/>
+      <property name="emitterOriginValign" value="MIDDLE"/>
+      <property name="emitterParticleType" value="SPRITE"/>
+      <property name="emitterSpawnAmount" type="int" value="20"/>
+      <property name="emitterSpawnRate" type="int" value="100"/>
+      <property name="emitterUpdateDelay" type="int" value="40"/>
+      <property name="particleAnimateSprite" type="bool" value="true"/>
+      <property name="particleAntiAliasing" type="bool" value="false"/>
+      <property name="particleFade" type="bool" value="false"/>
+      <property name="particleFadeOnCollision" type="bool" value="false"/>
+      <property name="particleLoopSprite" type="bool" value="true"/>
+      <property name="particleMaxAccelerationX" type="float" value="0.009999999776482582"/>
+      <property name="particleMaxAccelerationY" type="float" value="0.009999999776482582"/>
+      <property name="particleMaxAngle" type="float" value="360.0"/>
+      <property name="particleMaxDeltaAngle" type="float" value="1.0"/>
+      <property name="particleMaxDeltaHeight" type="float" value="0.10000000149011612"/>
+      <property name="particleMaxDeltaWidth" type="float" value="0.10000000149011612"/>
+      <property name="particleMaxOffsetX" type="float" value="4.0"/>
+      <property name="particleMaxOffsetY" type="float" value="4.0"/>
+      <property name="particleMaxStartHeight" type="float" value="6.0"/>
+      <property name="particleMaxStartWidth" type="float" value="6.0"/>
+      <property name="particleMaxTTL" type="float" value="1500.0"/>
+      <property name="particleMaxVelocityX" type="float" value="0.10000000149011612"/>
+      <property name="particleMaxVelocityY" type="float" value="0.10000000149011612"/>
+      <property name="particleMinAccelerationX" type="float" value="-0.009999999776482582"/>
+      <property name="particleMinAccelerationY" type="float" value="-0.009999999776482582"/>
+      <property name="particleMinAngle" type="float" value="0.0"/>
+      <property name="particleMinDeltaAngle" type="float" value="-1.0"/>
+      <property name="particleMinDeltaHeight" type="float" value="-0.10000000149011612"/>
+      <property name="particleMinDeltaWidth" type="float" value="-0.10000000149011612"/>
+      <property name="particleMinOffsetX" type="float" value="-4.0"/>
+      <property name="particleMinOffsetY" type="float" value="-4.0"/>
+      <property name="particleMinStartHeight" type="float" value="2.0"/>
+      <property name="particleMinStartWidth" type="float" value="2.0"/>
+      <property name="particleMinTTL" type="float" value="400.0"/>
+      <property name="particleMinVelocityX" type="float" value="-0.10000000149011612"/>
+      <property name="particleMinVelocityY" type="float" value="-0.10000000149011612"/>
+      <property name="particleOutlineOnly" type="bool" value="false"/>
+      <property name="particleTexts" value="LITI"/>
+      <property name="requiredQuality" value="VERYLOW"/>
+      <property name="spritesheetName" value="energy-blue-idle"/>
+     </properties>
+    </object>
+   </objectgroup>
   </map>
   <map version="1.8" tiledversion="1.8.6" orientation="orthogonal" renderorder="right-down" width="42" height="1500" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="6" name="level2">
    <tileset firstgid="1" name="tileset" tilewidth="16" tileheight="16" tilecount="64" columns="8">

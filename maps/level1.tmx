@@ -1510,7 +1510,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="8" name="default" visible="1">
+ <objectgroup id="8" name="default">
   <object id="1" name="spaceship" type="CREATURE" x="304" y="23909" width="64" height="64">
    <properties>
     <property name="addShadow" type="bool" value="true"/>
@@ -1523,20 +1523,6 @@
     <property name="indestructible" type="bool" value="false"/>
     <property name="spawnDirection" value="DOWN"/>
     <property name="spritesheetName" value="spaceship"/>
-   </properties>
-  </object>
-  <object id="2" type="CREATURE" x="448" y="23568" width="31" height="32">
-   <properties>
-    <property name="addShadow" type="bool" value="true"/>
-    <property name="collision" type="bool" value="true"/>
-    <property name="collisionAlign" value="CENTER"/>
-    <property name="collisionType" value="DYNAMIC"/>
-    <property name="collisionValign" value="DOWN"/>
-    <property name="collisionboxHeight" type="float" value="12.8"/>
-    <property name="collisionboxWidth" type="float" value="12.4"/>
-    <property name="indestructible" type="bool" value="false"/>
-    <property name="spawnDirection" value="UNDEFINED"/>
-    <property name="spritesheetName" value="enemy_1"/>
    </properties>
   </object>
  </objectgroup>
