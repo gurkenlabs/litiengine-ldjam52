@@ -4,6 +4,12 @@ import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.attributes.Attribute;
 import de.gurkenlabs.litiengine.entities.Creature;
 import de.gurkenlabs.litiengine.entities.ICombatEntity;
+import de.gurkenlabs.litiengine.graphics.RenderType;
+import de.gurkenlabs.litiengine.graphics.emitters.Emitter;
+import de.gurkenlabs.litiengine.graphics.emitters.EntityEmitter;
+import de.gurkenlabs.litiengine.graphics.emitters.xml.EmitterData;
+import de.gurkenlabs.litiengine.graphics.emitters.xml.EmitterLoader;
+import de.gurkenlabs.litiengine.resources.Resources;
 
 public abstract class Enemy extends Creature {
 
@@ -25,6 +31,11 @@ public abstract class Enemy extends Creature {
       var energy = new Energy(this.getColor(), Game.random().getLocation(this.getBoundingBox()));
       Game.world().environment().add(energy);
     }
+    Game.world().environment().remove(this);
+    String explosionEmitterName = String.format("explosion-%s", getColor().name().toLowerCase());
+    EntityEmitter explosion = new EntityEmitter(this, EmitterLoader.get(explosionEmitterName));
+    explosion.setRenderType(RenderType.OVERLAY);
+    Game.world().environment().add(explosion);
   }
 
   public EnergyColor getColor() {

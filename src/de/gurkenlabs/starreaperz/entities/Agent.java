@@ -1,10 +1,12 @@
 package de.gurkenlabs.starreaperz.entities;
 
 import de.gurkenlabs.litiengine.Game;
+import de.gurkenlabs.litiengine.entities.CombatInfo;
+import de.gurkenlabs.litiengine.entities.EntityInfo;
 import de.gurkenlabs.litiengine.physics.IMovementController;
 import de.gurkenlabs.litiengine.physics.MovementController;
 import de.gurkenlabs.starreaperz.constants.ReaperConstantZ;
-
+@CombatInfo(hitpoints = 1)
 public abstract class Agent extends Enemy {
   private final Swarm swarm;
 
