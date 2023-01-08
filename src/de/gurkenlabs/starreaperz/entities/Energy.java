@@ -1,6 +1,7 @@
 package de.gurkenlabs.starreaperz.entities;
 
 import de.gurkenlabs.litiengine.Game;
+import de.gurkenlabs.litiengine.GameMetrics;
 import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.litiengine.entities.AnimationInfo;
 import de.gurkenlabs.litiengine.entities.Creature;
@@ -33,7 +34,6 @@ public class Energy extends Creature implements SpaceshipListener, IUpdateable {
   private final double originalDistance;
 
   private final EnergyColor color;
-  private boolean harvested;
 
   public Energy(EnergyColor color, Point2D origin) {
     super("energy-" + color.name().toLowerCase());
@@ -94,14 +94,6 @@ public class Energy extends Creature implements SpaceshipListener, IUpdateable {
     return new EnergyController(this);
   }
 
-  public boolean isHarvested() {
-    return harvested;
-  }
-
-  public void harvest() {
-    this.harvested = true;
-  }
-
   public EnergyColor getColor() {
     return color;
   }
@@ -115,7 +107,7 @@ public class Energy extends Creature implements SpaceshipListener, IUpdateable {
     @Override
     public void update() {
       super.update();
-      if (getEntity().isHarvested()) {
+      if (GameManager.instance().getSpaceship().isHavesting()) {
         Game.physics().move(getEntity(), GameManager.instance().getSpaceship().getCenter(), getEntity().getTickVelocity());
         double newSize = MathUtilities.clamp(
             (getEntity().originalSize / getEntity().originalDistance) * GeometricUtilities.distance(getEntity().getCenter(),
