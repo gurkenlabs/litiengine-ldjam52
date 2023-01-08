@@ -16,6 +16,10 @@ public class EnemySpawner implements IUpdateable {
 
   private String currentLevel;
 
+  private long lastAsteorid;
+
+  private int asteoridDelay;
+
   @Override
   public void update() {
     var nextWave = enemyWaves.peek();
@@ -24,11 +28,27 @@ public class EnemySpawner implements IUpdateable {
       nextWave.spawn();
     }
 
+    if (asteoridDelay > 0 && Game.time().since(lastAsteorid) > asteoridDelay && !GameManager.instance().getSpaceship().isDead()) {
+      this.lastAsteorid = Game.time().now();
+      Game.world().environment().add(new Asteroid());
+      this.asteoridDelay = calcAsteoridDelay();
+      System.out.println("Spawned astroid");
+    }
+
     // TODO: Starting with level 2 => Spawn meteors
+  }
+
+  private int calcAsteoridDelay() {
+    return switch (this.currentLevel) {
+      case "level2" -> Game.random().nextInt(10000, 15000);
+      case "level3" -> Game.random().nextInt(5000, 15000);
+      default -> 0;
+    };
   }
 
   public void start(String name) {
     this.currentLevel = name;
+    this.asteoridDelay = calcAsteoridDelay();
 
     this.enemyWaves.clear();
     this.enemyWaves.add(new EnemyWave(1, 11500));
@@ -43,8 +63,6 @@ public class EnemySpawner implements IUpdateable {
     this.enemyWaves.add(new EnemyWave(10, 2500));
     this.enemyWaves.add(new EnemyWave(11, 1500));
     this.enemyWaves.add(new EnemyWave(12, 500));
-
-
   }
 
   private class EnemyWave {
@@ -104,9 +122,8 @@ public class EnemySpawner implements IUpdateable {
       System.out.println("-- Spawning a swarm (" + size + ")");
 
       var swarm = new Swarm();
-      var agents = new Agent[size];
       for (int i = 0; i < size; i++) {
-        agents[i] = Agent.create(this.energyColor, swarm);
+        Agent.create(this.energyColor, swarm);
       }
 
       swarm.spawn(determineSpawnPoint());

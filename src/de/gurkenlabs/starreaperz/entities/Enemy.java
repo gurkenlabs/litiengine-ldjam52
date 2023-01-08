@@ -5,11 +5,8 @@ import de.gurkenlabs.litiengine.attributes.Attribute;
 import de.gurkenlabs.litiengine.entities.Creature;
 import de.gurkenlabs.litiengine.entities.ICombatEntity;
 import de.gurkenlabs.litiengine.graphics.RenderType;
-import de.gurkenlabs.litiengine.graphics.emitters.Emitter;
 import de.gurkenlabs.litiengine.graphics.emitters.EntityEmitter;
-import de.gurkenlabs.litiengine.graphics.emitters.xml.EmitterData;
 import de.gurkenlabs.litiengine.graphics.emitters.xml.EmitterLoader;
-import de.gurkenlabs.litiengine.resources.Resources;
 
 public abstract class Enemy extends Creature {
 

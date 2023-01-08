@@ -39,7 +39,8 @@ public class LaserProjectile extends Creature implements IUpdateable {
             new Animation("laser_1-right", true, false));
 
     controller.addRule(p -> p.right, p -> "laser_1-right");
-    controller.addRule(p -> !p.right, p -> "laser_1");
+    controller.addRule(p -> !
+            p.right, p -> "laser_1");
     return controller;
   }
 
