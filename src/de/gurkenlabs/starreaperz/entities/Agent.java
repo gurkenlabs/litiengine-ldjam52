@@ -61,7 +61,7 @@ public abstract class Agent extends Enemy {
     public void update() {
       super.update();
       if (this.getEntity().isLeader()) {
-        var angle = Math.cos(Math.toRadians(Game.time().now() / 3)) * 90;
+        var angle = Math.sin(Math.toRadians(Game.time().now() / 3)) * 90;
         Game.physics().move(this.getEntity(), angle, this.getEntity().getTickVelocity());
       } else {
         var predecessor = this.getEntity().getSwarm().getPredecessor(this.getEntity());
@@ -101,7 +101,7 @@ public abstract class Agent extends Enemy {
   static class GreenAgent extends Agent {
 
     public GreenAgent(Swarm swarm) {
-      super(EnergyColor.YELLOW, swarm);
+      super(EnergyColor.GREEN, swarm);
     }
 
     @Override

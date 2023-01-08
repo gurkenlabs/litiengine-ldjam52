@@ -73,7 +73,7 @@ public abstract class Defender extends Enemy {
   static class GreenDefender extends Defender {
 
     public GreenDefender() {
-      super(EnergyColor.YELLOW);
+      super(EnergyColor.GREEN);
     }
 
     @Override

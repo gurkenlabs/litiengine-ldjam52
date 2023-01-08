@@ -68,7 +68,7 @@ public class GameManager {
 
   public void startGame() {
     Game.screens().display("INGAME");
-    Game.world().loadEnvironment("level1");
+    Game.world().loadEnvironment("level3");
     setState(GameState.INGAME);
   }
 
