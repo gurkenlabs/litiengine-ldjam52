@@ -112,7 +112,9 @@ public class Energy extends Creature implements SpaceshipListener, IUpdateable {
         double newSize = MathUtilities.clamp(
             (getEntity().originalSize / getEntity().originalDistance) * GeometricUtilities.distance(getEntity().getCenter(),
                 GameManager.instance().getSpaceship().getCenter()), 4, getEntity().originalSize);
-        getEntity().setSize(newSize, newSize);
+        if (newSize < getEntity().originalSize) {
+          getEntity().setSize(newSize, newSize);
+        }
       }
     }
   }
