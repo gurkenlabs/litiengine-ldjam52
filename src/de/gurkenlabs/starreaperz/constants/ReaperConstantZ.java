@@ -16,4 +16,6 @@ public class ReaperConstantZ {
 
   public static final double ENEMY_DEFENDER_WAVESTRENGTH = 0.5;
 
+  public static final int REAPER_HIT_COOLDOWN = 800;
+
 }

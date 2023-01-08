@@ -59,6 +59,15 @@ public abstract class Agent extends Enemy {
     @Override
     public void update() {
       super.update();
+
+      // if we hit the spaceship
+      var hitEnemy = Game.world().environment().findCombatEntities(this.getEntity().getHitBox(), e -> e instanceof Spaceship && !e.isDead()).stream().findFirst().orElse(null);
+      if (hitEnemy != null && !hitEnemy.wasHit(ReaperConstantZ.REAPER_HIT_COOLDOWN)) {
+        hitEnemy.hit(1);
+        this.getEntity().hit(1);
+        return;
+      }
+
       if (this.getEntity().isLeader()) {
         // try to move away from the spaceship if too close
         var angle = Math.sin(Math.toRadians(Game.time().now() / 3.0)) * 90;

@@ -11,10 +11,11 @@ import de.gurkenlabs.litiengine.graphics.emitters.EntityEmitter;
 import de.gurkenlabs.litiengine.graphics.emitters.xml.EmitterLoader;
 import de.gurkenlabs.litiengine.input.Input;
 import de.gurkenlabs.litiengine.physics.IMovementController;
-import de.gurkenlabs.starreaperz.GameManager;
 import de.gurkenlabs.starreaperz.abilities.ShootLaserAbility;
 
+import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.geom.Ellipse2D;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -37,6 +38,11 @@ public class Spaceship extends Creature {
         stopHarvesting();
       }
     });
+  }
+
+  @Override
+  public Shape getHitBox() {
+    return new Ellipse2D.Double(this.getX() + 8, this.getY() + 8, this.getWidth() - 16, this.getHeight() - 16);
   }
 
   @Override
