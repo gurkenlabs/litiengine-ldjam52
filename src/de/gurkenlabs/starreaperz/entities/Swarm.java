@@ -4,9 +4,9 @@ import java.awt.geom.Point2D;
 
 public class Swarm {
 
-  private final SwarmEnemy[] enemies;
+  private final Agent[] enemies;
 
-  public Swarm(SwarmEnemy... enemies) {
+  public Swarm(Agent... enemies) {
     this.enemies = enemies;
   }
 

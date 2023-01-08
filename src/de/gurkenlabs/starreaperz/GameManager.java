@@ -3,6 +3,7 @@ package de.gurkenlabs.starreaperz;
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.environment.Environment;
 import de.gurkenlabs.litiengine.input.Input;
+import de.gurkenlabs.starreaperz.entities.EnemySpawner;
 import de.gurkenlabs.starreaperz.entities.Energy;
 import de.gurkenlabs.starreaperz.entities.EnergyColor;
 import de.gurkenlabs.starreaperz.entities.Spaceship;
@@ -15,6 +16,8 @@ public class GameManager {
   private static GameManager INSTANCE;
 
   private final Hashtable<String, Integer> score = new Hashtable<>();
+
+  private final EnemySpawner spawner = new EnemySpawner();
 
   private GameState state;
 
@@ -40,7 +43,7 @@ public class GameManager {
 
   public void init() {
     Game.world().onLoaded(this::environmentLoaded);
-
+    Game.loop().attach(this.spawner);
     if (Game.isDebug()) {
       Input.keyboard().onKeyPressed(KeyEvent.VK_E, event -> {
         if (this.spaceship != null) {
@@ -55,6 +58,8 @@ public class GameManager {
   }
 
   private void environmentLoaded(Environment env) {
+    this.spawner.start(env.getMap().getName());
+
     this.spaceship = env.get(Spaceship.class, "spaceship");
     var verticalRailCamers = new VerticalRailCamera(spaceship);
     verticalRailCamers.setClampToMap(true);

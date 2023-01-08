@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.6" orientation="orthogonal" renderorder="right-down" width="40" height="750" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="6" name="level2">
+<map version="1.8" tiledversion="1.8.6" orientation="orthogonal" renderorder="right-down" width="40" height="750" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="6">
  <tileset firstgid="1" name="tileset" tilewidth="16" tileheight="16" tilecount="64" columns="8">
   <image source="tileset.png" width="128" height="128"/>
  </tileset>
@@ -760,7 +760,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="8" name="default" visible="1">
+ <objectgroup id="8" name="default">
   <object id="1" name="spaceship" type="CREATURE" x="272" y="11909" width="64" height="64">
    <properties>
     <property name="addShadow" type="bool" value="true"/>
