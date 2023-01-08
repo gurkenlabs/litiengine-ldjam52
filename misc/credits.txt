@@ -3,3 +3,4 @@ Original Music|Matthias Wilke
 Earth Orbiter Font|Daniel Zadorozny|https://www.iconian.com/fonts2/earthorbiter.zip
 Space Shooter Game User Interface|CraftPix.net 2D Game Assets|https://opengameart.org/content/space-shooter-game-user-interface
 Defending Spaceships|Jose Medina
+Asteroids|Luis Zuno|https://ansimuz.itch.io/
