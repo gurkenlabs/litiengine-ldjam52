@@ -7,7 +7,7 @@ import de.gurkenlabs.litiengine.physics.StickyForce;
 import java.awt.event.KeyEvent;
 
 public class SpaceshipController extends KeyboardEntityController<Spaceship> {
-  public static final int VERTICAL_VELOCITY = 200;
+  public static final int VERTICAL_VELOCITY = 70;
 
   private final StickyForce movementForce;
 
@@ -20,6 +20,7 @@ public class SpaceshipController extends KeyboardEntityController<Spaceship> {
   public SpaceshipController(Spaceship entity) {
     super(entity);
     this.movementForce = new StickyForce(this.getEntity(), VERTICAL_VELOCITY, 10);
+    this.movementForce.setCancelOnCollision(false);
     this.apply(this.movementForce);
   }
 
@@ -28,7 +29,7 @@ public class SpaceshipController extends KeyboardEntityController<Spaceship> {
     super.update();
 
     if((!this.isBreaking() && !this.isBoosting())){
-      Game.world().camera().setZoom(1.0f, 100);
+      Game.world().camera().setZoom(1.0f, 300);
     }
 
     if (!keyPressed || (!this.isBreaking() && !this.isBoosting())) {
@@ -63,12 +64,12 @@ public class SpaceshipController extends KeyboardEntityController<Spaceship> {
     if (this.getUpKeys().contains(keyCode.getKeyCode())) {
       this.changeVelocity(VERTICAL_VELOCITY * 1.75f);
       this.boosting = Game.time().now();
-      Game.world().camera().setZoom(0.95f, 100);
+      Game.world().camera().setZoom(0.95f, 300);
       return;
     } else if (this.getDownKeys().contains(keyCode.getKeyCode())) {
       this.changeVelocity(VERTICAL_VELOCITY * 0.25f);
       this.breaking = Game.time().now();
-      Game.world().camera().setZoom(1.1f, 100);
+      Game.world().camera().setZoom(1.1f, 300);
       return;
     } else if (this.getLeftKeys().contains(keyCode.getKeyCode())) {
       this.keyLeftDown = true;
@@ -77,6 +78,11 @@ public class SpaceshipController extends KeyboardEntityController<Spaceship> {
     }
 
     super.handlePressedKey(keyCode);
+
+
+    if (keyCode.getKeyCode() == KeyEvent.VK_SPACE) {
+      this.getEntity().getShootLaserAbility().cast();
+    }
   }
 
   private void changeVelocity(float velocity){

@@ -4,6 +4,7 @@ import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.environment.CreatureMapObjectLoader;
 import de.gurkenlabs.litiengine.resources.Resources;
 import de.gurkenlabs.starreaperz.constants.ReaperImageZ;
+import de.gurkenlabs.starreaperz.entities.Enemy;
 import de.gurkenlabs.starreaperz.entities.Spaceship;
 import de.gurkenlabs.starreaperz.ui.screens.IngameScreen;
 import de.gurkenlabs.starreaperz.ui.screens.MenuScreen;
@@ -30,6 +31,7 @@ public class Program {
     Resources.load("game.litidata");
 
     CreatureMapObjectLoader.registerCustomCreatureType(Spaceship.class);
+    CreatureMapObjectLoader.registerCustomCreatureType(Enemy.class);
     if (!Game.config().debug().isDebugEnabled()) {
       Game.screens().add(new MenuScreen());
     }
