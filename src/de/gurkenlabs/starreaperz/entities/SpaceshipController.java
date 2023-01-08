@@ -81,6 +81,10 @@ public class SpaceshipController extends KeyboardEntityController<Spaceship> {
     if (keyCode.getKeyCode() == KeyEvent.VK_SPACE) {
       this.getEntity().getShootLaserAbility().cast();
     }
+
+    if (keyCode.getKeyCode() == KeyEvent.VK_SHIFT) {
+      this.getEntity().getHarvestAbility().cast();
+    }
   }
 
   private void changeVelocity(float velocity) {

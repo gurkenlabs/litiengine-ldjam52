@@ -1525,19 +1525,5 @@
     <property name="spritesheetName" value="spaceship"/>
    </properties>
   </object>
-  <object id="2" type="CREATURE" x="384" y="23472" width="31" height="32">
-   <properties>
-    <property name="addShadow" type="bool" value="true"/>
-    <property name="collision" type="bool" value="true"/>
-    <property name="collisionAlign" value="CENTER"/>
-    <property name="collisionType" value="DYNAMIC"/>
-    <property name="collisionValign" value="DOWN"/>
-    <property name="collisionboxHeight" type="float" value="12.8"/>
-    <property name="collisionboxWidth" type="float" value="12.4"/>
-    <property name="indestructible" type="bool" value="false"/>
-    <property name="spawnDirection" value="UNDEFINED"/>
-    <property name="spritesheetName" value="enemy_1"/>
-   </properties>
-  </object>
  </objectgroup>
 </map>

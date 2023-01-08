@@ -6,6 +6,8 @@ import de.gurkenlabs.litiengine.entities.AnimationInfo;
 import de.gurkenlabs.litiengine.entities.Creature;
 import de.gurkenlabs.litiengine.environment.Environment;
 import de.gurkenlabs.litiengine.graphics.RenderType;
+import de.gurkenlabs.litiengine.physics.IMovementController;
+import de.gurkenlabs.litiengine.physics.MovementController;
 import de.gurkenlabs.litiengine.physics.StickyForce;
 import de.gurkenlabs.litiengine.tweening.TweenType;
 import de.gurkenlabs.starreaperz.GameManager;
@@ -21,15 +23,11 @@ public class Energy extends Creature implements SpaceshipListener, IUpdateable {
   };
   private static final float VELOCITY_DIFF_PERCENT = 0.1f;
 
-  public enum EnergyColor {
-    BLUE,
-    GREEN,
-    YELLOW
-  }
-
   private final StickyForce movementForce;
 
   private final float velocityDiff;
+
+  private boolean harvested;
 
   public Energy(EnergyColor color, Point2D origin) {
     super("energy-" + color.name().toLowerCase());
@@ -53,8 +51,8 @@ public class Energy extends Creature implements SpaceshipListener, IUpdateable {
   @Override
   public void update() {
     // if we hit the spaceship
-    if(Game.world().environment().findCombatEntities(this.getHitBox(), e -> e.equals(GameManager.instance().getSpaceship())).size() >0){
-      GameManager.instance().score((int)this.getWidth());
+    if (Game.world().environment().findCombatEntities(this.getHitBox(), e -> e.equals(GameManager.instance().getSpaceship())).size() > 0) {
+      GameManager.instance().score((int) this.getWidth());
       // TODO: ADD POOOOOF EMITTER
       Game.audio().playSound(Game.random().choose(collectSounds));
       Game.world().environment().remove(this);
@@ -80,5 +78,33 @@ public class Energy extends Creature implements SpaceshipListener, IUpdateable {
   @Override
   public void velocityChanged(float speed) {
     this.movementForce.setStrength(getEnergyVelocity(speed));
+  }
+
+  @Override
+  protected IMovementController createMovementController() {
+    return new EnergyController(this);
+  }
+
+  public boolean isHarvested() {
+    return harvested;
+  }
+
+  public void harvest() {
+    this.harvested = true;
+  }
+
+  private static class EnergyController extends MovementController<Energy> {
+
+    public EnergyController(Energy energy) {
+      super(energy);
+    }
+
+    @Override
+    public void update() {
+      super.update();
+      if (this.getEntity().isHarvested()) {
+        Game.physics().move(this.getEntity(), GameManager.instance().getSpaceship().getCenter(), this.getEntity().getTickVelocity());
+      }
+    }
   }
 }

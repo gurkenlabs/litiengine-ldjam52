@@ -4,6 +4,7 @@ import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.environment.Environment;
 import de.gurkenlabs.litiengine.input.Input;
 import de.gurkenlabs.starreaperz.entities.Energy;
+import de.gurkenlabs.starreaperz.entities.EnergyColor;
 import de.gurkenlabs.starreaperz.entities.Spaceship;
 import de.gurkenlabs.starreaperz.graphics.VerticalRailCamera;
 
@@ -43,7 +44,7 @@ public class GameManager {
     if (Game.isDebug()) {
       Input.keyboard().onKeyPressed(KeyEvent.VK_E, event -> {
         if (this.spaceship != null) {
-          Game.world().environment().add(new Energy(Game.random().next(Energy.EnergyColor.class), Game.random().getLocation(Game.world().camera().getViewport())));
+          Game.world().environment().add(new Energy(Game.random().next(EnergyColor.class), Game.random().getLocation(Game.world().camera().getViewport())));
         }
       });
     }
