@@ -5,13 +5,18 @@ import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.Valign;
 import de.gurkenlabs.litiengine.environment.Environment;
 import de.gurkenlabs.litiengine.environment.EnvironmentListener;
+import de.gurkenlabs.litiengine.graphics.ImageRenderer;
 import de.gurkenlabs.litiengine.graphics.TextRenderer;
 import de.gurkenlabs.litiengine.gui.screens.GameScreen;
 import de.gurkenlabs.starreaperz.GameManager;
 
+import de.gurkenlabs.starreaperz.constants.ReaperConstantZ;
+import de.gurkenlabs.starreaperz.constants.ReaperImageZ;
+import de.gurkenlabs.starreaperz.ui.components.HUD;
 import java.awt.*;
 
 public class IngameScreen extends GameScreen {
+  private HUD hud;
 
   public IngameScreen() {
     super("INGAME");
@@ -26,7 +31,11 @@ public class IngameScreen extends GameScreen {
   @Override
   public void render(Graphics2D g) {
     super.render(g);
+  }
 
-    TextRenderer.render(g, "Score: " + GameManager.instance().getOverallScore(), Align.CENTER, Valign.DOWN, 0 ,0);
+  @Override protected void initializeComponents() {
+    super.initializeComponents();
+    this.hud = new HUD();
+    getComponents().add(hud);
   }
 }

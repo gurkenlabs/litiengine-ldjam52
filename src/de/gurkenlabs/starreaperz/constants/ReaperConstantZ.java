@@ -15,4 +15,5 @@ public class ReaperConstantZ {
   public static final double ENEMY_AGENT_WAVESTRENGTH = 0.25;
 
   public static final double ENEMY_DEFENDER_WAVESTRENGTH = 0.5;
+
 }

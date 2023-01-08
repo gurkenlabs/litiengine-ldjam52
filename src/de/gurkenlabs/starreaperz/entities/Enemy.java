@@ -3,11 +3,15 @@ package de.gurkenlabs.starreaperz.entities;
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.attributes.Attribute;
 import de.gurkenlabs.litiengine.entities.Creature;
+import de.gurkenlabs.litiengine.entities.EntityInfo;
 import de.gurkenlabs.litiengine.entities.ICombatEntity;
+import de.gurkenlabs.litiengine.entities.Tag;
+import de.gurkenlabs.litiengine.entities.Tags;
 import de.gurkenlabs.litiengine.graphics.RenderType;
 import de.gurkenlabs.litiengine.graphics.emitters.EntityEmitter;
 import de.gurkenlabs.litiengine.graphics.emitters.xml.EmitterLoader;
 
+@Tag("enemy")
 public abstract class Enemy extends Creature {
 
   private final EnergyColor color;

@@ -6,3 +6,5 @@ Defending Spaceships|Jose Medina
 Asteroids|Luis Zuno|https://ansimuz.itch.io/
 Explosion effects|BearFX|https://like100bears.itch.io/bearfx-explosions
 Energy channeling effect|ppeldo|https://ppeldo.itch.io/2d-pixel-art-game-spellmagic-fx
+Futuristic user interface elements vector set|macrovector|https://www.freepik.com/free-vector/futuristic-user-interface-elements-vector-set_10601013.htm
+416 Energiekugeln pro level: EnemySpawner.determineWaveStrength gibt das her

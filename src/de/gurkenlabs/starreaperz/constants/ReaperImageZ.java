@@ -8,4 +8,6 @@ public class ReaperImageZ {
   public static final BufferedImage ICON = Resources.images().get("icon.png");
   public static final BufferedImage MAINMENU_BG = Resources.images().get("menu_bg.png");
   public static final BufferedImage INSTRUCTIONS = Resources.images().get("instructions.png");
+  public static final BufferedImage UI_CIRCLE_1 = Resources.images().get("circle1.png");
+  public static final BufferedImage UI_CIRCLE_2 = Resources.images().get("circle2.png");
 }

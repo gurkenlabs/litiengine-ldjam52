@@ -30,11 +30,6 @@ public class Spaceship extends Creature {
   public Spaceship() {
     super("spaceship");
     this.shootLaserAbility = new ShootLaserAbility(this);
-    //    Input.keyboard().onKeyPressed(l -> {
-    //      if (l.getKeyCode() == KeyEvent.VK_SHIFT && !isHarvesting()) {
-    //        startHarvesting();
-    //      }
-    //    });
     Input.keyboard().onKeyReleased(l -> {
       if (l.getKeyCode() == KeyEvent.VK_SHIFT && isHarvesting()) {
         stopHarvesting();
