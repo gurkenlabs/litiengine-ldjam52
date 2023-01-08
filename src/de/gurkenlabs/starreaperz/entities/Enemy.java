@@ -31,6 +31,7 @@ public abstract class Enemy extends Creature {
       var energy = new Energy(this.getColor(), Game.random().getLocation(this.getBoundingBox()));
       Game.world().environment().add(energy);
     }
+    setVisible(false);
     Game.world().environment().remove(this);
     String explosionEmitterName = String.format("explosion-%s", getColor().name().toLowerCase());
     EntityEmitter explosion = new EntityEmitter(this, EmitterLoader.get(explosionEmitterName));

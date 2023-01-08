@@ -2475,10 +2475,10 @@
  </spriteSheets>
  <tilesets/>
  <emitters>
-  <emitter emitterDuration="0" height="64.0" maxParticles="1" name="explosion-blue" particleType="SPRITE" spawnAmount="1" spawnRate="100" updateRate="40" width="64.0">
+  <emitter emitterDuration="1120" height="64.0" maxParticles="1" name="explosion-blue" particleType="SPRITE" spawnAmount="1" spawnRate="100" updateRate="40" width="64.0">
    <alphaVariance>0.0</alphaVariance>
    <animateSprite>true</animateSprite>
-   <loopSprite>true</loopSprite>
+   <loopSprite>false</loopSprite>
    <collision>NONE</collision>
    <requiredQuality>VERYLOW</requiredQuality>
    <colorVariance>0.0</colorVariance>
@@ -2509,10 +2509,10 @@
    <offsetX maxValue="4.0" minValue="-4.0"/>
    <offsetY maxValue="4.0" minValue="-4.0"/>
   </emitter>
-  <emitter emitterDuration="0" height="64.0" maxParticles="1" name="explosion-green" particleType="SPRITE" spawnAmount="1" spawnRate="100" updateRate="40" width="64.0">
+  <emitter emitterDuration="1120" height="64.0" maxParticles="1" name="explosion-green" particleType="SPRITE" spawnAmount="1" spawnRate="100" updateRate="40" width="64.0">
    <alphaVariance>0.0</alphaVariance>
    <animateSprite>true</animateSprite>
-   <loopSprite>true</loopSprite>
+   <loopSprite>false</loopSprite>
    <collision>NONE</collision>
    <requiredQuality>VERYLOW</requiredQuality>
    <colorVariance>0.0</colorVariance>
@@ -2543,10 +2543,10 @@
    <offsetX maxValue="4.0" minValue="-4.0"/>
    <offsetY maxValue="4.0" minValue="-4.0"/>
   </emitter>
-  <emitter emitterDuration="0" height="64.0" maxParticles="1" name="explosion-red" particleType="SPRITE" spawnAmount="1" spawnRate="100" updateRate="40" width="64.0">
+  <emitter emitterDuration="1120" height="64.0" maxParticles="1" name="explosion-red" particleType="SPRITE" spawnAmount="1" spawnRate="100" updateRate="40" width="64.0">
    <alphaVariance>0.0</alphaVariance>
    <animateSprite>true</animateSprite>
-   <loopSprite>true</loopSprite>
+   <loopSprite>false</loopSprite>
    <collision>NONE</collision>
    <requiredQuality>VERYLOW</requiredQuality>
    <colorVariance>0.0</colorVariance>
@@ -2577,10 +2577,10 @@
    <offsetX maxValue="4.0" minValue="-4.0"/>
    <offsetY maxValue="4.0" minValue="-4.0"/>
   </emitter>
-  <emitter emitterDuration="0" height="64.0" maxParticles="1" name="explosion-yellow" particleType="SPRITE" spawnAmount="1" spawnRate="100" updateRate="40" width="64.0">
+  <emitter emitterDuration="1120" height="64.0" maxParticles="1" name="explosion-yellow" particleType="SPRITE" spawnAmount="1" spawnRate="100" updateRate="40" width="64.0">
    <alphaVariance>0.0</alphaVariance>
    <animateSprite>true</animateSprite>
-   <loopSprite>true</loopSprite>
+   <loopSprite>false</loopSprite>
    <collision>NONE</collision>
    <requiredQuality>VERYLOW</requiredQuality>
    <colorVariance>0.0</colorVariance>
