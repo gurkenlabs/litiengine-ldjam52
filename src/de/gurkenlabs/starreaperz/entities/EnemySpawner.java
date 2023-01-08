@@ -5,6 +5,8 @@ import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.starreaperz.GameManager;
 import de.gurkenlabs.starreaperz.constants.ReaperConstantZ;
 
+import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayDeque;
 import java.util.Queue;
 
@@ -94,9 +96,25 @@ public class EnemySpawner implements IUpdateable {
       }
 
       var maxSwarmSizeBasedOnStrength = (int) (waveStrength / ReaperConstantZ.ENEMY_AGENT_WAVESTRENGTH);
-      var size = Math.min(Game.random().nextInt(1,4) * 2, maxSwarmSizeBasedOnStrength);
+      var size = Math.min(Game.random().nextInt(1, 4) * 2, maxSwarmSizeBasedOnStrength);
       System.out.println("-- Spawning a swarm (" + size + ")");
+
+      var swarm = new Swarm();
+      var agents = new Agent[size];
+      for (int i = 0; i < size; i++) {
+        agents[i] = Agent.create(this.energyColor, swarm);
+      }
+
+
+      swarm.spawn(determineSpawnPoint());
       return size * ReaperConstantZ.ENEMY_AGENT_WAVESTRENGTH;
+    }
+
+    public Point2D determineSpawnPoint() {
+      var viewport = Game.world().camera().getViewport();
+
+      var spawnArea = new Rectangle2D.Double(viewport.getX(), viewport.getY() - viewport.getHeight() / 4, viewport.getWidth(), viewport.getHeight() / 2);
+      return Game.random().getLocation(spawnArea);
     }
 
     /**
