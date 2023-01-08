@@ -5,6 +5,7 @@ import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.litiengine.entities.AnimationInfo;
 import de.gurkenlabs.litiengine.entities.Creature;
 import de.gurkenlabs.litiengine.environment.Environment;
+import de.gurkenlabs.litiengine.graphics.OverlayPixelsImageEffect;
 import de.gurkenlabs.litiengine.graphics.RenderType;
 import de.gurkenlabs.litiengine.physics.IMovementController;
 import de.gurkenlabs.litiengine.physics.MovementController;
@@ -27,10 +28,12 @@ public class Energy extends Creature implements SpaceshipListener, IUpdateable {
 
   private final float velocityDiff;
 
+  private final EnergyColor color;
   private boolean harvested;
 
   public Energy(EnergyColor color, Point2D origin) {
     super("energy-" + color.name().toLowerCase());
+    this.color = color;
     this.velocityDiff = Game.random().nextFloat(VELOCITY_DIFF_PERCENT, VELOCITY_DIFF_PERCENT * 3f);
     this.setLocation(origin);
 
@@ -55,6 +58,7 @@ public class Energy extends Creature implements SpaceshipListener, IUpdateable {
       GameManager.instance().score((int) this.getWidth());
       // TODO: ADD POOOOOF EMITTER
       Game.audio().playSound(Game.random().choose(collectSounds));
+      GameManager.instance().getSpaceship().animations().add(new OverlayPixelsImageEffect(50, this.getColor().toAwtColor()));
       Game.world().environment().remove(this);
     }
 
@@ -91,6 +95,10 @@ public class Energy extends Creature implements SpaceshipListener, IUpdateable {
 
   public void harvest() {
     this.harvested = true;
+  }
+
+  public EnergyColor getColor() {
+    return color;
   }
 
   private static class EnergyController extends MovementController<Energy> {
