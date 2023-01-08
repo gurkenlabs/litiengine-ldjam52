@@ -4,6 +4,7 @@ import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.entities.CombatInfo;
 import de.gurkenlabs.litiengine.entities.Creature;
 import de.gurkenlabs.litiengine.entities.MovementInfo;
+import de.gurkenlabs.litiengine.entities.Tag;
 import de.gurkenlabs.litiengine.graphics.RenderType;
 import de.gurkenlabs.litiengine.graphics.animation.IEntityAnimationController;
 import de.gurkenlabs.litiengine.graphics.emitters.EntityEmitter;
@@ -19,6 +20,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 @MovementInfo(acceleration = 800, deceleration = 1500, velocity = 200)
 @CombatInfo(hitpoints = 3)
+@Tag("minimap")
 public class Spaceship extends Creature {
 
   private final List<SpaceshipListener> listeners = new CopyOnWriteArrayList<>();

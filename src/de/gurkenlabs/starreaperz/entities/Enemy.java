@@ -11,7 +11,7 @@ import de.gurkenlabs.litiengine.graphics.RenderType;
 import de.gurkenlabs.litiengine.graphics.emitters.EntityEmitter;
 import de.gurkenlabs.litiengine.graphics.emitters.xml.EmitterLoader;
 
-@Tag("enemy")
+@Tag("minimap")
 public abstract class Enemy extends Creature {
 
   private final EnergyColor color;

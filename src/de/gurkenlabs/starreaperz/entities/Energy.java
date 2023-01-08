@@ -4,6 +4,7 @@ import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.litiengine.entities.AnimationInfo;
 import de.gurkenlabs.litiengine.entities.Creature;
+import de.gurkenlabs.litiengine.entities.Tag;
 import de.gurkenlabs.litiengine.environment.Environment;
 import de.gurkenlabs.litiengine.graphics.OverlayPixelsImageEffect;
 import de.gurkenlabs.litiengine.graphics.RenderType;
@@ -19,6 +20,7 @@ import de.gurkenlabs.starreaperz.constants.ReaperConstantZ;
 import java.awt.geom.Point2D;
 
 @AnimationInfo(spritePrefix = {"energy-blue", "energy-green", "energy-yellow"})
+@Tag("minimap")
 public class Energy extends Creature implements SpaceshipListener, IUpdateable {
   private static final String[] collectSounds = new String[] {
       "zoom.wav",
