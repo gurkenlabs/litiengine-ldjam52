@@ -31,6 +31,13 @@ public class EnemySpawner implements IUpdateable {
     if (asteoridDelay > 0 && Game.time().since(lastAsteorid) > asteoridDelay && !GameManager.instance().getSpaceship().isDead()) {
       this.lastAsteorid = Game.time().now();
       Game.world().environment().add(new Asteroid());
+      if (this.currentLevel.equals("level3")) {
+        var spawns = Game.random().nextInt(4);
+        for(int i = 0; i < spawns; i++){
+          Game.world().environment().add(new Asteroid());
+        }
+      }
+
       this.asteoridDelay = calcAsteoridDelay();
       System.out.println("Spawned astroid");
     }
@@ -40,8 +47,8 @@ public class EnemySpawner implements IUpdateable {
 
   private int calcAsteoridDelay() {
     return switch (this.currentLevel) {
-      case "level2" -> Game.random().nextInt(10000, 15000);
-      case "level3" -> Game.random().nextInt(5000, 15000);
+      case "level2" -> Game.random().nextInt(3500, 6000);
+      case "level3" -> Game.random().nextInt(2500, 5000);
       default -> 0;
     };
   }
