@@ -3,6 +3,7 @@ package de.gurkenlabs.starreaperz.entities;
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.litiengine.entities.*;
+import de.gurkenlabs.litiengine.graphics.OverlayPixelsImageEffect;
 import de.gurkenlabs.litiengine.graphics.animation.Animation;
 import de.gurkenlabs.litiengine.graphics.animation.EntityAnimationController;
 import de.gurkenlabs.litiengine.graphics.animation.IEntityAnimationController;
@@ -10,6 +11,7 @@ import de.gurkenlabs.litiengine.physics.IMovementController;
 import de.gurkenlabs.litiengine.physics.MovementController;
 import de.gurkenlabs.litiengine.physics.StickyForce;
 
+import java.awt.*;
 import java.awt.geom.Point2D;
 
 
@@ -47,6 +49,7 @@ public class LaserProjectile extends Creature implements IUpdateable {
     var hitEnemy = Game.world().environment().findCombatEntities(this.getHitBox(), e -> e instanceof Enemy && !e.isDead()).stream().findFirst();
     if(hitEnemy.isPresent()){
       hitEnemy.get().hit(1);
+      hitEnemy.get().animations().add(new OverlayPixelsImageEffect(50, Color.WHITE));
       // TODO: SOUND, explosion upon enemy death -> enemy class
       Game.world().environment().remove(this);
     }

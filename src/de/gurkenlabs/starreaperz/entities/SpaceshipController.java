@@ -14,8 +14,8 @@ public class SpaceshipController extends KeyboardEntityController<Spaceship> {
   private long breaking;
   private long boosting;
   private boolean keyPressed;
-  private boolean keyLeftDown;
-  private boolean keyRightDown;
+  private long keyLeftDown;
+  private long keyRightDown;
 
   public SpaceshipController(Spaceship entity) {
     super(entity);
@@ -38,16 +38,14 @@ public class SpaceshipController extends KeyboardEntityController<Spaceship> {
     }
 
     this.keyPressed = false;
-    this.keyLeftDown = false;
-    this.keyRightDown = false;
   }
 
   public boolean isKeyLeftDown() {
-    return keyLeftDown;
+    return keyLeftDown == Game.time().now();
   }
 
   public boolean isKeyRightDown() {
-    return keyRightDown;
+    return keyRightDown == Game.time().now();
   }
 
   public boolean isBoosting() {
@@ -72,9 +70,9 @@ public class SpaceshipController extends KeyboardEntityController<Spaceship> {
       Game.world().camera().setZoom(ReaperConstantZ.CAMERA_BRAKE_ZOOM_FACTOR, ReaperConstantZ.CAMERA_ZOOM_DELAY);
       return;
     } else if (this.getLeftKeys().contains(keyCode.getKeyCode())) {
-      this.keyLeftDown = true;
+      this.keyLeftDown = Game.time().now();
     } else if (this.getRightKeys().contains(keyCode.getKeyCode())) {
-      this.keyRightDown = true;
+      this.keyRightDown = Game.time().now();
     }
 
     super.handlePressedKey(keyCode);
