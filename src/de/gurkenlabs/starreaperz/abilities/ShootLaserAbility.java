@@ -26,6 +26,7 @@ public class ShootLaserAbility extends Ability {
   public ShootLaserAbility(Creature executor) {
     super(executor);
     this.addEffect(new ShootLaserProjectileEffect(this));
+    this.addEffect(new ScreenShakeEffect(this, 0.5, 30));
   }
 
   @Override

@@ -9,6 +9,7 @@ import de.gurkenlabs.litiengine.graphics.RenderType;
 import de.gurkenlabs.litiengine.physics.StickyForce;
 import de.gurkenlabs.litiengine.tweening.TweenType;
 import de.gurkenlabs.starreaperz.GameManager;
+import de.gurkenlabs.starreaperz.constants.ReaperConstantZ;
 
 import java.awt.geom.Point2D;
 
@@ -40,7 +41,7 @@ public class Energy extends Creature implements SpaceshipListener, IUpdateable {
     this.animations().setAutoScaling(true);
     Game.tweens().begin(this, TweenType.ANGLE, 10000);
     this.setRenderType(RenderType.OVERLAY);
-    this.movementForce = new StickyForce(this, getEnergyVelocity(SpaceshipController.VERTICAL_VELOCITY), 10);
+    this.movementForce = new StickyForce(this, getEnergyVelocity(ReaperConstantZ.REAPER_VERTICAL_VELOCITY), 10);
     this.movement().apply(this.movementForce);
   }
 
