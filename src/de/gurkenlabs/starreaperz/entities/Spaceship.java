@@ -5,7 +5,6 @@ import de.gurkenlabs.litiengine.entities.Creature;
 import de.gurkenlabs.litiengine.entities.MovementInfo;
 import de.gurkenlabs.litiengine.graphics.animation.IEntityAnimationController;
 import de.gurkenlabs.litiengine.physics.IMovementController;
-import de.gurkenlabs.starreaperz.abilities.HarvestAbility;
 import de.gurkenlabs.starreaperz.abilities.ShootLaserAbility;
 
 import java.util.List;
@@ -19,12 +18,9 @@ public class Spaceship extends Creature {
 
   private final ShootLaserAbility shootLaserAbility;
 
-  private final HarvestAbility harvestAbility;
-
   public Spaceship() {
     super("spaceship");
     this.shootLaserAbility = new ShootLaserAbility(this);
-    this.harvestAbility = new HarvestAbility(this);
   }
 
   @Override
@@ -55,7 +51,7 @@ public class Spaceship extends Creature {
     return shootLaserAbility;
   }
 
-  public HarvestAbility getHarvestAbility() {
-    return harvestAbility;
+  public boolean isHavesting() {
+    return ((SpaceshipController)this.movement()).isHarvesting();
   }
 }

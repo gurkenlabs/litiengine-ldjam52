@@ -8,6 +8,7 @@ import de.gurkenlabs.litiengine.abilities.effects.Effect;
 import de.gurkenlabs.litiengine.abilities.effects.EffectTarget;
 import de.gurkenlabs.litiengine.entities.Creature;
 import de.gurkenlabs.litiengine.entities.ICombatEntity;
+import de.gurkenlabs.starreaperz.GameManager;
 import de.gurkenlabs.starreaperz.entities.LaserProjectile;
 
 import java.awt.geom.Point2D;
@@ -33,6 +34,11 @@ public class ShootLaserAbility extends Ability {
   @Override
   public AbilityExecution cast() {
     return super.cast();
+  }
+
+  @Override
+  public boolean canCast() {
+    return !GameManager.instance().getSpaceship().isHavesting() && super.canCast();
   }
 
   private static class ShootLaserProjectileEffect extends Effect {

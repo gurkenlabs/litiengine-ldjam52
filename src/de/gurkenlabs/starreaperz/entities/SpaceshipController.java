@@ -17,6 +17,8 @@ public class SpaceshipController extends KeyboardEntityController<Spaceship> {
   private long keyLeftDown;
   private long keyRightDown;
 
+  private long harvestingDown;
+
   public SpaceshipController(Spaceship entity) {
     super(entity);
     this.movementForce = new StickyForce(this.getEntity(), ReaperConstantZ.REAPER_VERTICAL_VELOCITY, 10);
@@ -56,6 +58,10 @@ public class SpaceshipController extends KeyboardEntityController<Spaceship> {
     return breaking == Game.time().now();
   }
 
+  public boolean isHarvesting() {
+    return harvestingDown == Game.time().now();
+  }
+
   @Override
   public void handlePressedKey(KeyEvent keyCode) {
     keyPressed = true;
@@ -83,7 +89,7 @@ public class SpaceshipController extends KeyboardEntityController<Spaceship> {
     }
 
     if (keyCode.getKeyCode() == KeyEvent.VK_SHIFT) {
-      this.getEntity().getHarvestAbility().cast();
+      this.harvestingDown = Game.time().now();
     }
   }
 
