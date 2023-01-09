@@ -10,8 +10,8 @@ import de.gurkenlabs.starreaperz.GameManager;
 import de.gurkenlabs.starreaperz.GameState;
 import de.gurkenlabs.starreaperz.constants.ReaperConstantZ;
 
-@CombatInfo(hitpoints = 1)
-@MovementInfo(velocity = 40)
+@CombatInfo(hitpoints = ReaperConstantZ.AGENT_HITPOINTS)
+@MovementInfo(velocity = ReaperConstantZ.AGENT_VELOCITY)
 public abstract class Agent extends Enemy {
   private final Swarm swarm;
 
@@ -66,7 +66,9 @@ public abstract class Agent extends Enemy {
       super.update();
 
       // if we hit the spaceship
-      var hitEnemy = Game.world().environment().findCombatEntities(this.getEntity().getHitBox(), e -> e instanceof Spaceship && !e.isDead()).stream().findFirst().orElse(null);
+      var hitEnemy =
+          Game.world().environment().findCombatEntities(this.getEntity().getHitBox(), e -> e instanceof Spaceship && !e.isDead()).stream().findFirst()
+              .orElse(null);
       if (hitEnemy != null && !hitEnemy.wasHit(ReaperConstantZ.REAPER_HIT_COOLDOWN)) {
         hitEnemy.hit(1);
         this.getEntity().hit(1);
@@ -75,11 +77,11 @@ public abstract class Agent extends Enemy {
 
       if (this.getEntity().isLeader()) {
         // try to move away from the spaceship if too close
-        var angle = Math.sin(Math.toRadians(Game.time().now() / 3.0)) * 90;
+        var angle = Math.sin(Math.toRadians(Game.time().now() / 2.0)) * 90;
         Game.physics().move(this.getEntity(), angle, this.getEntity().getTickVelocity());
       } else {
         var predecessor = this.getEntity().getSwarm().getPredecessor(this.getEntity());
-        if (predecessor == null || predecessor.getCenter().distance(this.getEntity().getCenter()) < this.getEntity().getWidth()*1.15) {
+        if (predecessor == null || predecessor.getCenter().distance(this.getEntity().getCenter()) < this.getEntity().getWidth() * 1.15) {
           return;
         }
 

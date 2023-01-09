@@ -6,6 +6,7 @@ import de.gurkenlabs.litiengine.entities.Creature;
 import de.gurkenlabs.litiengine.entities.EntityInfo;
 import de.gurkenlabs.litiengine.entities.MovementInfo;
 import de.gurkenlabs.litiengine.graphics.OverlayPixelsImageEffect;
+import de.gurkenlabs.litiengine.graphics.RenderType;
 import de.gurkenlabs.litiengine.graphics.animation.Animation;
 import de.gurkenlabs.litiengine.graphics.animation.EntityAnimationController;
 import de.gurkenlabs.litiengine.graphics.animation.IEntityAnimationController;
@@ -13,11 +14,12 @@ import de.gurkenlabs.litiengine.util.geom.GeometricUtilities;
 import de.gurkenlabs.starreaperz.GameManager;
 
 import de.gurkenlabs.starreaperz.GameState;
+import de.gurkenlabs.starreaperz.constants.ReaperConstantZ;
 import java.awt.*;
 import java.awt.geom.Point2D;
 
-@MovementInfo(velocity = 200, turnOnMove = false)
-@EntityInfo(width = 5, height = 5)
+@MovementInfo(velocity = ReaperConstantZ.ENEMY_SHOT_VELOCITY, turnOnMove = false)
+@EntityInfo(width = 5, height = 5, renderType = RenderType.OVERLAY)
 public class EnergyProjectile extends Creature implements IUpdateable {
 
   private final EnergyColor color;
@@ -52,7 +54,7 @@ public class EnergyProjectile extends Creature implements IUpdateable {
     var hitEnemy = Game.world().environment().findCombatEntities(this.getHitBox(), e -> e instanceof Spaceship && !e.isDead()).stream().findFirst();
     if (hitEnemy.isPresent()) {
       hitEnemy.get().hit(1);
-      hitEnemy.get().animations().add(new OverlayPixelsImageEffect(50, Color.WHITE));
+      hitEnemy.get().animations().add(new OverlayPixelsImageEffect(ReaperConstantZ.REAPER_HIT_PIXEL_FLASH_DURATION, Color.WHITE));
 
       Game.world().environment().remove(this);
     }

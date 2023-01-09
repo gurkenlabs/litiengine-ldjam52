@@ -10,7 +10,7 @@ import de.gurkenlabs.starreaperz.GameState;
 import de.gurkenlabs.starreaperz.abilities.ShootEnergyProjectile;
 import de.gurkenlabs.starreaperz.constants.ReaperConstantZ;
 
-@CombatInfo(hitpoints = 5)
+@CombatInfo(hitpoints = ReaperConstantZ.DEFENDER_HITPOINTS)
 public abstract class Defender extends Enemy {
   private final ShootEnergyProjectile shootEnergyProjectile = new ShootEnergyProjectile(this);
 
@@ -20,13 +20,11 @@ public abstract class Defender extends Enemy {
 
   public static Defender create(EnergyColor color) {
 
-    var defender = switch (color) {
-      case YELLOW -> new Defender.YellowDefender();
-      case BLUE -> new Defender.BlueDefender();
-      case GREEN -> new Defender.GreenDefender();
+    return switch (color) {
+      case YELLOW -> new YellowDefender();
+      case BLUE -> new BlueDefender();
+      case GREEN -> new GreenDefender();
     };
-
-    return defender;
   }
 
   @Override
