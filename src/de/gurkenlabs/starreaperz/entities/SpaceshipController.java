@@ -26,6 +26,10 @@ public class SpaceshipController extends KeyboardEntityController<Spaceship> {
     this.movementForce = new StickyForce(this.getEntity(), ReaperConstantZ.REAPER_VERTICAL_VELOCITY, 10);
     this.movementForce.setCancelOnCollision(false);
     this.apply(this.movementForce);
+    addUpKey(KeyEvent.VK_UP);
+    addDownKey(KeyEvent.VK_DOWN);
+    addLeftKey(KeyEvent.VK_LEFT);
+    addRightKey(KeyEvent.VK_RIGHT);
   }
 
   @Override
