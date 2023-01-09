@@ -10,6 +10,7 @@ import de.gurkenlabs.litiengine.entities.Tags;
 import de.gurkenlabs.litiengine.graphics.RenderType;
 import de.gurkenlabs.litiengine.graphics.emitters.EntityEmitter;
 import de.gurkenlabs.litiengine.graphics.emitters.xml.EmitterLoader;
+import de.gurkenlabs.litiengine.resources.Resources;
 
 @Tag("minimap")
 public abstract class Enemy extends Creature {
@@ -38,6 +39,7 @@ public abstract class Enemy extends Creature {
     EntityEmitter explosion = new EntityEmitter(this, EmitterLoader.get(explosionEmitterName));
     explosion.setRenderType(RenderType.OVERLAY);
     Game.world().environment().add(explosion);
+    Game.audio().playSound(Resources.sounds().get("explode1.ogg"));
   }
 
   public EnergyColor getColor() {

@@ -11,6 +11,7 @@ import de.gurkenlabs.litiengine.graphics.emitters.EntityEmitter;
 import de.gurkenlabs.litiengine.graphics.emitters.xml.EmitterLoader;
 import de.gurkenlabs.litiengine.input.Input;
 import de.gurkenlabs.litiengine.physics.IMovementController;
+import de.gurkenlabs.litiengine.resources.Resources;
 import de.gurkenlabs.starreaperz.GameManager;
 import de.gurkenlabs.starreaperz.abilities.ShootLaserAbility;
 
@@ -47,6 +48,7 @@ public class Spaceship extends Creature {
       EntityEmitter explosion = new EntityEmitter(this, EmitterLoader.get("explosion-red"));
       explosion.setRenderType(RenderType.OVERLAY);
       Game.world().environment().add(explosion);
+      Game.audio().playSound(Resources.sounds().get("explode2.wav"));
     });
   }
 
