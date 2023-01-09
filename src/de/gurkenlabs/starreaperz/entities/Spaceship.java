@@ -27,7 +27,13 @@ import java.util.concurrent.CopyOnWriteArrayList;
 @CombatInfo(hitpoints = ReaperConstantZ.SPACESHIP_HITPOINTS)
 @Tag("minimap")
 public class Spaceship extends Creature {
-
+  private static final String[] hitSounds = new String[] {
+      "hitHurt.wav",
+      "hitHurt2.wav",
+      "hitHurt3.wav",
+      "hitHurt4.wav",
+      "hitHurt5.wav"
+  };
   private final List<SpaceshipListener> listeners = new CopyOnWriteArrayList<>();
   private boolean harvesting;
   private EntityEmitter harvestingEmitter;
@@ -61,6 +67,7 @@ public class Spaceship extends Creature {
   @Override public void hit(int damage) {
     super.hit(damage);
     Game.world().camera().shake(2, 0, 300);
+    Game.audio().playSound(Game.random().choose(hitSounds));
   }
 
   @Override

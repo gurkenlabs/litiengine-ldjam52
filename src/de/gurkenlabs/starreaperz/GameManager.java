@@ -8,6 +8,12 @@ import de.gurkenlabs.litiengine.entities.TriggerEvent;
 import de.gurkenlabs.litiengine.environment.Environment;
 import de.gurkenlabs.litiengine.input.Input;
 import de.gurkenlabs.starreaperz.entities.*;
+import de.gurkenlabs.litiengine.resources.Resources;
+import de.gurkenlabs.starreaperz.entities.Core;
+import de.gurkenlabs.starreaperz.entities.EnemySpawner;
+import de.gurkenlabs.starreaperz.entities.Energy;
+import de.gurkenlabs.starreaperz.entities.EnergyColor;
+import de.gurkenlabs.starreaperz.entities.Spaceship;
 import de.gurkenlabs.starreaperz.graphics.VerticalRailCamera;
 
 import de.gurkenlabs.starreaperz.ui.components.HUD;
@@ -49,13 +55,14 @@ public class GameManager {
   public void init() {
     Game.world().onLoaded(this::environmentLoaded);
     Game.loop().attach(this.spawner);
+    Game.audio().playMusic(Resources.sounds().get("music2.mp3"));
     if (Game.isDebug()) {
-      //      Input.keyboard().onKeyPressed(KeyEvent.VK_E, event -> {
-      //        if (this.spaceship != null) {
-      //          Game.world().environment()
-      //              .add(new Energy(Game.random().next(EnergyColor.class), Game.random().getLocation(Game.world().camera().getViewport())));
-      //        }
-      //      });
+//      Input.keyboard().onKeyPressed(KeyEvent.VK_E, event -> {
+//        if (this.spaceship != null) {
+//          Game.world().environment()
+//              .add(new Energy(Game.random().next(EnergyColor.class), Game.random().getLocation(Game.world().camera().getViewport())));
+//        }
+//      });
       Input.keyboard().onKeyTyped(KeyEvent.VK_Q,
           event -> Game.world().environment().add(new Core(Game.random().getLocation(Game.world().camera().getViewport()))));
     }
@@ -85,7 +92,8 @@ public class GameManager {
 
   public void startGame() {
     Game.screens().display("INGAME");
-    Game.world().loadEnvironment("level3");
+    Game.world().loadEnvironment("level1");
+    Game.audio().playMusic(Resources.sounds().get("music1.ogg"));
     setState(GameState.INGAME);
   }
 
