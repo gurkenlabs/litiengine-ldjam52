@@ -20,13 +20,11 @@ import java.awt.geom.Point2D;
 @AbilityInfo(cooldown = 220)
 public class ShootLaserAbility extends Ability {
   private static final String[] shootSounds = new String[] {
-      "laserShoot.wav",
-      "laserShoot2.wav",
-      "laserShoot3.wav",
-      "laserShoot4.wav",
-      "laserShoot5.wav",
-      "laserShoot6.wav"
-  };
+      "laserShoot1.ogg",
+      "laserShoot2.ogg",
+      "laserShoot3.ogg",
+      "laserShoot4.ogg",
+      "laserShoot5.ogg"};
 
   public ShootLaserAbility(Creature executor) {
     super(executor);

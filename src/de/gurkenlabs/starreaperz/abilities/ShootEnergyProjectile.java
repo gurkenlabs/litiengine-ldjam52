@@ -14,6 +14,13 @@ import java.awt.geom.Point2D;
 
 @AbilityInfo(cooldown = 2000)
 public class ShootEnergyProjectile extends Ability {
+  private static final String[] shootSounds = new String[] {
+      "energyShoot1.ogg",
+      "energyShoot2.ogg",
+      "energyShoot3.ogg",
+      "energyShoot4.ogg",
+      "energyShoot5.ogg"};
+
   public ShootEnergyProjectile(Creature executor) {
     super(executor);
     this.addEffect(new ShootShootEnergyProjectileEffect(this));
@@ -32,6 +39,7 @@ public class ShootEnergyProjectile extends Ability {
       // spawn projectiles
       var projectile = new EnergyProjectile(enemy.getColor(), projectileOrigin);
       Game.world().environment().add(projectile);
+      Game.audio().playSound(Game.random().choose(shootSounds));
       super.apply(enemy);
     }
   }
