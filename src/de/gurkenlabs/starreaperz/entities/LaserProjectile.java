@@ -52,6 +52,12 @@ public class LaserProjectile extends Creature implements IUpdateable {
     if (GameManager.instance().getState() != GameState.INGAME) {
       return;
     }
+    // if we hit an asteroid
+    var astroid = Game.world().environment().findCombatEntities(this.getHitBox(), e -> e instanceof Asteroid).stream().findFirst();
+    if (astroid.isPresent()) {
+      Game.world().environment().remove(this);
+    }
+
     // if we hit the spaceship
     var hitEnemy = Game.world().environment().findCombatEntities(this.getHitBox(), e -> e instanceof Enemy && !e.isDead()).stream().findFirst();
     if (hitEnemy.isPresent()) {

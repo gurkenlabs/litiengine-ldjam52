@@ -141,7 +141,7 @@ public class EnemySpawner implements IUpdateable {
       var viewport = Game.world().camera().getViewport();
       final int offsetX = 100;
       var spawnArea = new Rectangle2D.Double(viewport.getX() + offsetX, viewport.getY() - viewport.getHeight() / 4, viewport.getWidth() - 2 * offsetX,
-          viewport.getHeight() / 2);
+          viewport.getHeight() / 4);
       return Game.random().getLocation(spawnArea);
     }
 

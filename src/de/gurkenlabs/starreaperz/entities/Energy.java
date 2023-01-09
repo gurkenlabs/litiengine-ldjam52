@@ -67,7 +67,7 @@ public class Energy extends Creature implements SpaceshipListener, IUpdateable {
     }
     // if we hit the spaceship
     if (Game.world().environment().findCombatEntities(this.getHitBox(), e -> e.equals(GameManager.instance().getSpaceship())).size() > 0) {
-      GameManager.instance().score((int) this.getWidth());
+      GameManager.instance().score(1000);
       // TODO: ADD POOOOOF EMITTER
       Game.audio().playSound(Game.random().choose(collectSounds));
       GameManager.instance().getSpaceship().animations().add(new OverlayPixelsImageEffect(50, this.getColor().toAwtColor()));

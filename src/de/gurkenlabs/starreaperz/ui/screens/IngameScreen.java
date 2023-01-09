@@ -75,7 +75,11 @@ public class IngameScreen extends GameScreen implements StateDependentUIComponen
       ImageRenderer.render(g, LOGO, Game.window().getResolution().getWidth() / 2d - LOGO.getWidth() / 2d,
           Game.window().getResolution().getHeight() * 2 / 10d);
     } else if (GameManager.instance().getState() == GameState.WON) {
-      TextRenderer.render(g, "ALL ENERGY HARVESTED!", Align.CENTER, Valign.MIDDLE, 0, 0);
+      if (!Game.world().environment().getMap().getName().equals("level3")) {
+        TextRenderer.render(g, GameManager.instance().getCurrentScore() + " ENERGY HARVESTED IN THIS WORLD!", Align.CENTER, Valign.MIDDLE, 0, 0);
+      } else{
+        TextRenderer.render(g, "YOU ANNIHILATED ALL SPECIES AND HARVESTED " + GameManager.instance().getOverallScore() + " ENERGY!", Align.CENTER, Valign.MIDDLE, 0, 0);
+      }
     }
   }
 
@@ -102,14 +106,10 @@ public class IngameScreen extends GameScreen implements StateDependentUIComponen
 
     this.retryButton =
         new ImageComponent(menuX, screenHeight * 8 / 10d, menuWidth, screenHeight * 1 / 10d, "Retry");
-    retryButton.onClicked(c -> {
-      restartLevel();
-    });
+    retryButton.onClicked(c -> restartLevel());
 
     nextLevelButton = new ImageComponent(menuX, screenHeight * 8 / 10d, menuWidth, screenHeight * 1 / 10d, "Continue");
-    nextLevelButton.onClicked(c -> {
-      nextLevel();
-    });
+    nextLevelButton.onClicked(c -> nextLevel());
     getHud().setVisible(false);
     ingameMenu.setVisible(false);
     retryButton.setVisible(false);

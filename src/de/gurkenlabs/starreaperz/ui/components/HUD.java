@@ -9,6 +9,7 @@ import de.gurkenlabs.starreaperz.GameManager;
 import de.gurkenlabs.starreaperz.GameState;
 import de.gurkenlabs.starreaperz.Program;
 import de.gurkenlabs.starreaperz.constants.ReaperFontZ;
+
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 
@@ -29,8 +30,11 @@ public class HUD extends GuiComponent {
       return;
     }
     g.setFont(ReaperFontZ.FONT_LOGO_ACAD.deriveFont(40f));
-    g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-    TextRenderer.render(g, "Score: " + GameManager.instance().getOverallScore(), Align.CENTER, Valign.MIDDLE_TOP, 0, -150);
+    g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+
+    if (GameManager.instance().getState() != GameState.WON) {
+      TextRenderer.render(g, "Energy harvested: " + GameManager.instance().getOverallScore(), Align.CENTER, Valign.MIDDLE_TOP, 0, -150);
+    }
   }
 
   @Override protected void initializeComponents() {

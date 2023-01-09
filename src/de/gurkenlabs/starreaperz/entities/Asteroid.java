@@ -1,7 +1,6 @@
 package de.gurkenlabs.starreaperz.entities;
 
 import de.gurkenlabs.litiengine.Game;
-import de.gurkenlabs.litiengine.GameMetrics;
 import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.litiengine.entities.CombatInfo;
 import de.gurkenlabs.litiengine.entities.Creature;
@@ -87,7 +86,7 @@ public class Asteroid extends Creature implements IUpdateable {
 
   @Override
   public void update() {
-    if (GameManager.instance().getState() == GameState.INGAME) {
+    if (GameManager.instance().getState() != GameState.INGAME) {
       return;
     }
 

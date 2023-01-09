@@ -3,20 +3,15 @@ package de.gurkenlabs.starreaperz;
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.entities.Trigger;
 import de.gurkenlabs.litiengine.entities.Trigger.TriggerActivation;
-import de.gurkenlabs.litiengine.entities.TriggerActivatedListener;
-import de.gurkenlabs.litiengine.entities.TriggerEvent;
 import de.gurkenlabs.litiengine.environment.Environment;
 import de.gurkenlabs.litiengine.input.Input;
 import de.gurkenlabs.starreaperz.entities.*;
 import de.gurkenlabs.litiengine.resources.Resources;
 import de.gurkenlabs.starreaperz.entities.Core;
 import de.gurkenlabs.starreaperz.entities.EnemySpawner;
-import de.gurkenlabs.starreaperz.entities.Energy;
-import de.gurkenlabs.starreaperz.entities.EnergyColor;
 import de.gurkenlabs.starreaperz.entities.Spaceship;
 import de.gurkenlabs.starreaperz.graphics.VerticalRailCamera;
 
-import de.gurkenlabs.starreaperz.ui.components.HUD;
 import de.gurkenlabs.starreaperz.ui.screens.IngameScreen;
 
 import java.awt.event.KeyEvent;
@@ -52,6 +47,11 @@ public class GameManager {
     return this.score.values().stream().reduce(0, Integer::sum);
   }
 
+  public int getCurrentScore() {
+    var current = this.score.get(Game.world().environment().getMap().getName());
+    return current == null ? 0 : current;
+  }
+
   public void init() {
     Game.world().onLoaded(this::environmentLoaded);
     Game.loop().attach(this.spawner);
@@ -64,9 +64,7 @@ public class GameManager {
       //        }
       //      });
 
-      Input.keyboard().onKeyTyped(KeyEvent.VK_F, event -> {
-        spaceship.getHitPoints().setToMax();
-      });
+      Input.keyboard().onKeyTyped(KeyEvent.VK_F, event -> spaceship.getHitPoints().setToMax());
       Input.keyboard().onKeyTyped(KeyEvent.VK_Q,
           event -> Game.world().environment().add(new Core(Game.random().getLocation(Game.world().camera().getViewport()))));
     }
@@ -88,9 +86,7 @@ public class GameManager {
     levelCompleteTrigger.setSize(Game.world().environment().getMap().getSizeInPixels().getWidth(), 64);
     levelCompleteTrigger.setY(256);
     levelCompleteTrigger.addActivator(getSpaceship());
-    levelCompleteTrigger.addActivatedListener(l -> {
-      winLevel();
-    });
+    levelCompleteTrigger.addActivatedListener(l -> winLevel());
     Game.world().environment().add(levelCompleteTrigger);
   }
 
@@ -121,7 +117,7 @@ public class GameManager {
     int i = 100;
     for (var enemy : Game.world().environment().getEntities(Enemy.class)) {
       if (enemy.getBoundingBox().intersects(Game.world().camera().getViewport())) {
-        Game.loop().perform(i, () -> enemy.die());
+        Game.loop().perform(i, enemy::die);
         i += 100;
       } else {
         enemy.die();
@@ -151,18 +147,11 @@ public class GameManager {
 
   public void nextLevel() {
     var level = Game.world().environment().getMap().getName();
-    String next = null;
-    switch (level) {
-      case "level1":
-        next = "level2";
-        break;
-      case "level2":
-        next = "level3";
-        break;
-      default:
-        next = null;
-        break;
-    }
+    String next = switch (level) {
+      case "level1" -> "level2";
+      case "level2" -> "level3";
+      default -> null;
+    };
 
     if (next == null) {
       Game.world().environment().clear();

@@ -52,6 +52,12 @@ public class EnergyProjectile extends Creature implements IUpdateable {
     if (GameManager.instance().getState() != GameState.INGAME) {
       return;
     }
+    // if we hit an asteroid
+    var astroid = Game.world().environment().findCombatEntities(this.getHitBox(), e -> e instanceof Asteroid).stream().findFirst();
+    if (astroid.isPresent()) {
+      Game.world().environment().remove(this);
+    }
+
     // if we hit the spaceship
     var hitEnemy = Game.world().environment().findCombatEntities(this.getHitBox(), e -> e instanceof Spaceship && !e.isDead()).stream().findFirst();
     if (hitEnemy.isPresent()) {
@@ -69,9 +75,7 @@ public class EnergyProjectile extends Creature implements IUpdateable {
     if (Game.time().since(this.lastflash) > 400) {
       var color = this.color.toAwtColor();
       this.animations().add(new OverlayPixelsImageEffect(200, new Color(color.getRed(), color.getGreen(), color.getBlue(), 200)));
-      Game.loop().perform(200, () -> {
-        this.animations().add(new OverlayPixelsImageEffect(200, new Color(255, 255, 255, 200)));
-      });
+      Game.loop().perform(200, () -> this.animations().add(new OverlayPixelsImageEffect(200, new Color(255, 255, 255, 200))));
       this.lastflash = Game.time().now();
     }
   }
