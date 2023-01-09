@@ -12,7 +12,6 @@ import de.gurkenlabs.litiengine.graphics.emitters.xml.EmitterLoader;
 import de.gurkenlabs.litiengine.input.Input;
 import de.gurkenlabs.litiengine.physics.IMovementController;
 import de.gurkenlabs.starreaperz.GameManager;
-import de.gurkenlabs.starreaperz.GameState;
 import de.gurkenlabs.starreaperz.abilities.ShootLaserAbility;
 
 import de.gurkenlabs.starreaperz.constants.ReaperConstantZ;
@@ -53,7 +52,7 @@ public class Spaceship extends Creature {
 
   @Override
   public Shape getHitBox() {
-    return new Ellipse2D.Double(this.getX() + 8, this.getY() + 8, this.getWidth() - 16, this.getHeight() - 16);
+    return new Ellipse2D.Double(this.getX() + 10, this.getY() + 10, this.getWidth() - 20, this.getHeight() - 20);
   }
 
   @Override

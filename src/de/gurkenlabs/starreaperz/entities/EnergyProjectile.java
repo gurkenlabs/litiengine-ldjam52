@@ -15,6 +15,7 @@ import de.gurkenlabs.starreaperz.GameManager;
 
 import de.gurkenlabs.starreaperz.GameState;
 import de.gurkenlabs.starreaperz.constants.ReaperConstantZ;
+
 import java.awt.*;
 import java.awt.geom.Point2D;
 
@@ -25,6 +26,7 @@ public class EnergyProjectile extends Creature implements IUpdateable {
   private final EnergyColor color;
 
   private final double angle;
+  private long lastflash;
 
   public EnergyProjectile(EnergyColor color, Point2D origin) {
     this.color = color;
@@ -63,6 +65,12 @@ public class EnergyProjectile extends Creature implements IUpdateable {
       Game.world().environment().remove(this);
     } else {
       Game.physics().move(this, this.angle, this.getTickVelocity());
+    }
+
+    if (Game.time().since(this.lastflash) > 400) {
+      var color = this.color.toAwtColor();
+      this.animations().add(new OverlayPixelsImageEffect(200, new Color(color.getRed(), color.getGreen(), color.getBlue(), 100)));
+      this.lastflash = Game.time().now();
     }
   }
 }

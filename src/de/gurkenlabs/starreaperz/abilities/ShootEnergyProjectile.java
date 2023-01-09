@@ -12,7 +12,7 @@ import de.gurkenlabs.starreaperz.entities.EnergyProjectile;
 
 import java.awt.geom.Point2D;
 
-@AbilityInfo(cooldown = 1000)
+@AbilityInfo(cooldown = 2000)
 public class ShootEnergyProjectile extends Ability {
   public ShootEnergyProjectile(Creature executor) {
     super(executor);

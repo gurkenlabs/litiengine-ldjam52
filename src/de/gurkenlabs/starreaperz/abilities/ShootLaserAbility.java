@@ -2,7 +2,6 @@ package de.gurkenlabs.starreaperz.abilities;
 
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.abilities.Ability;
-import de.gurkenlabs.litiengine.abilities.AbilityExecution;
 import de.gurkenlabs.litiengine.abilities.AbilityInfo;
 import de.gurkenlabs.litiengine.abilities.effects.Effect;
 import de.gurkenlabs.litiengine.abilities.effects.EffectTarget;
@@ -18,7 +17,7 @@ import de.gurkenlabs.starreaperz.ui.screens.IngameScreen;
 import java.awt.geom.Point2D;
 
 // TODO: Fast shooting upgrade (reduce cooldown to <=100)
-@AbilityInfo(cooldown = 250)
+@AbilityInfo(cooldown = 220)
 public class ShootLaserAbility extends Ability {
   private static final String[] shootSounds = new String[] {
       "laserShoot.wav",

@@ -38,7 +38,7 @@ public class EnemySpawner implements IUpdateable {
       Game.world().environment().add(new Asteroid());
       if (this.currentLevel.equals("level3")) {
         var spawns = Game.random().nextInt(4);
-        for(int i = 0; i < spawns; i++){
+        for (int i = 0; i < spawns; i++) {
           Game.world().environment().add(new Asteroid());
         }
       }
@@ -77,14 +77,14 @@ public class EnemySpawner implements IUpdateable {
     this.enemyWaves.add(new EnemyWave(12, 500));
   }
 
-  private class EnemyWave {
+  private static class EnemyWave {
     private final int number;
     private final int triggerYCood;
 
     private final EnergyColor energyColor;
 
     public EnemyWave(int number, int triggerYCoord) {
-      this.energyColor= EnergyColor.getLevelColor();
+      this.energyColor = EnergyColor.getLevelColor();
       this.number = number;
       this.triggerYCood = triggerYCoord;
     }
@@ -93,8 +93,15 @@ public class EnemySpawner implements IUpdateable {
       double waveStrength = this.determineWaveStrength();
       System.out.println("Spawned wave " + this.number + " (strength: " + waveStrength + ")");
 
+
+      int defenders = 0;
       while (waveStrength > 0) {
-        waveStrength -= Game.random().nextBoolean() ? this.spawnSwarm(waveStrength) : this.spawnDefender(waveStrength);
+        var spawnSwarm = Game.random().nextBoolean();
+        if (!spawnSwarm) {
+          defenders++;
+        }
+
+        waveStrength -= spawnSwarm || defenders > Math.ceil(waveStrength) ? this.spawnSwarm(waveStrength) : this.spawnDefender(waveStrength);
       }
     }
 
@@ -133,7 +140,8 @@ public class EnemySpawner implements IUpdateable {
     public Point2D determineSpawnPoint() {
       var viewport = Game.world().camera().getViewport();
       final int offsetX = 100;
-      var spawnArea = new Rectangle2D.Double(viewport.getX() + offsetX, viewport.getY() - viewport.getHeight() / 4, viewport.getWidth() - 2 * offsetX, viewport.getHeight() / 2);
+      var spawnArea = new Rectangle2D.Double(viewport.getX() + offsetX, viewport.getY() - viewport.getHeight() / 4, viewport.getWidth() - 2 * offsetX,
+          viewport.getHeight() / 2);
       return Game.random().getLocation(spawnArea);
     }
 
