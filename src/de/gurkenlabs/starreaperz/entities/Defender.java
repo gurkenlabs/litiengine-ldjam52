@@ -12,6 +12,14 @@ import de.gurkenlabs.starreaperz.constants.ReaperConstantZ;
 
 @CombatInfo(hitpoints = ReaperConstantZ.DEFENDER_HITPOINTS)
 public abstract class Defender extends Enemy {
+  private static final String[] hitSounds = new String[] {
+      "hitHurt.wav",
+      "hitHurt2.wav",
+      "hitHurt3.wav",
+      "hitHurt4.wav",
+      "hitHurt5.wav"
+  };
+
   private final ShootEnergyProjectile shootEnergyProjectile = new ShootEnergyProjectile(this);
 
   Defender(EnergyColor color) {
@@ -25,6 +33,11 @@ public abstract class Defender extends Enemy {
       case BLUE -> new BlueDefender();
       case GREEN -> new GreenDefender();
     };
+  }
+
+  @Override public void hit(int damage) {
+    super.hit(damage);
+    Game.audio().playSound(Game.random().choose(hitSounds));
   }
 
   @Override
@@ -63,7 +76,8 @@ public abstract class Defender extends Enemy {
 
       if (!shootEnergyProjectile.isOnCooldown() && Game.time().now() > this.nextShoot) {
         shootEnergyProjectile.cast();
-        this.nextShoot = Game.time().now() + Game.time().toTicks((int) (shootEnergyProjectile.getAttributes().cooldown().get() * Game.random().nextDouble(1.0, 2.0)));
+        this.nextShoot = Game.time().now() + Game.time()
+            .toTicks((int) (shootEnergyProjectile.getAttributes().cooldown().get() * Game.random().nextDouble(1.0, 2.0)));
       }
 
       super.update();
