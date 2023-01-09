@@ -1,6 +1,7 @@
 package de.gurkenlabs.starreaperz.entities;
 
 import de.gurkenlabs.litiengine.Game;
+import de.gurkenlabs.litiengine.GameMetrics;
 import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.litiengine.entities.CombatInfo;
 import de.gurkenlabs.litiengine.entities.Creature;
@@ -12,6 +13,8 @@ import de.gurkenlabs.litiengine.graphics.animation.Animation;
 import de.gurkenlabs.litiengine.graphics.animation.EntityAnimationController;
 import de.gurkenlabs.litiengine.graphics.animation.IEntityAnimationController;
 import de.gurkenlabs.litiengine.util.geom.GeometricUtilities;
+import de.gurkenlabs.starreaperz.GameManager;
+import de.gurkenlabs.starreaperz.GameState;
 import de.gurkenlabs.starreaperz.constants.ReaperConstantZ;
 
 import java.awt.*;
@@ -84,6 +87,10 @@ public class Asteroid extends Creature implements IUpdateable {
 
   @Override
   public void update() {
+    if (GameManager.instance().getState() == GameState.INGAME) {
+      return;
+    }
+
     // if we hit the spaceship
     var hitEnemy =
         Game.world().environment().findCombatEntities(this.getHitBox(), e -> e instanceof Spaceship && !e.isDead()).stream().findFirst().orElse(null);

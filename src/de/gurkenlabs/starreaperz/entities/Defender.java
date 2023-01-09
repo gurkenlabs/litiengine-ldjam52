@@ -22,6 +22,8 @@ public abstract class Defender extends Enemy {
 
   private final ShootEnergyProjectile shootEnergyProjectile = new ShootEnergyProjectile(this);
 
+  private static long globalLastShot;
+
   Defender(EnergyColor color) {
     super(color, ReaperConstantZ.ENEMY_DEFENDER_ENERGY_AMOUNT);
   }
@@ -74,8 +76,9 @@ public abstract class Defender extends Enemy {
         return;
       }
 
-      if (!shootEnergyProjectile.isOnCooldown() && Game.time().now() > this.nextShoot) {
+      if (!shootEnergyProjectile.isOnCooldown() && Game.time().now() > this.nextShoot && Game.time().since(globalLastShot) > 1300) {
         shootEnergyProjectile.cast();
+        globalLastShot = Game.time().now();
         this.nextShoot = Game.time().now() + Game.time()
             .toTicks((int) (shootEnergyProjectile.getAttributes().cooldown().get() * Game.random().nextDouble(1.0, 2.0)));
       }

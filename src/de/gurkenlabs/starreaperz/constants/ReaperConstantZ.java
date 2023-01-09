@@ -25,9 +25,10 @@ public class ReaperConstantZ {
   public static final double ENEMY_DEFENDER_WAVESTRENGTH = 0.5;
   public static final int ENEMY_SHOT_VELOCITY = 120;
 
-  public static final int DEFENDER_HITPOINTS = 3;
+  public static final int DEFENDER_HITPOINTS = 2;
   public static final int AGENT_HITPOINTS = 1;
   public static final int AGENT_VELOCITY = 40;
+  public static final int ENERGY_VELOCITY = 200;
   public static final int SPACESHIP_HITPOINTS = 5;
 
 
