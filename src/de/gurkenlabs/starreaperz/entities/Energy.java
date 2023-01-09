@@ -15,6 +15,7 @@ import de.gurkenlabs.litiengine.tweening.TweenType;
 import de.gurkenlabs.litiengine.util.MathUtilities;
 import de.gurkenlabs.litiengine.util.geom.GeometricUtilities;
 import de.gurkenlabs.starreaperz.GameManager;
+import de.gurkenlabs.starreaperz.GameState;
 import de.gurkenlabs.starreaperz.constants.ReaperConstantZ;
 
 import java.awt.geom.Point2D;
@@ -59,6 +60,9 @@ public class Energy extends Creature implements SpaceshipListener, IUpdateable {
 
   @Override
   public void update() {
+    if (GameManager.instance().getState() != GameState.INGAME) {
+      return;
+    }
     // if we hit the spaceship
     if (Game.world().environment().findCombatEntities(this.getHitBox(), e -> e.equals(GameManager.instance().getSpaceship())).size() > 0) {
       GameManager.instance().score((int) this.getWidth());
@@ -107,6 +111,9 @@ public class Energy extends Creature implements SpaceshipListener, IUpdateable {
 
     @Override
     public void update() {
+      if (GameManager.instance().getState() != GameState.INGAME) {
+        return;
+      }
       super.update();
       if (GameManager.instance().getSpaceship().isHarvesting()) {
         Game.physics().move(getEntity(), GameManager.instance().getSpaceship().getCenter(), getEntity().getTickVelocity());

@@ -30,10 +30,10 @@ public class SpaceshipController extends KeyboardEntityController<Spaceship> {
 
   @Override
   public void update() {
-    super.update();
     if (GameManager.instance().getState() != GameState.INGAME) {
       return;
     }
+    super.update();
 
     if ((!this.isBraking() && !this.isBoosting())) {
       Game.world().camera().setZoom(ReaperConstantZ.CAMERA_STANDARD_ZOOM_FACTOR, ReaperConstantZ.CAMERA_ZOOM_DELAY);
@@ -65,6 +65,9 @@ public class SpaceshipController extends KeyboardEntityController<Spaceship> {
 
   @Override
   public void handlePressedKey(KeyEvent keyCode) {
+    if (GameManager.instance().getState() != GameState.INGAME) {
+      return;
+    }
     keyPressed = true;
     if (this.getUpKeys().contains(keyCode.getKeyCode())) {
       this.changeVelocity(ReaperConstantZ.REAPER_VERTICAL_VELOCITY * ReaperConstantZ.REAPER_VELOCITY_BOOST_FACTOR);

@@ -6,6 +6,8 @@ import de.gurkenlabs.litiengine.entities.MovementInfo;
 import de.gurkenlabs.litiengine.physics.IMovementController;
 import de.gurkenlabs.litiengine.physics.MovementController;
 import de.gurkenlabs.litiengine.physics.StickyForce;
+import de.gurkenlabs.starreaperz.GameManager;
+import de.gurkenlabs.starreaperz.GameState;
 import de.gurkenlabs.starreaperz.constants.ReaperConstantZ;
 
 @CombatInfo(hitpoints = 1)
@@ -58,6 +60,9 @@ public abstract class Agent extends Enemy {
 
     @Override
     public void update() {
+      if (GameManager.instance().getState() != GameState.INGAME) {
+        return;
+      }
       super.update();
 
       // if we hit the spaceship

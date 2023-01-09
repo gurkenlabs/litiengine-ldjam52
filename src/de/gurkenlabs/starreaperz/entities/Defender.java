@@ -5,6 +5,8 @@ import de.gurkenlabs.litiengine.entities.CombatInfo;
 import de.gurkenlabs.litiengine.physics.IMovementController;
 import de.gurkenlabs.litiengine.physics.MovementController;
 import de.gurkenlabs.litiengine.physics.StickyForce;
+import de.gurkenlabs.starreaperz.GameManager;
+import de.gurkenlabs.starreaperz.GameState;
 import de.gurkenlabs.starreaperz.abilities.ShootEnergyProjectile;
 import de.gurkenlabs.starreaperz.constants.ReaperConstantZ;
 
@@ -48,6 +50,9 @@ public abstract class Defender extends Enemy {
 
     @Override
     public void update() {
+      if (GameManager.instance().getState() != GameState.INGAME) {
+        return;
+      }
       // if we hit the spaceship
       var hitEnemy =
           Game.world().environment().findCombatEntities(this.getEntity().getHitBox(), e -> e instanceof Spaceship && !e.isDead()).stream().findFirst()

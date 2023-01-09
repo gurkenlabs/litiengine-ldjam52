@@ -12,6 +12,7 @@ import de.gurkenlabs.litiengine.graphics.animation.IEntityAnimationController;
 import de.gurkenlabs.litiengine.util.geom.GeometricUtilities;
 import de.gurkenlabs.starreaperz.GameManager;
 
+import de.gurkenlabs.starreaperz.GameState;
 import java.awt.*;
 import java.awt.geom.Point2D;
 
@@ -44,6 +45,9 @@ public class EnergyProjectile extends Creature implements IUpdateable {
 
   @Override
   public void update() {
+    if (GameManager.instance().getState() != GameState.INGAME) {
+      return;
+    }
     // if we hit the spaceship
     var hitEnemy = Game.world().environment().findCombatEntities(this.getHitBox(), e -> e instanceof Spaceship && !e.isDead()).stream().findFirst();
     if (hitEnemy.isPresent()) {

@@ -11,6 +11,8 @@ import de.gurkenlabs.litiengine.physics.IMovementController;
 import de.gurkenlabs.litiengine.physics.MovementController;
 import de.gurkenlabs.litiengine.physics.StickyForce;
 
+import de.gurkenlabs.starreaperz.GameManager;
+import de.gurkenlabs.starreaperz.GameState;
 import java.awt.*;
 import java.awt.geom.Point2D;
 
@@ -45,6 +47,9 @@ public class LaserProjectile extends Creature implements IUpdateable {
 
   @Override
   public void update() {
+    if (GameManager.instance().getState() != GameState.INGAME) {
+      return;
+    }
     // if we hit the spaceship
     var hitEnemy = Game.world().environment().findCombatEntities(this.getHitBox(), e -> e instanceof Enemy && !e.isDead()).stream().findFirst();
     if(hitEnemy.isPresent()){
@@ -64,6 +69,13 @@ public class LaserProjectile extends Creature implements IUpdateable {
     public LaserProjectileMovementController(LaserProjectile mobileEntity) {
       super(mobileEntity);
       this.apply(new StickyForce(this.getEntity(), this.getEntity().getVelocity().get(), 10));
+    }
+
+    @Override public void update() {
+      if (GameManager.instance().getState() != GameState.INGAME) {
+        return;
+      }
+      super.update();
     }
   }
 }
