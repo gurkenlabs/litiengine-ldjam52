@@ -120,8 +120,12 @@ public class GameManager {
   private void killEverything() {
     int i = 100;
     for (var enemy : Game.world().environment().getEntities(Enemy.class)) {
-      Game.loop().perform(i, () -> enemy.die());
-      i += 100;
+      if (enemy.getBoundingBox().intersects(Game.world().camera().getViewport())) {
+        Game.loop().perform(i, () -> enemy.die());
+        i += 100;
+      } else {
+        enemy.die();
+      }
     }
 
     for (var projectile : Game.world().environment().getEntities(LaserProjectile.class)) {
