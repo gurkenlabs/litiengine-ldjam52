@@ -41,7 +41,13 @@ public class IngameScreen extends GameScreen implements StateDependentUIComponen
 
       }
     });
-    Input.keyboard().onKeyTyped(KeyEvent.VK_ESCAPE, l -> pauseGame());
+    Input.keyboard().onKeyTyped(KeyEvent.VK_ESCAPE, l -> {
+      if (GameManager.instance().getState() == GameState.INGAME) {
+        pauseGame();
+      } else if (GameManager.instance().getState() == GameState.PAUSE) {
+        resumeGame();
+      }
+    });
   }
 
   public static IngameScreen instance() {

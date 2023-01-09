@@ -15,14 +15,15 @@ import de.gurkenlabs.starreaperz.GameManager;
 import de.gurkenlabs.starreaperz.GameState;
 import de.gurkenlabs.starreaperz.abilities.ShootLaserAbility;
 
+import de.gurkenlabs.starreaperz.constants.ReaperConstantZ;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.geom.Ellipse2D;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-@MovementInfo(acceleration = 800, deceleration = 1500, velocity = 200)
-@CombatInfo(hitpoints = 3)
+@MovementInfo(acceleration = ReaperConstantZ.REAPER_ACCELERATION, deceleration = ReaperConstantZ.REAPER_DECELERATION, velocity = ReaperConstantZ.REAPER_VELOCITY)
+@CombatInfo(hitpoints = ReaperConstantZ.SPACESHIP_HITPOINTS)
 @Tag("minimap")
 public class Spaceship extends Creature {
 
