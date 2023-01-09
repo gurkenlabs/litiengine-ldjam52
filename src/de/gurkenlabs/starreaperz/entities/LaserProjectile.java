@@ -4,6 +4,7 @@ import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.litiengine.entities.*;
 import de.gurkenlabs.litiengine.graphics.OverlayPixelsImageEffect;
+import de.gurkenlabs.litiengine.graphics.RenderType;
 import de.gurkenlabs.litiengine.graphics.animation.Animation;
 import de.gurkenlabs.litiengine.graphics.animation.EntityAnimationController;
 import de.gurkenlabs.litiengine.graphics.animation.IEntityAnimationController;
@@ -13,12 +14,13 @@ import de.gurkenlabs.litiengine.physics.StickyForce;
 
 import de.gurkenlabs.starreaperz.GameManager;
 import de.gurkenlabs.starreaperz.GameState;
+
 import java.awt.*;
 import java.awt.geom.Point2D;
 
 
 @MovementInfo(velocity = 350, turnOnMove = false)
-@EntityInfo(width = 5, height = 10)
+@EntityInfo(width = 5, height = 10, renderType = RenderType.OVERLAY)
 public class LaserProjectile extends Creature implements IUpdateable {
 
   private final boolean right;
@@ -36,12 +38,12 @@ public class LaserProjectile extends Creature implements IUpdateable {
   @Override
   protected IEntityAnimationController<?> createAnimationController() {
     var controller = new EntityAnimationController<>(this,
-            new Animation("laser_1", true, false),
-            new Animation("laser_1-right", true, false));
+        new Animation("laser_1", true, false),
+        new Animation("laser_1-right", true, false));
 
     controller.addRule(p -> p.right, p -> "laser_1-right");
     controller.addRule(p -> !
-            p.right, p -> "laser_1");
+        p.right, p -> "laser_1");
     return controller;
   }
 
@@ -52,7 +54,7 @@ public class LaserProjectile extends Creature implements IUpdateable {
     }
     // if we hit the spaceship
     var hitEnemy = Game.world().environment().findCombatEntities(this.getHitBox(), e -> e instanceof Enemy && !e.isDead()).stream().findFirst();
-    if(hitEnemy.isPresent()){
+    if (hitEnemy.isPresent()) {
       hitEnemy.get().hit(1);
       hitEnemy.get().animations().add(new OverlayPixelsImageEffect(50, Color.WHITE));
       // TODO: SOUND, explosion upon enemy death -> enemy class

@@ -10,6 +10,8 @@ import de.gurkenlabs.litiengine.entities.Tags;
 import de.gurkenlabs.litiengine.graphics.RenderType;
 import de.gurkenlabs.litiengine.graphics.emitters.EntityEmitter;
 import de.gurkenlabs.litiengine.graphics.emitters.xml.EmitterLoader;
+import de.gurkenlabs.starreaperz.GameManager;
+import de.gurkenlabs.starreaperz.GameState;
 import de.gurkenlabs.litiengine.resources.Resources;
 
 @Tag("minimap")
@@ -29,10 +31,13 @@ public abstract class Enemy extends Creature {
   }
 
   private void handleDeath(ICombatEntity entity) {
-    for (int i = 0; i < this.energyAmount.get(); i++) {
-      var energy = new Energy(this.getColor(), Game.random().getLocation(this.getBoundingBox()));
-      Game.world().environment().add(energy);
+    if (GameManager.instance().getState() == GameState.INGAME) {
+      for (int i = 0; i < this.energyAmount.get(); i++) {
+        var energy = new Energy(this.getColor(), Game.random().getLocation(this.getBoundingBox()));
+        Game.world().environment().add(energy);
+      }
     }
+
     setVisible(false);
     Game.world().environment().remove(this);
     String explosionEmitterName = String.format("explosion-%s", getColor().name().toLowerCase());

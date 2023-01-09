@@ -7,15 +7,12 @@ import de.gurkenlabs.litiengine.entities.TriggerActivatedListener;
 import de.gurkenlabs.litiengine.entities.TriggerEvent;
 import de.gurkenlabs.litiengine.environment.Environment;
 import de.gurkenlabs.litiengine.input.Input;
-import de.gurkenlabs.starreaperz.entities.Core;
-import de.gurkenlabs.starreaperz.entities.EnemySpawner;
-import de.gurkenlabs.starreaperz.entities.Energy;
-import de.gurkenlabs.starreaperz.entities.EnergyColor;
-import de.gurkenlabs.starreaperz.entities.Spaceship;
+import de.gurkenlabs.starreaperz.entities.*;
 import de.gurkenlabs.starreaperz.graphics.VerticalRailCamera;
 
 import de.gurkenlabs.starreaperz.ui.components.HUD;
 import de.gurkenlabs.starreaperz.ui.screens.IngameScreen;
+
 import java.awt.event.KeyEvent;
 import java.awt.geom.Point2D;
 import java.util.Hashtable;
@@ -53,12 +50,12 @@ public class GameManager {
     Game.world().onLoaded(this::environmentLoaded);
     Game.loop().attach(this.spawner);
     if (Game.isDebug()) {
-//      Input.keyboard().onKeyPressed(KeyEvent.VK_E, event -> {
-//        if (this.spaceship != null) {
-//          Game.world().environment()
-//              .add(new Energy(Game.random().next(EnergyColor.class), Game.random().getLocation(Game.world().camera().getViewport())));
-//        }
-//      });
+      //      Input.keyboard().onKeyPressed(KeyEvent.VK_E, event -> {
+      //        if (this.spaceship != null) {
+      //          Game.world().environment()
+      //              .add(new Energy(Game.random().next(EnergyColor.class), Game.random().getLocation(Game.world().camera().getViewport())));
+      //        }
+      //      });
       Input.keyboard().onKeyTyped(KeyEvent.VK_Q,
           event -> Game.world().environment().add(new Core(Game.random().getLocation(Game.world().camera().getViewport()))));
     }
@@ -88,7 +85,7 @@ public class GameManager {
 
   public void startGame() {
     Game.screens().display("INGAME");
-    Game.world().loadEnvironment("level1");
+    Game.world().loadEnvironment("level3");
     setState(GameState.INGAME);
   }
 
@@ -104,6 +101,18 @@ public class GameManager {
 
   public void winLevel() {
     setState(GameState.WON);
+    for (var enemy : Game.world().environment().getEntities(Enemy.class)) {
+      enemy.die();
+      Game.world().environment().remove(enemy);
+    }
+
+    for (var projectile : Game.world().environment().getEntities(LaserProjectile.class)) {
+      Game.world().environment().remove(projectile);
+    }
+
+    for (var projectile : Game.world().environment().getEntities(EnergyProjectile.class)) {
+      Game.world().environment().remove(projectile);
+    }
   }
 
   public void loseLevel() {

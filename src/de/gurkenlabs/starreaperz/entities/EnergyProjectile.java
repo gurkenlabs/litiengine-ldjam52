@@ -69,7 +69,10 @@ public class EnergyProjectile extends Creature implements IUpdateable {
 
     if (Game.time().since(this.lastflash) > 400) {
       var color = this.color.toAwtColor();
-      this.animations().add(new OverlayPixelsImageEffect(200, new Color(color.getRed(), color.getGreen(), color.getBlue(), 100)));
+      this.animations().add(new OverlayPixelsImageEffect(200, new Color(color.getRed(), color.getGreen(), color.getBlue(), 200)));
+      Game.loop().perform(200, () -> {
+        this.animations().add(new OverlayPixelsImageEffect(200, new Color(255, 255, 255, 200)));
+      });
       this.lastflash = Game.time().now();
     }
   }

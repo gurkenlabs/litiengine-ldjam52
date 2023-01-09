@@ -16,6 +16,7 @@ import de.gurkenlabs.starreaperz.GameManager;
 import de.gurkenlabs.starreaperz.abilities.ShootLaserAbility;
 
 import de.gurkenlabs.starreaperz.constants.ReaperConstantZ;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.geom.Ellipse2D;
@@ -55,6 +56,11 @@ public class Spaceship extends Creature {
   @Override
   public Shape getHitBox() {
     return new Ellipse2D.Double(this.getX() + 10, this.getY() + 10, this.getWidth() - 20, this.getHeight() - 20);
+  }
+
+  @Override public void hit(int damage) {
+    super.hit(damage);
+    Game.world().camera().shake(2, 0, 300);
   }
 
   @Override
