@@ -53,12 +53,12 @@ public class GameManager {
     Game.world().onLoaded(this::environmentLoaded);
     Game.loop().attach(this.spawner);
     if (Game.isDebug()) {
-      Input.keyboard().onKeyPressed(KeyEvent.VK_E, event -> {
-        if (this.spaceship != null) {
-          Game.world().environment()
-              .add(new Energy(Game.random().next(EnergyColor.class), Game.random().getLocation(Game.world().camera().getViewport())));
-        }
-      });
+//      Input.keyboard().onKeyPressed(KeyEvent.VK_E, event -> {
+//        if (this.spaceship != null) {
+//          Game.world().environment()
+//              .add(new Energy(Game.random().next(EnergyColor.class), Game.random().getLocation(Game.world().camera().getViewport())));
+//        }
+//      });
       Input.keyboard().onKeyTyped(KeyEvent.VK_Q,
           event -> Game.world().environment().add(new Core(Game.random().getLocation(Game.world().camera().getViewport()))));
     }
