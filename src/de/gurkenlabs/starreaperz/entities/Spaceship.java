@@ -42,7 +42,7 @@ public class Spaceship extends Creature {
       }
     });
     onDeath(d -> {
-      GameManager.instance().setState(GameState.LOST);
+      GameManager.instance().loseLevel();
       setVisible(false);
       Game.world().environment().remove(this);
       EntityEmitter explosion = new EntityEmitter(this, EmitterLoader.get("explosion-red"));

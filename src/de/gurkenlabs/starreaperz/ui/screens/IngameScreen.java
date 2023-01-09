@@ -15,10 +15,9 @@ import de.gurkenlabs.litiengine.util.Imaging;
 import de.gurkenlabs.starreaperz.GameManager;
 
 import de.gurkenlabs.starreaperz.GameState;
-import de.gurkenlabs.starreaperz.constants.ReaperConstantZ;
 import de.gurkenlabs.starreaperz.constants.ReaperImageZ;
+import de.gurkenlabs.starreaperz.ui.StateDependentUIComponent;
 import de.gurkenlabs.starreaperz.ui.components.HUD;
-import de.gurkenlabs.starreaperz.ui.components.StateDependentUIComponent;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.image.AffineTransformOp;
@@ -31,6 +30,7 @@ public class IngameScreen extends GameScreen implements StateDependentUIComponen
 
   private HUD hud;
   private Menu ingameMenu;
+  private ImageComponent continueButton;
 
 
   private IngameScreen() {
@@ -87,6 +87,13 @@ public class IngameScreen extends GameScreen implements StateDependentUIComponen
         System.exit(0);
       }
     });
+
+    this.continueButton =
+        new ImageComponent(menuX, screenHeight * 8 / 10d, menuWidth, screenHeight * 1 / 10d, "Retry");
+    continueButton.onClicked(c -> {
+      restartLevel();
+    });
+    getComponents().add(continueButton);
     getComponents().add(ingameMenu);
     getComponents().add(getHud());
   }
@@ -96,14 +103,22 @@ public class IngameScreen extends GameScreen implements StateDependentUIComponen
       case PAUSE -> {
         getHud().setVisible(false);
         ingameMenu.setVisible(true);
+        continueButton.setVisible(false);
       }
       case INGAME -> {
         getHud().setVisible(true);
         ingameMenu.setVisible(false);
+        continueButton.setVisible(false);
+      }
+      case LOST -> {
+        getHud().setVisible(false);
+        ingameMenu.setVisible(false);
+        continueButton.setVisible(true);
       }
       default -> {
         getHud().setVisible(false);
         ingameMenu.setVisible(false);
+        continueButton.setVisible(false);
       }
     }
   }
@@ -122,7 +137,7 @@ public class IngameScreen extends GameScreen implements StateDependentUIComponen
   }
 
   private void restartLevel() {
-    GameManager.instance().setState(GameState.INGAME);
+    GameManager.instance().restartLevel();
 
   }
 }

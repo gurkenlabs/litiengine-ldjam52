@@ -1,4 +1,4 @@
-package de.gurkenlabs.starreaperz.ui.components;
+package de.gurkenlabs.starreaperz.ui;
 
 public interface StateDependentUIComponent {
   void updateState();

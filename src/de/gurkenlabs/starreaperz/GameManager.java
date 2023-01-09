@@ -102,8 +102,18 @@ public class GameManager {
     IngameScreen.instance().updateState();
   }
 
-  private void winLevel() {
+  public void winLevel() {
     setState(GameState.WON);
+  }
+
+  public void loseLevel() {
+    setState(GameState.LOST);
+  }
+
+  public void restartLevel() {
+    Game.world().environment().clear();
+    Game.world().loadEnvironment(Game.world().reset(Game.world().environment().getMap()));
+    setState(GameState.INGAME);
   }
 
 }
