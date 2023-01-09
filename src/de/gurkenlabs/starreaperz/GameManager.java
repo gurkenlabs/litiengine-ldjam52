@@ -57,12 +57,16 @@ public class GameManager {
     Game.loop().attach(this.spawner);
     Game.audio().playMusic(Resources.sounds().get("music2.mp3"));
     if (Game.isDebug()) {
-//      Input.keyboard().onKeyPressed(KeyEvent.VK_E, event -> {
-//        if (this.spaceship != null) {
-//          Game.world().environment()
-//              .add(new Energy(Game.random().next(EnergyColor.class), Game.random().getLocation(Game.world().camera().getViewport())));
-//        }
-//      });
+      //      Input.keyboard().onKeyPressed(KeyEvent.VK_E, event -> {
+      //        if (this.spaceship != null) {
+      //          Game.world().environment()
+      //              .add(new Energy(Game.random().next(EnergyColor.class), Game.random().getLocation(Game.world().camera().getViewport())));
+      //        }
+      //      });
+
+      Input.keyboard().onKeyTyped(KeyEvent.VK_F, event -> {
+        spaceship.getHitPoints().setToMax();
+      });
       Input.keyboard().onKeyTyped(KeyEvent.VK_Q,
           event -> Game.world().environment().add(new Core(Game.random().getLocation(Game.world().camera().getViewport()))));
     }
@@ -109,9 +113,15 @@ public class GameManager {
 
   public void winLevel() {
     setState(GameState.WON);
+    this.killEverything();
+
+  }
+
+  private void killEverything() {
+    int i = 100;
     for (var enemy : Game.world().environment().getEntities(Enemy.class)) {
-      enemy.die();
-      Game.world().environment().remove(enemy);
+      Game.loop().perform(i, () -> enemy.die());
+      i += 100;
     }
 
     for (var projectile : Game.world().environment().getEntities(LaserProjectile.class)) {
@@ -128,6 +138,8 @@ public class GameManager {
   }
 
   public void restartLevel() {
+    var level = Game.world().environment().getMap().getName();
+    this.score.put(level, 0);
     Game.world().environment().clear();
     Game.world().loadEnvironment(Game.world().reset(Game.world().environment().getMap()));
     setState(GameState.INGAME);

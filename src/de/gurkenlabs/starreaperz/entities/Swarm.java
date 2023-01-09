@@ -1,6 +1,8 @@
 package de.gurkenlabs.starreaperz.entities;
 
 import de.gurkenlabs.litiengine.Game;
+import de.gurkenlabs.starreaperz.GameManager;
+import de.gurkenlabs.starreaperz.GameState;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
@@ -22,7 +24,11 @@ public class Swarm {
       final Agent enemy = agents.get(i);
       enemy.setLocation(location);
       if (i > 0) {
-        Game.loop().perform(i * 500, () -> Game.world().environment().add(enemy));
+        Game.loop().perform(i * 500, () -> {
+          if (GameManager.instance().getState() == GameState.INGAME) {
+            Game.world().environment().add(enemy);
+          }
+        });
       } else {
         Game.world().environment().add(enemy);
       }

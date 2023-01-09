@@ -8,7 +8,7 @@ public class ReaperConstantZ {
   public static final int REAPER_ACCELERATION = 400;
   public static final int REAPER_DECELERATION = 1000;
   public static final int REAPER_VELOCITY = 250;
-  public static final int REAPER_VERTICAL_VELOCITY = 70;
+  public static final int REAPER_VERTICAL_VELOCITY = 300;
   public static final float REAPER_VELOCITY_BOOST_FACTOR = 1.75f;
   public static final float REAPER_VELOCITY_BRAKE_FACTOR = 0.25f;
   public static final double REAPER_SHOT_VELOCITY = 0.5;

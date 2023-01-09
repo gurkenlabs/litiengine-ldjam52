@@ -40,11 +40,14 @@ public abstract class Enemy extends Creature {
 
     setVisible(false);
     Game.world().environment().remove(this);
-    String explosionEmitterName = String.format("explosion-%s", getColor().name().toLowerCase());
-    EntityEmitter explosion = new EntityEmitter(this, EmitterLoader.get(explosionEmitterName));
-    explosion.setRenderType(RenderType.OVERLAY);
-    Game.world().environment().add(explosion);
-    Game.audio().playSound(Resources.sounds().get("explode1.ogg"));
+
+    if (this.getBoundingBox().intersects(Game.world().camera().getViewport())) {
+      String explosionEmitterName = String.format("explosion-%s", getColor().name().toLowerCase());
+      EntityEmitter explosion = new EntityEmitter(this, EmitterLoader.get(explosionEmitterName));
+      explosion.setRenderType(RenderType.OVERLAY);
+      Game.world().environment().add(explosion);
+      Game.audio().playSound(Resources.sounds().get("explode1.ogg"));
+    }
   }
 
   public EnergyColor getColor() {
