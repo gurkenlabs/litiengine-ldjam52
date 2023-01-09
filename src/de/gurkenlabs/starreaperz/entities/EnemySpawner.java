@@ -3,6 +3,7 @@ package de.gurkenlabs.starreaperz.entities;
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.starreaperz.GameManager;
+import de.gurkenlabs.starreaperz.GameState;
 import de.gurkenlabs.starreaperz.constants.ReaperConstantZ;
 
 import java.awt.geom.Point2D;
@@ -22,6 +23,10 @@ public class EnemySpawner implements IUpdateable {
 
   @Override
   public void update() {
+    if (GameManager.instance().getState() != GameState.INGAME) {
+      return;
+    }
+
     var nextWave = enemyWaves.peek();
     if (nextWave != null && nextWave.triggerYCood > GameManager.instance().getSpaceship().getY()) {
       enemyWaves.poll();
@@ -79,19 +84,7 @@ public class EnemySpawner implements IUpdateable {
     private final EnergyColor energyColor;
 
     public EnemyWave(int number, int triggerYCoord) {
-      switch (EnemySpawner.this.currentLevel) {
-        case "level2":
-          this.energyColor = EnergyColor.BLUE;
-          break;
-        case "level3":
-          this.energyColor = EnergyColor.GREEN;
-          break;
-        case "level1":
-        default:
-          this.energyColor = EnergyColor.YELLOW;
-          break;
-      }
-
+      this.energyColor= EnergyColor.getLevelColor();
       this.number = number;
       this.triggerYCood = triggerYCoord;
     }

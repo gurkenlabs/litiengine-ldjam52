@@ -1,6 +1,7 @@
 package de.gurkenlabs.starreaperz.entities;
 
 import de.gurkenlabs.litiengine.graphics.animation.CreatureAnimationController;
+import de.gurkenlabs.litiengine.input.Input;
 
 public class SpaceshipAnimationController extends CreatureAnimationController<Spaceship> {
   public SpaceshipAnimationController(Spaceship creature) {

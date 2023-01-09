@@ -4,6 +4,8 @@ import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.input.KeyboardEntityController;
 import de.gurkenlabs.litiengine.physics.StickyForce;
 
+import de.gurkenlabs.starreaperz.GameManager;
+import de.gurkenlabs.starreaperz.GameState;
 import de.gurkenlabs.starreaperz.constants.ReaperConstantZ;
 import java.awt.event.KeyEvent;
 
@@ -29,12 +31,15 @@ public class SpaceshipController extends KeyboardEntityController<Spaceship> {
   @Override
   public void update() {
     super.update();
+    if (GameManager.instance().getState() != GameState.INGAME) {
+      return;
+    }
 
-    if ((!this.isBreaking() && !this.isBoosting())) {
+    if ((!this.isBraking() && !this.isBoosting())) {
       Game.world().camera().setZoom(ReaperConstantZ.CAMERA_STANDARD_ZOOM_FACTOR, ReaperConstantZ.CAMERA_ZOOM_DELAY);
     }
 
-    if (!keyPressed || (!this.isBreaking() && !this.isBoosting())) {
+    if (!keyPressed || (!this.isBraking() && !this.isBoosting())) {
       this.changeVelocity(ReaperConstantZ.REAPER_VERTICAL_VELOCITY);
       this.movementForce.setStrength(ReaperConstantZ.REAPER_VERTICAL_VELOCITY);
     }
@@ -54,7 +59,7 @@ public class SpaceshipController extends KeyboardEntityController<Spaceship> {
     return boosting == Game.time().now();
   }
 
-  public boolean isBreaking() {
+  public boolean isBraking() {
     return breaking == Game.time().now();
   }
 

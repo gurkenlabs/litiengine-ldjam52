@@ -34,7 +34,7 @@ public class Program {
     if (!Game.config().debug().isDebugEnabled()) {
       Game.screens().add(new MenuScreen());
     }
-    Game.screens().add(new IngameScreen());
+    Game.screens().add(IngameScreen.instance());
 
     Game.start();
     GameManager.instance().init();

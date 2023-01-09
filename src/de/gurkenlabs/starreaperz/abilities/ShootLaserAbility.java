@@ -14,6 +14,7 @@ import de.gurkenlabs.starreaperz.GameManager;
 import de.gurkenlabs.starreaperz.entities.LaserProjectile;
 
 import de.gurkenlabs.starreaperz.ui.components.HUD;
+import de.gurkenlabs.starreaperz.ui.screens.IngameScreen;
 import java.awt.geom.Point2D;
 
 // TODO: Fast shooting upgrade (reduce cooldown to <=100)
@@ -34,11 +35,12 @@ public class ShootLaserAbility extends Ability {
     this.addEffect(new ScreenShakeEffect(this, 0.25, 100));
 
     onEffectApplied(a -> {
-      Game.tweens().begin(HUD.instance().getShootIndicator(), TweenType.SIZE_BOTH, 300).targetRelative(20, 20).ease(TweenFunction.BOUNCE_IN);
-      Game.tweens().begin(HUD.instance().getShootIndicator(), TweenType.LOCATION_XY, 300).targetRelative(-10, -10).ease(TweenFunction.BOUNCE_IN);
+      HUD hud = IngameScreen.instance().getHud();
+      Game.tweens().begin(hud.getShootIndicator(), TweenType.SIZE_BOTH, 300).targetRelative(20, 20).ease(TweenFunction.BOUNCE_IN);
+      Game.tweens().begin(hud.getShootIndicator(), TweenType.LOCATION_XY, 300).targetRelative(-10, -10).ease(TweenFunction.BOUNCE_IN);
       Game.loop().perform(300, () -> {
-        Game.tweens().begin(HUD.instance().getShootIndicator(), TweenType.SIZE_BOTH, 300).targetRelative(-20, -20).ease(TweenFunction.LINEAR);
-        Game.tweens().begin(HUD.instance().getShootIndicator(), TweenType.LOCATION_XY, 300).targetRelative(10, 10).ease(TweenFunction.LINEAR);
+        Game.tweens().begin(hud.getShootIndicator(), TweenType.SIZE_BOTH, 300).targetRelative(-20, -20).ease(TweenFunction.LINEAR);
+        Game.tweens().begin(hud.getShootIndicator(), TweenType.LOCATION_XY, 300).targetRelative(10, 10).ease(TweenFunction.LINEAR);
       });
     });
   }

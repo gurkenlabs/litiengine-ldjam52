@@ -3,28 +3,17 @@ package de.gurkenlabs.starreaperz.ui.components;
 import de.gurkenlabs.litiengine.Align;
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.Valign;
-import de.gurkenlabs.litiengine.graphics.ImageRenderer;
 import de.gurkenlabs.litiengine.graphics.TextRenderer;
 import de.gurkenlabs.litiengine.gui.GuiComponent;
 import de.gurkenlabs.starreaperz.GameManager;
-import de.gurkenlabs.starreaperz.constants.ReaperImageZ;
 import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 
 public class HUD extends GuiComponent {
-  private static HUD INSTANCE;
-
   private Minimap minimap;
   private ShootIndicator shootIndicator;
 
-  public static HUD instance() {
-    if (INSTANCE == null) {
-      INSTANCE = new HUD();
-    }
-    return INSTANCE;
-  }
 
-  private HUD() {
+  public HUD() {
     super(0, 0, Game.window().getResolution().getWidth(), Game.window().getResolution().getHeight());
   }
 

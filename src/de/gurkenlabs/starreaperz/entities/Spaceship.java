@@ -11,6 +11,8 @@ import de.gurkenlabs.litiengine.graphics.emitters.EntityEmitter;
 import de.gurkenlabs.litiengine.graphics.emitters.xml.EmitterLoader;
 import de.gurkenlabs.litiengine.input.Input;
 import de.gurkenlabs.litiengine.physics.IMovementController;
+import de.gurkenlabs.starreaperz.GameManager;
+import de.gurkenlabs.starreaperz.GameState;
 import de.gurkenlabs.starreaperz.abilities.ShootLaserAbility;
 
 import java.awt.*;
@@ -37,6 +39,9 @@ public class Spaceship extends Creature {
       if (l.getKeyCode() == KeyEvent.VK_SHIFT && isHarvesting()) {
         stopHarvesting();
       }
+    });
+    onDeath(d -> {
+      GameManager.instance().setState(GameState.LOST);
     });
   }
 
