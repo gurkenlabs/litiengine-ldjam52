@@ -17,7 +17,7 @@ public class Program {
   public static void main(String[] args) {
     // set meta information about the game
     Game.info().setName("Star ReaperZ");
-    Game.info().setVersion("v0.0.1");
+    Game.info().setVersion("v1.0.0");
     Game.info().setWebsite("https://github.com/gurkenlabs/litiengine-ldjam52");
     Game.info().setDescription("Woke Sternenschnitter ernten die ganze Energie ey, was geeeeht?");
 

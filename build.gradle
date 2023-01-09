@@ -1,22 +1,67 @@
 plugins {
-    // Apply the application plugin to add support for building a CLI application in Java.
-    id 'application'
-    id 'java'
+  // Apply the application plugin to add support for building a CLI application in Java.
+  id 'application'
+  id 'java'
+  id 'org.beryx.runtime' version '1.13.0'
 }
 
 repositories {
-    // Use Maven Central for resolving dependencies.
-    mavenCentral()
+  // Use Maven Central for resolving dependencies.
+  mavenCentral()
 }
 
 sourceSets {
-    main.java.srcDir 'src'
-    main.resources.srcDirs = ['audio', 'images', 'localization', 'misc']
+  main.java.srcDir 'src'
+  main.resources.srcDirs = ['audio', 'images', 'localization', 'misc']
+}
+
+processResources {
+  from("game.litidata")
 }
 
 dependencies {
-    implementation "de.gurkenlabs:litiengine"
+  implementation "de.gurkenlabs:litiengine"
 }
 
-version 'v0.0.1'
+application {
+  mainClass = 'de.gurkenlabs.starreaperz.Program'
+  applicationName = 'StarReaperZ'
+}
+
+jar {
+  manifest {
+    attributes 'Implementation-Title': "StarReaperZ",
+            'Main-Class': 'de.gurkenlabs.starreaperz.Program'
+  }
+}
+
+version 'v1.0.0'
 mainClassName = 'de.gurkenlabs.starreaperz.Program'
+
+runtime {
+  options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
+  modules = ['java.desktop', 'java.logging', 'java.datatransfer', 'java.management', 'java.xml']
+
+  launcher {
+    noConsole = false
+  }
+
+  jpackage {
+    appVersion = "1.0.0"
+    imageName = "StarReaperZ"
+    skipInstaller = true
+
+    def currentOs = org.gradle.internal.os.OperatingSystem.current();
+    if (currentOs.windows) {
+      imageOptions = [
+              '--icon', project.file('/images/icon.ico'),
+              '--copyright', '2023 gurkenlabs.de',
+              '--vendor', 'gurkenlabs.de',
+              '--java-options', '-Xms256m',
+              '--java-options', '-Xmx2048m'
+      ]
+    }
+  }
+}
+
+
