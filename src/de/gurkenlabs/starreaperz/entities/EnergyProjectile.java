@@ -12,11 +12,9 @@ import de.gurkenlabs.litiengine.graphics.animation.EntityAnimationController;
 import de.gurkenlabs.litiengine.graphics.animation.IEntityAnimationController;
 import de.gurkenlabs.litiengine.util.geom.GeometricUtilities;
 import de.gurkenlabs.starreaperz.GameManager;
-
 import de.gurkenlabs.starreaperz.GameState;
 import de.gurkenlabs.starreaperz.constants.ReaperConstantZ;
-
-import java.awt.*;
+import java.awt.Color;
 import java.awt.geom.Point2D;
 
 @MovementInfo(velocity = ReaperConstantZ.ENEMY_SHOT_VELOCITY, turnOnMove = false)

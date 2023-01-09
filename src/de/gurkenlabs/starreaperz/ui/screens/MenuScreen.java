@@ -2,7 +2,6 @@ package de.gurkenlabs.starreaperz.ui.screens;
 
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.graphics.ImageRenderer;
-import de.gurkenlabs.litiengine.gui.GuiComponent;
 import de.gurkenlabs.litiengine.gui.ImageComponent;
 import de.gurkenlabs.litiengine.gui.ImageScaleMode;
 import de.gurkenlabs.litiengine.gui.Menu;
@@ -12,7 +11,6 @@ import de.gurkenlabs.starreaperz.GameManager;
 import de.gurkenlabs.starreaperz.GameState;
 import de.gurkenlabs.starreaperz.constants.ReaperImageZ;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 

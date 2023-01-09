@@ -3,7 +3,6 @@ package de.gurkenlabs.starreaperz.entities;
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.starreaperz.GameManager;
 import de.gurkenlabs.starreaperz.GameState;
-
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;

@@ -1,9 +1,8 @@
 package de.gurkenlabs.starreaperz.entities;
 
-import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.starreaperz.GameManager;
 import de.gurkenlabs.starreaperz.constants.ReaperColorZ;
-import java.awt.*;
+import java.awt.Color;
 
 public enum EnergyColor {
   BLUE,
@@ -20,15 +19,11 @@ public enum EnergyColor {
   }
 
   public static EnergyColor getLevelColor() {
-    switch (Game.world().environment().getMap().getName()) {
-      case "level1":
-        return EnergyColor.YELLOW;
-      case "level2":
-        return EnergyColor.BLUE;
-      case "level3":
-        return EnergyColor.GREEN;
-      default:
-        return null;
-    }
+    return switch (GameManager.instance().getCurrentLevel()) {
+      case 0 -> EnergyColor.YELLOW;
+      case 1 -> EnergyColor.BLUE;
+      case 2 -> EnergyColor.GREEN;
+      default -> null;
+    };
   }
 }

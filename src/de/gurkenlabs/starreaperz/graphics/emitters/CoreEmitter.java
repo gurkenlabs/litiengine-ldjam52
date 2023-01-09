@@ -3,9 +3,7 @@ package de.gurkenlabs.starreaperz.graphics.emitters;
 import de.gurkenlabs.litiengine.entities.EmitterInfo;
 import de.gurkenlabs.litiengine.entities.IEntity;
 import de.gurkenlabs.litiengine.graphics.emitters.EntityEmitter;
-import de.gurkenlabs.litiengine.graphics.emitters.particles.Particle;
 import de.gurkenlabs.litiengine.graphics.emitters.particles.SpriteParticle;
-import de.gurkenlabs.litiengine.graphics.emitters.xml.ParticleParameter;
 import de.gurkenlabs.litiengine.resources.Resources;
 import de.gurkenlabs.starreaperz.entities.EnergyColor;
 

@@ -2,7 +2,6 @@ package de.gurkenlabs.starreaperz;
 
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.environment.CreatureMapObjectLoader;
-import de.gurkenlabs.litiengine.gui.Appearance;
 import de.gurkenlabs.litiengine.gui.GuiProperties;
 import de.gurkenlabs.litiengine.resources.Resources;
 import de.gurkenlabs.starreaperz.constants.ReaperColorZ;
@@ -12,7 +11,6 @@ import de.gurkenlabs.starreaperz.entities.Enemy;
 import de.gurkenlabs.starreaperz.entities.Spaceship;
 import de.gurkenlabs.starreaperz.ui.screens.IngameScreen;
 import de.gurkenlabs.starreaperz.ui.screens.MenuScreen;
-import javax.swing.UIDefaults;
 
 public class Program {
 

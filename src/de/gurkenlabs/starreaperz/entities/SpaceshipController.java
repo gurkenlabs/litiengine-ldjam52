@@ -3,7 +3,6 @@ package de.gurkenlabs.starreaperz.entities;
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.input.KeyboardEntityController;
 import de.gurkenlabs.litiengine.physics.StickyForce;
-
 import de.gurkenlabs.starreaperz.GameManager;
 import de.gurkenlabs.starreaperz.GameState;
 import de.gurkenlabs.starreaperz.constants.ReaperConstantZ;

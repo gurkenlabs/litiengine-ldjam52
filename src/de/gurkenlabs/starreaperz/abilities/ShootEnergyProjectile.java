@@ -9,7 +9,6 @@ import de.gurkenlabs.litiengine.entities.Creature;
 import de.gurkenlabs.litiengine.entities.ICombatEntity;
 import de.gurkenlabs.starreaperz.entities.Enemy;
 import de.gurkenlabs.starreaperz.entities.EnergyProjectile;
-
 import java.awt.geom.Point2D;
 
 @AbilityInfo(cooldown = 2000)

@@ -5,7 +5,6 @@ import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.starreaperz.GameManager;
 import de.gurkenlabs.starreaperz.GameState;
 import de.gurkenlabs.starreaperz.constants.ReaperConstantZ;
-
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayDeque;
@@ -14,8 +13,6 @@ import java.util.Queue;
 public class EnemySpawner implements IUpdateable {
 
   private final Queue<EnemyWave> enemyWaves = new ArrayDeque<>();
-
-  private String currentLevel;
 
   private long lastAsteorid;
 
@@ -36,7 +33,7 @@ public class EnemySpawner implements IUpdateable {
     if (asteoridDelay > 0 && Game.time().since(lastAsteorid) > asteoridDelay && !GameManager.instance().getSpaceship().isDead()) {
       this.lastAsteorid = Game.time().now();
       Game.world().environment().add(new Asteroid());
-      if (this.currentLevel.equals("level3")) {
+      if (GameManager.instance().getCurrentLevel() == 2) {
         var spawns = Game.random().nextInt(4);
         for (int i = 0; i < spawns; i++) {
           Game.world().environment().add(new Asteroid());
@@ -51,15 +48,14 @@ public class EnemySpawner implements IUpdateable {
   }
 
   private int calcAsteoridDelay() {
-    return switch (this.currentLevel) {
-      case "level2" -> Game.random().nextInt(3500, 6000);
-      case "level3" -> Game.random().nextInt(2500, 5000);
+    return switch (GameManager.instance().getCurrentLevel()) {
+      case 1 -> Game.random().nextInt(3500, 6000);
+      case 2 -> Game.random().nextInt(2500, 5000);
       default -> 0;
     };
   }
 
-  public void start(String name) {
-    this.currentLevel = name;
+  public void start() {
     this.asteoridDelay = calcAsteoridDelay();
 
     this.enemyWaves.clear();
@@ -146,9 +142,8 @@ public class EnemySpawner implements IUpdateable {
     }
 
     /**
-     * Determines the wave strength based on the number of this wave.
-     * 1----2----3----4----5----6----7----8----9----10---11---12
-     * 1 -> 2 -> 3 -> 4 -> 4 -> 5 -> 5 -> 5 -> 5 -> 6 -> 6 -> 6
+     * Determines the wave strength based on the number of this wave. 1----2----3----4----5----6----7----8----9----10---11---12 1 -> 2 -> 3 -> 4 -> 4
+     * -> 5 -> 5 -> 5 -> 5 -> 6 -> 6 -> 6
      */
     private int determineWaveStrength() {
       int minStrength = 1;

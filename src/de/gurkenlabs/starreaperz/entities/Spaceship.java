@@ -14,10 +14,8 @@ import de.gurkenlabs.litiengine.physics.IMovementController;
 import de.gurkenlabs.litiengine.resources.Resources;
 import de.gurkenlabs.starreaperz.GameManager;
 import de.gurkenlabs.starreaperz.abilities.ShootLaserAbility;
-
 import de.gurkenlabs.starreaperz.constants.ReaperConstantZ;
-
-import java.awt.*;
+import java.awt.Shape;
 import java.awt.event.KeyEvent;
 import java.awt.geom.Ellipse2D;
 import java.util.List;

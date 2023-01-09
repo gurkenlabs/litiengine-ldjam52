@@ -5,15 +5,16 @@ import de.gurkenlabs.litiengine.entities.Trigger;
 import de.gurkenlabs.litiengine.entities.Trigger.TriggerActivation;
 import de.gurkenlabs.litiengine.environment.Environment;
 import de.gurkenlabs.litiengine.input.Input;
-import de.gurkenlabs.starreaperz.entities.*;
 import de.gurkenlabs.litiengine.resources.Resources;
 import de.gurkenlabs.starreaperz.entities.Core;
+import de.gurkenlabs.starreaperz.entities.Enemy;
 import de.gurkenlabs.starreaperz.entities.EnemySpawner;
+import de.gurkenlabs.starreaperz.entities.EnergyProjectile;
+import de.gurkenlabs.starreaperz.entities.LaserProjectile;
 import de.gurkenlabs.starreaperz.entities.Spaceship;
 import de.gurkenlabs.starreaperz.graphics.VerticalRailCamera;
 
 import de.gurkenlabs.starreaperz.ui.screens.IngameScreen;
-
 import java.awt.event.KeyEvent;
 import java.awt.geom.Point2D;
 import java.util.Hashtable;
@@ -21,13 +22,15 @@ import java.util.Hashtable;
 public class GameManager {
   private static GameManager INSTANCE;
 
-  private final Hashtable<String, Integer> score = new Hashtable<>();
+  private final Hashtable<Integer, Integer> score = new Hashtable<>();
 
   private final EnemySpawner spawner = new EnemySpawner();
 
   private GameState state;
 
   private Spaceship spaceship;
+
+  private int currentLevel;
 
   public static GameManager instance() {
     if (INSTANCE == null) {
@@ -37,10 +40,9 @@ public class GameManager {
   }
 
   public void score(int points) {
-    var level = Game.world().environment().getMap().getName();
-    var currentScore = this.score.get(level) != null ? this.score.get(level) : 0;
+    var currentScore = this.score.get(getCurrentLevel()) != null ? this.score.get(getCurrentLevel()) : 0;
     var newScore = currentScore + points;
-    this.score.put(level, newScore);
+    this.score.put(getCurrentLevel(), newScore);
   }
 
   public int getOverallScore() {
@@ -74,8 +76,12 @@ public class GameManager {
     return spaceship;
   }
 
+  public int getCurrentLevel() {
+    return currentLevel;
+  }
+
   private void environmentLoaded(Environment env) {
-    this.spawner.start(env.getMap().getName());
+    this.spawner.start();
 
     this.spaceship = env.get(Spaceship.class, "spaceship");
     var verticalRailCamera = new VerticalRailCamera(spaceship);
@@ -92,7 +98,7 @@ public class GameManager {
 
   public void startGame() {
     Game.screens().display("INGAME");
-    Game.world().loadEnvironment("level1");
+    Game.world().loadEnvironment("galaxy");
     Game.audio().playMusic(Resources.sounds().get("music1.ogg"));
     setState(GameState.INGAME);
   }
@@ -138,22 +144,14 @@ public class GameManager {
   }
 
   public void restartLevel() {
-    var level = Game.world().environment().getMap().getName();
-    this.score.put(level, 0);
+    this.score.put(getCurrentLevel(), 0);
     Game.world().environment().clear();
     Game.world().loadEnvironment(Game.world().reset(Game.world().environment().getMap()));
     setState(GameState.INGAME);
   }
 
   public void nextLevel() {
-    var level = Game.world().environment().getMap().getName();
-    String next = switch (level) {
-      case "level1" -> "level2";
-      case "level2" -> "level3";
-      default -> null;
-    };
-
-    if (next == null) {
+    if (getCurrentLevel() == 2) {
       Game.world().environment().clear();
       this.score.clear();
       Game.screens().display("Menu");
@@ -161,9 +159,10 @@ public class GameManager {
       setState(GameState.MENU);
       // TODO: return to main menu or display win sceen if there is time left
     } else {
+      this.currentLevel++;
       Game.world().environment().clear();
       spaceship.getHitPoints().setToMax();
-      Game.world().loadEnvironment(next);
+      Game.world().loadEnvironment("galaxy");
       setState(GameState.INGAME);
     }
   }

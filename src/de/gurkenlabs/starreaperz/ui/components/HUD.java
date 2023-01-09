@@ -7,7 +7,6 @@ import de.gurkenlabs.litiengine.graphics.TextRenderer;
 import de.gurkenlabs.litiengine.gui.GuiComponent;
 import de.gurkenlabs.starreaperz.GameManager;
 import de.gurkenlabs.starreaperz.GameState;
-import de.gurkenlabs.starreaperz.Program;
 import de.gurkenlabs.starreaperz.constants.ReaperFontZ;
 
 import java.awt.Graphics2D;

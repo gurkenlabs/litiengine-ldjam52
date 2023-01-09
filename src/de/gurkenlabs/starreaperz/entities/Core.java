@@ -1,10 +1,8 @@
 package de.gurkenlabs.starreaperz.entities;
 
 import de.gurkenlabs.litiengine.Game;
-import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.litiengine.entities.Entity;
 import de.gurkenlabs.litiengine.entities.EntityInfo;
-import de.gurkenlabs.litiengine.entities.Prop;
 import de.gurkenlabs.starreaperz.graphics.emitters.CoreEmitter;
 import java.awt.geom.Point2D;
 

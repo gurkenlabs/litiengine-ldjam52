@@ -18,7 +18,6 @@ import de.gurkenlabs.litiengine.util.geom.GeometricUtilities;
 import de.gurkenlabs.starreaperz.GameManager;
 import de.gurkenlabs.starreaperz.GameState;
 import de.gurkenlabs.starreaperz.constants.ReaperConstantZ;
-
 import java.awt.geom.Point2D;
 
 @AnimationInfo(spritePrefix = {"energy-blue", "energy-green", "energy-yellow"})

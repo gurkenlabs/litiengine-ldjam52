@@ -5,7 +5,6 @@ import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.Valign;
 import de.gurkenlabs.litiengine.environment.Environment;
 import de.gurkenlabs.litiengine.environment.EnvironmentListener;
-import de.gurkenlabs.litiengine.environment.tilemap.xml.Text;
 import de.gurkenlabs.litiengine.graphics.ImageRenderer;
 import de.gurkenlabs.litiengine.graphics.TextRenderer;
 import de.gurkenlabs.litiengine.gui.ImageComponent;
@@ -14,12 +13,10 @@ import de.gurkenlabs.litiengine.gui.screens.GameScreen;
 import de.gurkenlabs.litiengine.input.Input;
 import de.gurkenlabs.litiengine.util.Imaging;
 import de.gurkenlabs.starreaperz.GameManager;
-
 import de.gurkenlabs.starreaperz.GameState;
 import de.gurkenlabs.starreaperz.constants.ReaperImageZ;
 import de.gurkenlabs.starreaperz.ui.StateDependentUIComponent;
 import de.gurkenlabs.starreaperz.ui.components.HUD;
-
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.image.AffineTransformOp;

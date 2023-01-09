@@ -3,7 +3,6 @@ package de.gurkenlabs.starreaperz.graphics;
 import de.gurkenlabs.litiengine.graphics.LocationLockCamera;
 import de.gurkenlabs.starreaperz.entities.Spaceship;
 import de.gurkenlabs.starreaperz.entities.SpaceshipController;
-
 import java.awt.geom.Point2D;
 
 public class VerticalRailCamera extends LocationLockCamera {

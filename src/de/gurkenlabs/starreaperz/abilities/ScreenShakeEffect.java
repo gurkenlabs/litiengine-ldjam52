@@ -3,8 +3,7 @@ package de.gurkenlabs.starreaperz.abilities;
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.abilities.Ability;
 import de.gurkenlabs.litiengine.abilities.effects.Effect;
-
-import java.awt.*;
+import java.awt.Shape;
 
 public class ScreenShakeEffect extends Effect {
 

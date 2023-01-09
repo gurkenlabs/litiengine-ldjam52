@@ -11,7 +11,6 @@ import de.gurkenlabs.litiengine.tweening.TweenFunction;
 import de.gurkenlabs.litiengine.tweening.TweenType;
 import de.gurkenlabs.starreaperz.GameManager;
 import de.gurkenlabs.starreaperz.entities.LaserProjectile;
-
 import de.gurkenlabs.starreaperz.ui.components.HUD;
 import de.gurkenlabs.starreaperz.ui.screens.IngameScreen;
 import java.awt.geom.Point2D;

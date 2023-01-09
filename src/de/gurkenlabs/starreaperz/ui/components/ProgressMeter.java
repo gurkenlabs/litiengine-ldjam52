@@ -1,12 +1,9 @@
 package de.gurkenlabs.starreaperz.ui.components;
 
 import de.gurkenlabs.litiengine.Game;
-import de.gurkenlabs.litiengine.gui.HorizontalSlider;
 import de.gurkenlabs.litiengine.gui.ImageComponent;
 import de.gurkenlabs.litiengine.gui.ImageScaleMode;
-import de.gurkenlabs.litiengine.util.MathUtilities;
 import de.gurkenlabs.starreaperz.GameManager;
-import de.gurkenlabs.starreaperz.GameState;
 import de.gurkenlabs.starreaperz.constants.ReaperImageZ;
 import java.awt.Graphics2D;
 
