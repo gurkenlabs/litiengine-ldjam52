@@ -57,7 +57,6 @@ public class EnergyProjectile extends Creature implements IUpdateable {
     if (hitEnemy.isPresent()) {
       hitEnemy.get().hit(1);
       hitEnemy.get().animations().add(new OverlayPixelsImageEffect(ReaperConstantZ.REAPER_HIT_PIXEL_FLASH_DURATION, Color.WHITE));
-
       Game.world().environment().remove(this);
     }
 

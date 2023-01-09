@@ -4,6 +4,7 @@ import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.graphics.ImageRenderer;
 import de.gurkenlabs.litiengine.gui.GuiComponent;
 import de.gurkenlabs.litiengine.gui.ImageComponent;
+import de.gurkenlabs.litiengine.gui.ImageScaleMode;
 import de.gurkenlabs.litiengine.gui.Menu;
 import de.gurkenlabs.litiengine.gui.screens.Screen;
 import de.gurkenlabs.litiengine.util.Imaging;
@@ -17,8 +18,9 @@ import java.awt.image.BufferedImage;
 
 public class MenuScreen extends Screen {
   private final double scaleFactor = Game.window().getResolution().getWidth() / 1920d;
-  private final BufferedImage MENU_BG = Imaging.scale(ReaperImageZ.MAINMENU_BG, Game.window().getResolution().width, Game.window().getResolution().height,
-      AffineTransformOp.TYPE_BICUBIC, false);
+  private final BufferedImage MENU_BG =
+      Imaging.scale(ReaperImageZ.MAINMENU_BG, Game.window().getResolution().width, Game.window().getResolution().height,
+          AffineTransformOp.TYPE_BICUBIC, false);
   private final BufferedImage LOGO = Imaging.scale(ReaperImageZ.LOGO, scaleFactor, AffineTransformOp.TYPE_BICUBIC);
   private final BufferedImage INSTRUCTIONS = Imaging.scale(ReaperImageZ.INSTRUCTIONS, scaleFactor, AffineTransformOp.TYPE_BICUBIC);
 
@@ -61,12 +63,15 @@ public class MenuScreen extends Screen {
         System.exit(0);
       }
     });
+
+    this.instructionsImage = new ImageComponent(screenWidth / 2d - screenWidth * 3 / 8d, menuY, screenWidth * 6 / 8d, menuHeight * 2d);
+    instructionsImage.setImageScaleMode(ImageScaleMode.FIT);
+
     this.instructionsBackButton =
-        new ImageComponent(menuX, screenHeight * 8 / 10d, menuWidth, screenHeight * 1 / 10d, "Back");
+        new ImageComponent(menuX, menuY - screenHeight * 1 / 10d, menuWidth, screenHeight * 1 / 10d, "Back");
     instructionsBackButton.onClicked(c -> {
       showMenu();
     });
-    this.instructionsImage = new ImageComponent(menuX, menuY, menuWidth, menuHeight);
     getComponents().add(mainMenu);
     getComponents().add(instructionsBackButton);
     getComponents().add(instructionsImage);
