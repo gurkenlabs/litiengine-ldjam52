@@ -149,4 +149,33 @@ public class GameManager {
     setState(GameState.INGAME);
   }
 
+  public void nextLevel() {
+    var level = Game.world().environment().getMap().getName();
+    String next = null;
+    switch (level) {
+      case "level1":
+        next = "level2";
+        break;
+      case "level2":
+        next = "level3";
+        break;
+      default:
+        next = null;
+        break;
+    }
+
+    if (next == null) {
+      Game.world().environment().clear();
+      this.score.clear();
+      Game.screens().display("Menu");
+      Game.audio().playMusic(Resources.sounds().get("music2.mp3"));
+      setState(GameState.MENU);
+      // TODO: return to main menu or display win sceen if there is time left
+    } else {
+      Game.world().environment().clear();
+      spaceship.getHitPoints().setToMax();
+      Game.world().loadEnvironment(next);
+      setState(GameState.INGAME);
+    }
+  }
 }

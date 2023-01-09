@@ -61,7 +61,7 @@ public abstract class Agent extends Enemy {
 
     @Override
     public void update() {
-      if (GameManager.instance().getState() != GameState.INGAME) {
+      if (GameManager.instance().getState() != GameState.INGAME || !Game.world().camera().getViewport().intersects(this.getEntity().getBoundingBox())) {
         return;
       }
       super.update();

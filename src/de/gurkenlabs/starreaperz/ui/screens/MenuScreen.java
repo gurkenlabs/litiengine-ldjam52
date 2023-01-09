@@ -26,7 +26,7 @@ public class MenuScreen extends Screen {
   private ImageComponent instructionsImage, instructionsBackButton;
 
   public MenuScreen() {
-    super("Menu");
+    super("MENU");
   }
 
   @Override public void render(Graphics2D g) {

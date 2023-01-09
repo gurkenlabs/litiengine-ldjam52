@@ -5,6 +5,7 @@ import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.Valign;
 import de.gurkenlabs.litiengine.environment.Environment;
 import de.gurkenlabs.litiengine.environment.EnvironmentListener;
+import de.gurkenlabs.litiengine.environment.tilemap.xml.Text;
 import de.gurkenlabs.litiengine.graphics.ImageRenderer;
 import de.gurkenlabs.litiengine.graphics.TextRenderer;
 import de.gurkenlabs.litiengine.gui.ImageComponent;
@@ -18,6 +19,7 @@ import de.gurkenlabs.starreaperz.GameState;
 import de.gurkenlabs.starreaperz.constants.ReaperImageZ;
 import de.gurkenlabs.starreaperz.ui.StateDependentUIComponent;
 import de.gurkenlabs.starreaperz.ui.components.HUD;
+
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.image.AffineTransformOp;
@@ -30,7 +32,9 @@ public class IngameScreen extends GameScreen implements StateDependentUIComponen
 
   private HUD hud;
   private Menu ingameMenu;
-  private ImageComponent continueButton;
+  private ImageComponent retryButton;
+
+  private ImageComponent nextLevelButton;
 
 
   private IngameScreen() {
@@ -64,6 +68,8 @@ public class IngameScreen extends GameScreen implements StateDependentUIComponen
     if (GameManager.instance().getState() == GameState.PAUSE) {
       ImageRenderer.render(g, LOGO, Game.window().getResolution().getWidth() / 2d - LOGO.getWidth() / 2d,
           Game.window().getResolution().getHeight() * 2 / 10d);
+    } else if (GameManager.instance().getState() == GameState.WON) {
+      TextRenderer.render(g, "ALL ENERGY HARVESTED!", Align.CENTER, Valign.MIDDLE, 0, 0);
     }
   }
 
@@ -88,14 +94,28 @@ public class IngameScreen extends GameScreen implements StateDependentUIComponen
       }
     });
 
-    this.continueButton =
+    this.retryButton =
         new ImageComponent(menuX, screenHeight * 8 / 10d, menuWidth, screenHeight * 1 / 10d, "Retry");
-    continueButton.onClicked(c -> {
+    retryButton.onClicked(c -> {
       restartLevel();
     });
-    getComponents().add(continueButton);
+
+    nextLevelButton = new ImageComponent(menuX, screenHeight * 8 / 10d, menuWidth, screenHeight * 1 / 10d, "Continue");
+    nextLevelButton.onClicked(c -> {
+      nextLevel();
+    });
+    getHud().setVisible(false);
+    ingameMenu.setVisible(false);
+    retryButton.setVisible(false);
+    nextLevelButton.setVisible(false);
+    getComponents().add(retryButton);
+    getComponents().add(nextLevelButton);
     getComponents().add(ingameMenu);
     getComponents().add(getHud());
+ }
+
+  private void nextLevel() {
+    GameManager.instance().nextLevel();
   }
 
   @Override public void updateState() {
@@ -103,22 +123,32 @@ public class IngameScreen extends GameScreen implements StateDependentUIComponen
       case PAUSE -> {
         getHud().setVisible(false);
         ingameMenu.setVisible(true);
-        continueButton.setVisible(false);
+        retryButton.setVisible(false);
+        nextLevelButton.setVisible(false);
       }
       case INGAME -> {
         getHud().setVisible(true);
         ingameMenu.setVisible(false);
-        continueButton.setVisible(false);
+        retryButton.setVisible(false);
+        nextLevelButton.setVisible(false);
       }
       case LOST -> {
         getHud().setVisible(false);
         ingameMenu.setVisible(false);
-        continueButton.setVisible(true);
+        retryButton.setVisible(true);
+        nextLevelButton.setVisible(false);
+      }
+      case WON -> {
+        getHud().setVisible(false);
+        ingameMenu.setVisible(false);
+        retryButton.setVisible(false);
+        nextLevelButton.setVisible(true);
       }
       default -> {
         getHud().setVisible(false);
         ingameMenu.setVisible(false);
-        continueButton.setVisible(false);
+        retryButton.setVisible(false);
+        nextLevelButton.setVisible(false);
       }
     }
   }
