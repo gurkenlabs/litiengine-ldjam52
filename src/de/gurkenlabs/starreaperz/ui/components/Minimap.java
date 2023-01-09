@@ -37,6 +37,9 @@ public class Minimap extends ImageComponent {
   }
 
   @Override public void render(Graphics2D g) {
+    if (!HUD.showHud()) {
+      return;
+    }
     ImageRenderer.render(g, bg, getX() - getWidth() * 1 / 4d, getY() - getHeight() * 1 / 4d);
     super.render(g);
     ImageRenderer.render(g, computeMinimapImage(), getX(), getY());

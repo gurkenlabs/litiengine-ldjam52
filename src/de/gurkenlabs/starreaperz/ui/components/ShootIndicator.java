@@ -30,7 +30,7 @@ public class ShootIndicator extends ImageComponent {
 
   @Override public void render(Graphics2D g) {
     super.render(g);
-    if (aim2 == null || aim3 == null || aim4 == null || aim5 == null) {
+    if (!HUD.showHud() || aim2 == null || aim3 == null || aim4 == null || aim5 == null) {
       return;
     }
     ImageRenderer.renderRotated(g, aim2, getX() + getWidth() / 2d - aim2.getWidth() / 2d,

@@ -6,11 +6,15 @@ import de.gurkenlabs.litiengine.Valign;
 import de.gurkenlabs.litiengine.graphics.TextRenderer;
 import de.gurkenlabs.litiengine.gui.GuiComponent;
 import de.gurkenlabs.starreaperz.GameManager;
+import de.gurkenlabs.starreaperz.GameState;
+import de.gurkenlabs.starreaperz.Program;
 import java.awt.Graphics2D;
 
 public class HUD extends GuiComponent {
   private Minimap minimap;
   private ShootIndicator shootIndicator;
+  private Portrait portrait;
+  private ProgressMeter progressMeter;
 
 
   public HUD() {
@@ -19,15 +23,26 @@ public class HUD extends GuiComponent {
 
   @Override public void render(Graphics2D g) {
     super.render(g);
+    if (!showHud()) {
+      return;
+    }
     TextRenderer.render(g, "Score: " + GameManager.instance().getOverallScore(), Align.CENTER, Valign.DOWN, 0, 0);
   }
 
   @Override protected void initializeComponents() {
     super.initializeComponents();
-    this.minimap = new Minimap(600, 200, Game.window().getResolution().getWidth() * 1 / 10d, Game.window().getResolution().getHeight() * 1 / 10d);
-    this.shootIndicator = new ShootIndicator(10, 10, 250, 250);
+    double screenWidth = Game.window().getResolution().getWidth();
+    double screenHeight = Game.window().getResolution().getHeight();
+    this.portrait = new Portrait(screenWidth * 1 / 32d, screenHeight * 1 / 32d, screenWidth * 4 / 32d, screenWidth * 4 / 32d);
+    this.shootIndicator = new ShootIndicator(portrait.getX() + portrait.getWidth() - portrait.getWidth() / 3d,
+        portrait.getY() + portrait.getHeight() - portrait.getWidth() / 3d, screenWidth * 2 / 32d, screenWidth * 2 / 32d);
+    this.minimap = new Minimap(screenWidth * 27 / 32d, screenHeight * 1 / 32d, screenWidth * 4 / 32d, screenHeight * 4 / 32d);
+    this.progressMeter =
+        new ProgressMeter(screenWidth / 2d - screenWidth * 2 / 10d, screenHeight * 1 / 32d, screenWidth * 2 / 5d, screenHeight * 1 / 32d);
     getComponents().add(minimap);
     getComponents().add(shootIndicator);
+    getComponents().add(portrait);
+    getComponents().add(progressMeter);
   }
 
   public Minimap getMinimap() {
@@ -36,5 +51,11 @@ public class HUD extends GuiComponent {
 
   public ShootIndicator getShootIndicator() {
     return shootIndicator;
+  }
+
+  public static boolean showHud() {
+    return GameManager.instance().getState() == GameState.INGAME
+        && Game.world().environment() != null
+        && GameManager.instance().getSpaceship() != null;
   }
 }
