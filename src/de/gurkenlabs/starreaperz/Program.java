@@ -2,12 +2,17 @@ package de.gurkenlabs.starreaperz;
 
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.environment.CreatureMapObjectLoader;
+import de.gurkenlabs.litiengine.gui.Appearance;
+import de.gurkenlabs.litiengine.gui.GuiProperties;
 import de.gurkenlabs.litiengine.resources.Resources;
+import de.gurkenlabs.starreaperz.constants.ReaperColorZ;
+import de.gurkenlabs.starreaperz.constants.ReaperFontZ;
 import de.gurkenlabs.starreaperz.constants.ReaperImageZ;
 import de.gurkenlabs.starreaperz.entities.Enemy;
 import de.gurkenlabs.starreaperz.entities.Spaceship;
 import de.gurkenlabs.starreaperz.ui.screens.IngameScreen;
 import de.gurkenlabs.starreaperz.ui.screens.MenuScreen;
+import javax.swing.UIDefaults;
 
 public class Program {
 
@@ -31,6 +36,15 @@ public class Program {
 
     CreatureMapObjectLoader.registerCustomCreatureType(Spaceship.class);
     CreatureMapObjectLoader.registerCustomCreatureType(Enemy.class);
+
+    GuiProperties.getDefaultAppearance().setForeColor(ReaperColorZ.ENERGY_RED);
+    GuiProperties.getDefaultAppearance().setBackgroundColor1(ReaperColorZ.UI_BG);
+    GuiProperties.getDefaultAppearanceHovered().setForeColor(ReaperColorZ.ENERGY_RED.darker());
+    GuiProperties.getDefaultAppearanceHovered().setBackgroundColor1(ReaperColorZ.UI_BG.darker());
+    GuiProperties.getDefaultAppearanceDisabled().setForeColor(ReaperColorZ.ENERGY_RED.darker().darker());
+    GuiProperties.getDefaultAppearanceDisabled().setBackgroundColor1(ReaperColorZ.UI_BG.darker().darker());
+    GuiProperties.setDefaultFont(ReaperFontZ.FONT_LOGO_STD.deriveFont(48f));
+
     if (!Game.config().debug().isDebugEnabled()) {
       Game.screens().add(new MenuScreen());
     }
