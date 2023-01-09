@@ -6,6 +6,7 @@ import de.gurkenlabs.litiengine.entities.CombatInfo;
 import de.gurkenlabs.litiengine.entities.Creature;
 import de.gurkenlabs.litiengine.entities.ICollisionEntity;
 import de.gurkenlabs.litiengine.entities.MovementInfo;
+import de.gurkenlabs.litiengine.entities.Tag;
 import de.gurkenlabs.litiengine.graphics.OverlayPixelsImageEffect;
 import de.gurkenlabs.litiengine.graphics.animation.Animation;
 import de.gurkenlabs.litiengine.graphics.animation.EntityAnimationController;
@@ -19,6 +20,7 @@ import java.awt.geom.Point2D;
 
 @CombatInfo(isIndestructible = true)
 @MovementInfo(velocity = 150)
+@Tag("minimap")
 public class Asteroid extends Creature implements IUpdateable {
   private final int type;
 
@@ -48,25 +50,28 @@ public class Asteroid extends Creature implements IUpdateable {
   private Point2D determineSpawnPoint() {
     var viewport = Game.world().camera().getViewport();
     final int offsetX = 50;
-    var spawnLine = new Line2D.Double(viewport.getX() + offsetX, viewport.getY() - 50, viewport.getX() + viewport.getWidth() - 2 * offsetX, viewport.getY() - 50);
+    var spawnLine =
+        new Line2D.Double(viewport.getX() + offsetX, viewport.getY() - 50, viewport.getX() + viewport.getWidth() - 2 * offsetX, viewport.getY() - 50);
     return Game.random().getLocation(spawnLine);
   }
 
   private Point2D determineTarget() {
     var viewport = Game.world().camera().getViewport();
     final int offsetX = 50;
-    var spawnLine = new Line2D.Double(viewport.getX() + offsetX, viewport.getY() + viewport.getHeight(), viewport.getX() + viewport.getWidth() - 2 * offsetX, viewport.getY() + viewport.getHeight());
+    var spawnLine =
+        new Line2D.Double(viewport.getX() + offsetX, viewport.getY() + viewport.getHeight(), viewport.getX() + viewport.getWidth() - 2 * offsetX,
+            viewport.getY() + viewport.getHeight());
     return Game.random().getLocation(spawnLine);
   }
 
   @Override
   protected IEntityAnimationController<?> createAnimationController() {
     var controller = new EntityAnimationController<>(this,
-            new Animation("asteroid1", true, false),
-            new Animation("asteroid2", true, false),
-            new Animation("asteroid3", true, false),
-            new Animation("asteroid4", true, false),
-            new Animation("asteroid5", true, false));
+        new Animation("asteroid1", true, false),
+        new Animation("asteroid2", true, false),
+        new Animation("asteroid3", true, false),
+        new Animation("asteroid4", true, false),
+        new Animation("asteroid5", true, false));
 
     controller.addRule(p -> p.type == 1, p -> "asteroid1");
     controller.addRule(p -> p.type == 2, p -> "asteroid2");
@@ -80,7 +85,8 @@ public class Asteroid extends Creature implements IUpdateable {
   @Override
   public void update() {
     // if we hit the spaceship
-    var hitEnemy = Game.world().environment().findCombatEntities(this.getHitBox(), e -> e instanceof Spaceship && !e.isDead()).stream().findFirst().orElse(null);
+    var hitEnemy =
+        Game.world().environment().findCombatEntities(this.getHitBox(), e -> e instanceof Spaceship && !e.isDead()).stream().findFirst().orElse(null);
     if (hitEnemy != null && !hitEnemy.wasHit(ReaperConstantZ.REAPER_HIT_COOLDOWN)) {
       hitEnemy.hit(1);
       hitEnemy.animations().add(new OverlayPixelsImageEffect(50, Color.WHITE));

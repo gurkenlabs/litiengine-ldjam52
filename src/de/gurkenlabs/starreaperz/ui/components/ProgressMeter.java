@@ -35,6 +35,6 @@ public class ProgressMeter extends ImageComponent {
     double progress =
         (Game.world().environment().getMap().getSizeInPixels().getHeight() - GameManager.instance().getSpaceship().getY()) / Game.world()
             .environment().getMap().getSizeInPixels().getHeight();
-    slider.setX(getX() + progress * (getWidth() * 0.8));
+    slider.setX(getX() + progress * (getWidth() * 0.9));
   }
 }

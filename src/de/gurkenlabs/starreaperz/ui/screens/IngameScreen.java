@@ -61,6 +61,12 @@ public class IngameScreen extends GameScreen implements StateDependentUIComponen
     return INSTANCE;
   }
 
+  @Override public void prepare() {
+    super.prepare();
+    ingameMenu.setVisible(false);
+    retryButton.setVisible(false);
+    nextLevelButton.setVisible(false);
+  }
 
   @Override
   public void render(Graphics2D g) {
@@ -112,7 +118,7 @@ public class IngameScreen extends GameScreen implements StateDependentUIComponen
     getComponents().add(nextLevelButton);
     getComponents().add(ingameMenu);
     getComponents().add(getHud());
- }
+  }
 
   private void nextLevel() {
     GameManager.instance().nextLevel();
