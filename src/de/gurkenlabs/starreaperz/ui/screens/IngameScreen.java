@@ -73,9 +73,9 @@ public class IngameScreen extends GameScreen implements StateDependentUIComponen
           Game.window().getResolution().getHeight() * 2 / 10d);
     } else if (GameManager.instance().getState() == GameState.WON) {
       if (GameManager.instance().getCurrentLevel()!=2) {
-        TextRenderer.render(g, GameManager.instance().getCurrentScore() + " ENERGY HARVESTED IN THIS WORLD!", Align.CENTER, Valign.MIDDLE, 0, 0);
+        TextRenderer.render(g, GameManager.instance().getCurrentScore() + " ENERGY HARVESTED IN THIS GALAXY!", Align.CENTER, Valign.MIDDLE, 0, 0);
       } else{
-        TextRenderer.render(g, "YOU ANNIHILATED ALL SPECIES AND HARVESTED " + GameManager.instance().getOverallScore() + " ENERGY!", Align.CENTER, Valign.MIDDLE, 0, 0);
+        TextRenderer.render(g, "YOU ANNIHILATED ALL GALAXIES AND HARVESTED " + GameManager.instance().getOverallScore() + " ENERGY!", Align.CENTER, Valign.MIDDLE, 0, 0);
       }
     }
   }
