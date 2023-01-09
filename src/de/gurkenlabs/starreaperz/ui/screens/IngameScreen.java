@@ -26,7 +26,7 @@ import java.awt.image.BufferedImage;
 
 public class IngameScreen extends GameScreen implements StateDependentUIComponent {
   private final double scaleFactor = Game.window().getResolution().getWidth() / 1920d;
-  private BufferedImage LOGO = Imaging.scale(ReaperImageZ.LOGO, scaleFactor, AffineTransformOp.TYPE_BICUBIC);
+  private final BufferedImage LOGO = Imaging.scale(ReaperImageZ.LOGO, scaleFactor, AffineTransformOp.TYPE_BICUBIC);
   private static IngameScreen INSTANCE;
 
   private HUD hud;

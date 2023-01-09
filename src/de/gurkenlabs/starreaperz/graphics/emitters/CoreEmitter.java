@@ -11,8 +11,13 @@ import de.gurkenlabs.starreaperz.entities.EnergyColor;
 
 @EmitterInfo(duration = 0, activateOnInit = true)
 public class CoreEmitter extends EntityEmitter {
-  private EnergyColor color;
-  private SpriteParticle ring, core, halo1, halo2, halo3, halo4;
+  private final EnergyColor color;
+  private final SpriteParticle ring;
+  private final SpriteParticle core;
+  private final SpriteParticle halo1;
+  private final SpriteParticle halo2;
+  private final SpriteParticle halo3;
+  private final SpriteParticle halo4;
 
   public CoreEmitter(IEntity entity, EnergyColor color) {
     super(entity, true);

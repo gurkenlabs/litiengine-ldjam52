@@ -29,8 +29,8 @@ import java.awt.image.BufferedImage;
 import java.util.Collection;
 
 public class Minimap extends ImageComponent {
-  private BufferedImage border = Imaging.scale(ReaperImageZ.UI_BORDER_1, (int) (getWidth() * 1.5d), (int) (getHeight() * 1.5d));
-  private BufferedImage bg = Imaging.scale(ReaperImageZ.UI_BG_1, (int) (getWidth() * 1.5d), (int) (getHeight() * 1.5d));
+  private final BufferedImage border = Imaging.scale(ReaperImageZ.UI_BORDER_1, (int) (getWidth() * 1.5d), (int) (getHeight() * 1.5d));
+  private final BufferedImage bg = Imaging.scale(ReaperImageZ.UI_BG_1, (int) (getWidth() * 1.5d), (int) (getHeight() * 1.5d));
 
   public Minimap(double x, double y, double width, double height) {
     super(x, y, width, height);

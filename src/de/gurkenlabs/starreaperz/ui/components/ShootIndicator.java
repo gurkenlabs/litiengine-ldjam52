@@ -14,7 +14,10 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 
 public class ShootIndicator extends ImageComponent {
-  private BufferedImage aim2, aim3, aim4, aim5;
+  private BufferedImage aim2;
+  private final BufferedImage aim3;
+  private BufferedImage aim4;
+  private final BufferedImage aim5;
 
   public ShootIndicator(double x, double y, double width, double height) {
     super(x, y, width, height, Imaging.scale(ReaperImageZ.UI_AIM_1, (int) width, (int) height));

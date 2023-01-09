@@ -17,10 +17,10 @@ import java.awt.image.BufferedImage;
 
 public class MenuScreen extends Screen {
   private final double scaleFactor = Game.window().getResolution().getWidth() / 1920d;
-  private BufferedImage MENU_BG = Imaging.scale(ReaperImageZ.MAINMENU_BG, Game.window().getResolution().width, Game.window().getResolution().height,
+  private final BufferedImage MENU_BG = Imaging.scale(ReaperImageZ.MAINMENU_BG, Game.window().getResolution().width, Game.window().getResolution().height,
       AffineTransformOp.TYPE_BICUBIC, false);
-  private BufferedImage LOGO = Imaging.scale(ReaperImageZ.LOGO, scaleFactor, AffineTransformOp.TYPE_BICUBIC);
-  private BufferedImage INSTRUCTIONS = Imaging.scale(ReaperImageZ.INSTRUCTIONS, scaleFactor, AffineTransformOp.TYPE_BICUBIC);
+  private final BufferedImage LOGO = Imaging.scale(ReaperImageZ.LOGO, scaleFactor, AffineTransformOp.TYPE_BICUBIC);
+  private final BufferedImage INSTRUCTIONS = Imaging.scale(ReaperImageZ.INSTRUCTIONS, scaleFactor, AffineTransformOp.TYPE_BICUBIC);
 
   private Menu mainMenu;
   private ImageComponent instructionsImage, instructionsBackButton;
