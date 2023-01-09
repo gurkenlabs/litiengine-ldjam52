@@ -16,7 +16,6 @@ import de.gurkenlabs.starreaperz.ui.components.HUD;
 import java.awt.*;
 
 public class IngameScreen extends GameScreen {
-  private HUD hud;
 
   public IngameScreen() {
     super("INGAME");
@@ -35,7 +34,6 @@ public class IngameScreen extends GameScreen {
 
   @Override protected void initializeComponents() {
     super.initializeComponents();
-    this.hud = new HUD();
-    getComponents().add(hud);
+    getComponents().add(HUD.instance());
   }
 }

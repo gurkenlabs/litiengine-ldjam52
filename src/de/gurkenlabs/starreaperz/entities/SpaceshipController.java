@@ -84,7 +84,7 @@ public class SpaceshipController extends KeyboardEntityController<Spaceship> {
       this.getEntity().getShootLaserAbility().cast();
     }
 
-    if (keyCode.getKeyCode() == KeyEvent.VK_SHIFT && !getEntity().isHarvesting()) {
+    if (keyCode.getKeyCode() == KeyEvent.VK_SHIFT && !getEntity().isHarvesting() && !getEntity().isDead()) {
       getEntity().startHarvesting();
     }
   }

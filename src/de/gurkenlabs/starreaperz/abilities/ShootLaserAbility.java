@@ -8,32 +8,39 @@ import de.gurkenlabs.litiengine.abilities.effects.Effect;
 import de.gurkenlabs.litiengine.abilities.effects.EffectTarget;
 import de.gurkenlabs.litiengine.entities.Creature;
 import de.gurkenlabs.litiengine.entities.ICombatEntity;
+import de.gurkenlabs.litiengine.tweening.TweenFunction;
+import de.gurkenlabs.litiengine.tweening.TweenType;
 import de.gurkenlabs.starreaperz.GameManager;
 import de.gurkenlabs.starreaperz.entities.LaserProjectile;
 
+import de.gurkenlabs.starreaperz.ui.components.HUD;
 import java.awt.geom.Point2D;
 
 // TODO: Fast shooting upgrade (reduce cooldown to <=100)
 @AbilityInfo(cooldown = 250)
 public class ShootLaserAbility extends Ability {
-  private static final String[] shootSounds = new String[]{
-          "laserShoot.wav",
-          "laserShoot2.wav",
-          "laserShoot3.wav",
-          "laserShoot4.wav",
-          "laserShoot5.wav",
-          "laserShoot6.wav"
+  private static final String[] shootSounds = new String[] {
+      "laserShoot.wav",
+      "laserShoot2.wav",
+      "laserShoot3.wav",
+      "laserShoot4.wav",
+      "laserShoot5.wav",
+      "laserShoot6.wav"
   };
 
   public ShootLaserAbility(Creature executor) {
     super(executor);
     this.addEffect(new ShootLaserProjectileEffect(this));
     this.addEffect(new ScreenShakeEffect(this, 0.25, 100));
-  }
 
-  @Override
-  public AbilityExecution cast() {
-    return super.cast();
+    onEffectApplied(a -> {
+      Game.tweens().begin(HUD.instance().getShootIndicator(), TweenType.SIZE_BOTH, 300).targetRelative(20, 20).ease(TweenFunction.BOUNCE_IN);
+      Game.tweens().begin(HUD.instance().getShootIndicator(), TweenType.LOCATION_XY, 300).targetRelative(-10, -10).ease(TweenFunction.BOUNCE_IN);
+      Game.loop().perform(300, () -> {
+        Game.tweens().begin(HUD.instance().getShootIndicator(), TweenType.SIZE_BOTH, 300).targetRelative(-20, -20).ease(TweenFunction.LINEAR);
+        Game.tweens().begin(HUD.instance().getShootIndicator(), TweenType.LOCATION_XY, 300).targetRelative(10, 10).ease(TweenFunction.LINEAR);
+      });
+    });
   }
 
   @Override
