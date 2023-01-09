@@ -50,7 +50,7 @@ public class GameManager {
   }
 
   public int getCurrentScore() {
-    var current = this.score.get(Game.world().environment().getMap().getName());
+    var current = this.score.get(getCurrentLevel());
     return current == null ? 0 : current;
   }
 

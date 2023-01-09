@@ -72,7 +72,7 @@ public class IngameScreen extends GameScreen implements StateDependentUIComponen
       ImageRenderer.render(g, LOGO, Game.window().getResolution().getWidth() / 2d - LOGO.getWidth() / 2d,
           Game.window().getResolution().getHeight() * 2 / 10d);
     } else if (GameManager.instance().getState() == GameState.WON) {
-      if (!Game.world().environment().getMap().getName().equals("level3")) {
+      if (GameManager.instance().getCurrentLevel()!=2) {
         TextRenderer.render(g, GameManager.instance().getCurrentScore() + " ENERGY HARVESTED IN THIS WORLD!", Align.CENTER, Valign.MIDDLE, 0, 0);
       } else{
         TextRenderer.render(g, "YOU ANNIHILATED ALL SPECIES AND HARVESTED " + GameManager.instance().getOverallScore() + " ENERGY!", Align.CENTER, Valign.MIDDLE, 0, 0);

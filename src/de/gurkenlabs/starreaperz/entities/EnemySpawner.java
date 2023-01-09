@@ -25,7 +25,7 @@ public class EnemySpawner implements IUpdateable {
     }
 
     var nextWave = enemyWaves.peek();
-    if (nextWave != null && nextWave.triggerYCood > GameManager.instance().getSpaceship().getY()) {
+    if (nextWave != null && nextWave.triggerYCoord > GameManager.instance().getSpaceship().getY()) {
       enemyWaves.poll();
       nextWave.spawn();
     }
@@ -75,14 +75,14 @@ public class EnemySpawner implements IUpdateable {
 
   private static class EnemyWave {
     private final int number;
-    private final int triggerYCood;
+    private final int triggerYCoord;
 
     private final EnergyColor energyColor;
 
     public EnemyWave(int number, int triggerYCoord) {
       this.energyColor = EnergyColor.getLevelColor();
       this.number = number;
-      this.triggerYCood = triggerYCoord;
+      this.triggerYCoord = triggerYCoord;
     }
 
     public void spawn() {
