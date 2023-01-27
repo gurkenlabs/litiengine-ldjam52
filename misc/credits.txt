@@ -1,13 +1,13 @@
-Concept, Programming, Original Art|Steffen Wilke, Matthias Wilke
-Original Music|Matthias Wilke
-Earth Orbiter Font|Daniel Zadorozny|https://www.iconian.com/fonts2/earthorbiter.zip
-Space Shooter Game User Interface|CraftPix.net 2D Game Assets|https://opengameart.org/content/space-shooter-game-user-interface
-Defending Spaceships|Jose Medina
-Asteroids|Luis Zuno|https://ansimuz.itch.io/
-Explosion effects|BearFX|https://like100bears.itch.io/bearfx-explosions
-Energy channeling effect|ppeldo|https://ppeldo.itch.io/2d-pixel-art-game-spellmagic-fx
-Futuristic user interface elements vector set|macrovector|https://www.freepik.com/free-vector/futuristic-user-interface-elements-vector-set_10601013.htm
-futuristic-hud-interface-with-gradient-style|Freepik|https://www.freepik.com/free-vector/futuristic-hud-interface-with-gradient-style_2966605.htm
-Input Prompts|Kenney|https://www.kenney.nl/assets/input-prompts-pixel-16
-Ingame music|remaxim|https://opengameart.org/content/high-tech-lab
-Menu music|matthewpl|https://opengameart.org/content/dust-scifi-music
+| Asset | Creator | Link |
+|--------------|-----------|------------|
+|[Earth Orbiter Font](https://www.iconian.com/fonts2/earthorbiter.zip)|Daniel Zadorozny|
+|Defending Spaceships|Jose Medina|
+|[Asteroids](https://ansimuz.itch.io/)|Luis Zuno|
+|[Galaxy background](https://aamatniekss.itch.io/sci-fi-space-background-set)|Nauris Amatnieks|
+|[Input prompt icons](https://www.kenney.nl/assets/input-prompts-pixel-16)|Kenney|
+|[Explosion effects](https://like100bears.itch.io/bearfx-explosions)|BearFX|
+|[Energy channeling effect](https://ppeldo.itch.io/2d-pixel-art-game-spellmagic-fx)|ppeldo|
+|[Futuristic user interface elements vector set](https://www.freepik.com/free-vector/futuristic-user-interface-elements-vector-set_10601013.htm)|macrovector|
+|[futuristic-hud-interface-with-gradient-style](https://www.freepik.com/free-vector/futuristic-hud-interface-with-gradient-style_2966605.htm)|Freepik|
+|[Ingame music](https://opengameart.org/content/high-tech-lab)|remaxim|
+|[Menu music](https://opengameart.org/content/dust-scifi-music)|matthewpl|
